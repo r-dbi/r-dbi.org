@@ -1,0 +1,20 @@
+---
+title: "DBI for R"
+comments: False
+format:
+  html:
+    page-layout: full
+about:
+  id: about-rdbi
+  template: jolla
+  image: https://avatars.githubusercontent.com/u/5695665?s=200&v=4
+  image-shape: rectangle
+  links:
+    - icon: github
+      text: GitHub
+      href: https://github.com/r-dbi
+---
+
+:::{#about-rdbi}
+R's interface to databases, with a testable and human-readable specification, a selection of backend packages to connect with various databases, and a boilerplate for developing new backends.
+:::
