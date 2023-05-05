@@ -4,6 +4,7 @@ project:
 
 website:
   title: "R + databases"
+  site-url: https://maelle.github.io/rdbidotorg/
   navbar:
     left:
       - href: index.qmd
