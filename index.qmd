@@ -17,6 +17,9 @@ listing:
   - id: blog
     contents: blog/posts
     type: default
+    sort: 
+      - "date desc"
+      - "title asc"
 ---
 
 :::{#about-rdbi}
