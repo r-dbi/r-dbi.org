@@ -13,8 +13,46 @@ about:
     - icon: github
       text: GitHub
       href: https://github.com/r-dbi
+listing:
+  - id: interface
+    contents: "packages/interface-*.qmd"
+    type: default
 ---
 
 :::{#about-rdbi}
 R's interface to databases, with a testable and human-readable specification, a selection of backend packages to connect with various databases, and a boilerplate for developing new backends.
 :::
+
+
+## Packages
+:::::{.grid}
+::::{.g-col-8 .g-col-md-4}
+### Interface
+
+The [DBI](https://dbi.r-dbi.org/) package defines generic methods that work almost identically across databases. 
+This is checked by [DBItest](https://dbitest.r-dbi.org/), which also provides a human-readable [specification](https://cran.r-project.org/web/packages/DBI/vignettes/spec.html).
+
+:::{#interface}
+:::
+
+::::
+
+::::{.g-col-8 .g-col-md-4}
+
+### Backends
+
+The [RSQLite](https://rsqlite.r-dbi.org/), [MariaDB](https://mariadb.r-dbi.org/), and [RPostgres](https://rpostgres.r-dbi.org/) packages implement methods defined by DBI that connect to specific databases. 
+There are more packages that connect to other databases.
+
+
+::::
+
+
+::::{.g-col-8 .g-col-md-4}
+
+### Boilerplate
+
+The [RKazam](https://rkazam.r-dbi.org/) package makes it easy for package developers to create a new package to a new DBMS.
+
+::::
+:::::

@@ -5,5 +5,12 @@
     "title": "DBI for R",
     "section": "",
     "text": "R’s interface to databases, with a testable and human-readable specification, a selection of backend packages to connect with various databases, and a boilerplate for developing new backends.\n \n  \n   \n  \n    \n     GitHub"
+  },
+  {
+    "objectID": "index.html#packages",
+    "href": "index.html#packages",
+    "title": "DBI for R",
+    "section": "Packages",
+    "text": "Packages\n\n\nInterface\nThe DBI package defines generic methods that work almost identically across databases. This is checked by DBItest, which also provides a human-readable specification.\n\n\n\n\n\n\nDBI\n\n\n\n\n\nR Database Interface\n\n\n\n\n \n\n\n\n\nNo matching items\n\n\n\n\nBackends\nThe RSQLite, MariaDB, and RPostgres packages implement methods defined by DBI that connect to specific databases. There are more packages that connect to other databases.\n\n\nBoilerplate\nThe RKazam package makes it easy for package developers to create a new package to a new DBMS."
   }
 ]
