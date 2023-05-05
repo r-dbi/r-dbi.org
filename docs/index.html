@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>R + databases - DBI for R</title>
+<title>R-DBI - DBI for R</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -62,20 +62,20 @@ ul.task-list li input[type="checkbox"] {
 <script>
 
   window.document.addEventListener("DOMContentLoaded", function (_event) {
-    const listingTargetEl = window.document.querySelector('#listing-interface .list');
+    const listingTargetEl = window.document.querySelector('#listing-blog .list');
     if (!listingTargetEl) {
       // No listing discovered, do not attach.
       return; 
     }
 
     const options = {
-      valueNames: ['listing-title','listing-author','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
       
-      searchColumns: ["listing-title","listing-author","listing-description"],
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description"],
     };
 
     window['quarto-listings'] = window['quarto-listings'] || {};
-    window['quarto-listings']['listing-interface'] = new List('listing-interface', options);
+    window['quarto-listings']['listing-blog'] = new List('listing-blog', options);
 
     if (window['quarto-listing-loaded']) {
       window['quarto-listing-loaded']();
@@ -102,7 +102,7 @@ ul.task-list li input[type="checkbox"] {
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">R + databases</span>
+    <span class="navbar-title">R-DBI</span>
     </a>
   </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
@@ -161,31 +161,6 @@ ul.task-list li input[type="checkbox"] {
 <section id="interface" class="level3 g-col-8 g-col-md-4">
 <h3 data-anchor-id="interface">Interface</h3>
 <p>The <a href="https://dbi.r-dbi.org/">DBI</a> package defines generic methods that work almost identically across databases. This is checked by <a href="https://dbitest.r-dbi.org/">DBItest</a>, which also provides a human-readable <a href="https://cran.r-project.org/web/packages/DBI/vignettes/spec.html">specification</a>.</p>
-<div id="listing-interface" class="quarto-listing quarto-listing-container-default">
-<div class="list quarto-listing-default">
-<div class="quarto-post image-right" data-index="0" data-listing-file-modified-sort="1683278587965" data-listing-reading-time-sort="0.005">
-<div class="body">
-<a href="./packages/interface-dbi.html">
-<h3 class="no-anchor listing-title">
-DBI
-</h3>
-<div class="listing-subtitle">
-
-</div>
-<div class="listing-description">
-<p>R Database Interface</p>
-</div>
-</a>
-</div>
-<div class="metadata">
-<a href="./packages/interface-dbi.html"> </a>
-</div>
-</div>
-</div>
-<div class="listing-no-matching d-none">
-No matching items
-</div>
-</div>
 </section>
 <section id="backends" class="level3 g-col-8 g-col-md-4">
 <h3 data-anchor-id="backends">Backends</h3>
@@ -195,6 +170,268 @@ No matching items
 <h3 data-anchor-id="boilerplate">Boilerplate</h3>
 <p>The <a href="https://rkazam.r-dbi.org/">RKazam</a> package makes it easy for package developers to create a new package to a new DBMS.</p>
 </section>
+</div>
+</section>
+<section id="blog-posts" class="level2">
+<h2 data-anchor-id="blog-posts">Blog posts</h2>
+<div id="listing-blog" class="quarto-listing quarto-listing-container-default">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-listing-date-sort="1517526000000" data-listing-file-modified-sort="1683280298010" data-listing-reading-time-sort="0.155">
+<div class="thumbnail">
+<a href="./blog/posts/rstudio-conf.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/rstudio-conf.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/rstudio-conf.html">
+<h3 class="no-anchor listing-title">
+Connecting to open source databases
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Presentation at rstudio::conf, San Diego</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/rstudio-conf.html">
+<div class="listing-date">
+Feb 2, 2018
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="1" data-listing-date-sort="1525125600000" data-listing-file-modified-sort="1683280218589" data-listing-reading-time-sort="14.47">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-2-final.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-2-final.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-2-final.html">
+<h3 class="no-anchor listing-title">
+Done “Establishing DBI”!?
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summary of the “Establishing DBI” project</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-2-final.html">
+<div class="listing-date">
+May 1, 2018
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="2" data-listing-date-sort="1480978800000" data-listing-file-modified-sort="1683280204585" data-listing-reading-time-sort="3.74">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-1-halfway.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-1-halfway.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-1-halfway.html">
+<h3 class="no-anchor listing-title">
+Halfway through “Improving DBI”
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Intermediate status report on the “Improving DBI” project</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-1-halfway.html">
+<div class="listing-date">
+Dec 6, 2016
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="3" data-listing-date-sort="1546210800000" data-listing-file-modified-sort="1683280238905" data-listing-reading-time-sort="10.15">
+<div class="thumbnail">
+<p><a href="./blog/posts/dbi-3-1.html"> <img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge" class="thumnail-image"> </a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-3-1.html">
+<h3 class="no-anchor listing-title">
+Maintaining DBI, 1/4
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summarizing the progress of 2018</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-3-1.html">
+<div class="listing-date">
+Dec 31, 2018
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="4" data-listing-date-sort="1576710000000" data-listing-file-modified-sort="1683280253038" data-listing-reading-time-sort="11.205">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-3-2.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-3-2.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-3-2.html">
+<h3 class="no-anchor listing-title">
+Maintaining DBI, 2/4
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summarizing the progress of 2019</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-3-2.html">
+<div class="listing-date">
+Dec 19, 2019
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="5" data-listing-date-sort="1611097200000" data-listing-file-modified-sort="1683280269170" data-listing-reading-time-sort="6.55">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-3-3.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-3-3.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-3-3.html">
+<h3 class="no-anchor listing-title">
+Maintaining DBI, 3/4
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summarizing the progress of 2020</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-3-3.html">
+<div class="listing-date">
+Jan 20, 2021
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="6" data-listing-date-sort="1640041200000" data-listing-file-modified-sort="1683280283398" data-listing-reading-time-sort="10.51">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-3-4.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-3-4.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-3-4.html">
+<h3 class="no-anchor listing-title">
+Maintaining DBI, 4/4
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summarizing the progress of 2021</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-3-4.html">
+<div class="listing-date">
+Dec 21, 2021
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+<div class="quarto-post image-right" data-index="7" data-listing-date-sort="1494799200000" data-listing-file-modified-sort="1683280187789" data-listing-reading-time-sort="6.39">
+<div class="thumbnail">
+<a href="./blog/posts/dbi-1-final.html">
+<div class="thumbnail-image">
+
+</div>
+</a><p><a href="./blog/posts/dbi-1-final.html"></a></p>
+</div>
+<div class="body">
+<a href="./blog/posts/dbi-1-final.html">
+<h3 class="no-anchor listing-title">
+<code>DBItest</code>: Specification
+</h3>
+<div class="listing-subtitle">
+
+</div>
+<div class="listing-description">
+<p>Summary of the “Improving DBI” project</p>
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./blog/posts/dbi-1-final.html">
+<div class="listing-date">
+May 15, 2017
+</div>
+<div class="listing-author">
+Kirill Müller
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
 </div>
 
 
@@ -330,6 +567,24 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 });
 </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+ © Licence MIT.
+  </li>  
+</ul>
+    </div>   
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item">
+    <a class="nav-link" href="https://www.r-consortium.org/">Sponsored by the R Consortium.</a>
+  </li>  
+</ul>
+    </div>
+  </div>
+</footer>
 
 
 

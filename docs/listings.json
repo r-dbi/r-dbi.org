@@ -2,7 +2,14 @@
   {
     "listing": "/index.html",
     "items": [
-      "/packages/interface-dbi.html"
+      "/blog/posts/rstudio-conf.html",
+      "/blog/posts/dbi-2-final.html",
+      "/blog/posts/dbi-1-halfway.html",
+      "/blog/posts/dbi-3-1.html",
+      "/blog/posts/dbi-3-2.html",
+      "/blog/posts/dbi-3-3.html",
+      "/blog/posts/dbi-3-4.html",
+      "/blog/posts/dbi-1-final.html"
     ]
   },
   {

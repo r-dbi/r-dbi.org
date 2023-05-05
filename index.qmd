@@ -14,8 +14,8 @@ about:
       text: GitHub
       href: https://github.com/r-dbi
 listing:
-  - id: interface
-    contents: "packages/interface-*.qmd"
+  - id: blog
+    contents: blog/posts
     type: default
 ---
 
@@ -32,8 +32,6 @@ R's interface to databases, with a testable and human-readable specification, a 
 The [DBI](https://dbi.r-dbi.org/) package defines generic methods that work almost identically across databases. 
 This is checked by [DBItest](https://dbitest.r-dbi.org/), which also provides a human-readable [specification](https://cran.r-project.org/web/packages/DBI/vignettes/spec.html).
 
-:::{#interface}
-:::
 
 ::::
 
@@ -55,4 +53,9 @@ There are more packages that connect to other databases.
 The [RKazam](https://rkazam.r-dbi.org/) package makes it easy for package developers to create a new package to a new DBMS.
 
 ::::
-:::::
+::::
+
+## Blog posts
+
+:::{#blog}
+:::

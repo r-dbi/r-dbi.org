@@ -3,8 +3,15 @@ project:
   output-dir: docs
 
 website:
-  title: "R + databases"
+  title: "R-DBI"
+  description: "R + databases"
   site-url: https://maelle.github.io/rdbidotorg/
+  page-footer:
+    left:
+      - text: "© Licence MIT."
+    right:
+      - text: "Sponsored by the R Consortium."
+        href: https://www.r-consortium.org/
   navbar:
     left:
       - href: index.qmd

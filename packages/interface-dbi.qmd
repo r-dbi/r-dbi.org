@@ -1,6 +1,0 @@
----
-title: "DBI"
-description: R Database Interface
-github: https://github.com/r-dbi/DBI
-pkgdown: https://dbi.r-dbi.org/
----
