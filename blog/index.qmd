@@ -1,0 +1,28 @@
+---
+title: R-DBI blog
+comments: false
+margin-header: "MIT License"
+listing:
+  - id: posts
+    contents: posts
+    sort: 
+      - "date desc"
+      - "title asc"
+    # TODO: Set categories appearance.  
+    categories: true
+    sort-ui: [date, author]
+    filter-ui: [title, date, author]
+    feed: true
+    type: default
+    page-size: 5
+    image-align: left
+    date-format: "DD MMMM YYYY"
+    fields: [title, subtitle, author, description, date, image, reading-time]
+format:
+  html:
+    page-layout: full
+open-graph:
+  description: "Updates about the R-DBI project."
+twitter-card:
+  description: "Updates about the R-DBI project."
+---
