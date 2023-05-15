@@ -1,0 +1,9 @@
+Package: rdbiwebsite
+Type: Website
+Title: R-DBI
+Description: R-DBI
+Version: 0.0.1
+Imports:
+    jsonlite,
+    knitr,
+    purrr
