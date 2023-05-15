@@ -6,4 +6,5 @@ Version: 0.0.1
 Imports:
     jsonlite,
     knitr,
-    purrr
+    purrr,
+    rmarkdown
