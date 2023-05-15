@@ -77,8 +77,7 @@ following topics:
 After completing the process, projects are entitled to wear a badge like
 the one below for the DBI project:
 
-[![CII Best
-Practices](https://bestpractices.coreinfrastructure.org/projects/1882/badge)](https://bestpractices.coreinfrastructure.org/projects/1882)
+[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/1882/badge)](https://bestpractices.coreinfrastructure.org/projects/1882)
 
 A click on the badge takes you to the detailed assessment. In addition
 to the badge, completing the self-certification allows the maintainer to
