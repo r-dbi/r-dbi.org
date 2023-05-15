@@ -18,6 +18,8 @@ website:
         text: Home
       - href: blog/index.qmd
         text: Blog
+      - href: backends/index.qmd
+        text: Backends
 
 format:
   html:

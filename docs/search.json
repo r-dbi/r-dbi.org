@@ -390,5 +390,243 @@
     "title": "Done “Establishing DBI”!?",
     "section": "Acknowledgments",
     "text": "Acknowledgments\nI’d like to thank the R Consortium for their generous financial support. Many thanks to the numerous contributors who helped make the past two projects a success."
+  },
+  {
+    "objectID": "backends/index.html",
+    "href": "backends/index.html",
+    "title": "Backends for R-DBI",
+    "section": "",
+    "text": "Do you maintain a backend and think that yours should be on this list? Please open an issue in the backends repository."
+  },
+  {
+    "objectID": "backends/index.html#azurekusto-1.1.2-2023-03-17",
+    "href": "backends/index.html#azurekusto-1.1.2-2023-03-17",
+    "title": "Backends for R-DBI",
+    "section": "AzureKusto 1.1.2 (2023-03-17) 🔗 🐛",
+    "text": "AzureKusto 1.1.2 (2023-03-17) 🔗 🐛\nInterface to ‘Kusto’/‘Azure Data Explorer’\nAn interface to ‘Azure Data Explorer’, also known as ‘Kusto’, a fast, highly scalable data exploration service from Microsoft: https://azure.microsoft.com/en-us/products/data-explorer/. Includes ‘DBI’ and ‘dplyr’ interfaces, with the latter modelled after the ‘dbplyr’ package, whereby queries are translated from R into the native ‘KQL’ query language and executed lazily. On the admin side, the package extends the object framework provided by ‘AzureRMR’ to support creation and deletion of databases, and management of database principals. Part of the ‘AzureR’ family of packages.\nMaintainer: Alex Kyllo jekyllo@microsoft.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#bigrquery-1.4.2-2023-04-20",
+    "href": "backends/index.html#bigrquery-1.4.2-2023-04-20",
+    "title": "Backends for R-DBI",
+    "section": "bigrquery 1.4.2 (2023-04-20) 🔗 🐛",
+    "text": "bigrquery 1.4.2 (2023-04-20) 🔗 🐛\nAn Interface to Google’s ‘BigQuery’ ‘API’\nEasily talk to Google’s ‘BigQuery’ database from R.\nMaintainer: Hadley Wickham hadley@posit.co. License: GPL-3"
+  },
+  {
+    "objectID": "backends/index.html#ckanr-0.7.0-2023-03-17",
+    "href": "backends/index.html#ckanr-0.7.0-2023-03-17",
+    "title": "Backends for R-DBI",
+    "section": "ckanr 0.7.0 (2023-03-17) 🔗 🐛",
+    "text": "ckanr 0.7.0 (2023-03-17) 🔗 🐛\nClient for the Comprehensive Knowledge Archive Network (‘CKAN’) API\nClient for ‘CKAN’ API (https://ckan.org/). Includes interface to ‘CKAN’ ‘APIs’ for search, list, show for packages, organizations, and resources. In addition, provides an interface to the ‘datastore’ API.\nMaintainer: Francisco Alves fjunior.alves.oliveira@gmail.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#clickhousehttp-0.3.0-2023-02-16",
+    "href": "backends/index.html#clickhousehttp-0.3.0-2023-02-16",
+    "title": "Backends for R-DBI",
+    "section": "ClickHouseHTTP 0.3.0 (2023-02-16) 🐛",
+    "text": "ClickHouseHTTP 0.3.0 (2023-02-16) 🐛\nA Simple HTTP Database Interface to ‘ClickHouse’\n‘ClickHouse’ (https://clickhouse.com/) is an open-source, high performance columnar OLAP (online analytical processing of queries) database management system for real-time analytics using SQL. This ‘DBI’ backend relies on the ‘ClickHouse’ HTTP interface and support HTTPS protocol.\nMaintainer: Patrice Godard patrice.godard@gmail.com. License: GPL-3"
+  },
+  {
+    "objectID": "backends/index.html#connections-0.1.1-2020-02-07",
+    "href": "backends/index.html#connections-0.1.1-2020-02-07",
+    "title": "Backends for R-DBI",
+    "section": "connections 0.1.1 (2020-02-07) 🐛",
+    "text": "connections 0.1.1 (2020-02-07) 🐛\nIntegrates with the ‘RStudio’ Connections Pane and ‘pins’\nEnables ‘DBI’ compliant packages to integrate with the ‘RStudio’ connections pane, and the ‘pins’ package. It automates the display of schemata, tables, views, as well as the preview of the table’s top 1000 records.\nMaintainer: Javier Luraschi javier@rstudio.com. License: GPL-3"
+  },
+  {
+    "objectID": "backends/index.html#databaseconnector-6.2.1-2023-05-10",
+    "href": "backends/index.html#databaseconnector-6.2.1-2023-05-10",
+    "title": "Backends for R-DBI",
+    "section": "DatabaseConnector 6.2.1 (2023-05-10) 🔗 🐛",
+    "text": "DatabaseConnector 6.2.1 (2023-05-10) 🔗 🐛\nConnecting to Various Database Platforms\nAn R ‘DataBase Interface’ (‘DBI’) compatible interface to various database platforms (‘PostgreSQL’, ‘Oracle’, ‘Microsoft SQL Server’, ‘Amazon Redshift’, ‘Microsoft Parallel Database Warehouse’, ‘IBM Netezza’, ‘Apache Impala’, ‘Google BigQuery’, ‘Snowflake’, ‘Spark’, and ‘SQLite’). Also includes support for fetching data as ‘Andromeda’ objects. Uses either ‘Java Database Connectivity’ (‘JDBC’) or other ‘DBI’ drivers to connect to databases.\nMaintainer: Martijn Schuemie schuemie@ohdsi.org. License: Apache License"
+  },
+  {
+    "objectID": "backends/index.html#dbi.rodbc-0.1-2",
+    "href": "backends/index.html#dbi.rodbc-0.1-2",
+    "title": "Backends for R-DBI",
+    "section": "DBI.RODBC 0.1-2",
+    "text": "DBI.RODBC 0.1-2\nDBI front-end to RODBC\nA simple DBI front-end to the RODBC package. This package uses version 4 style classes and methods to create a front-end to the existing RODBC (version 0.8-3) package.\nMaintainer: David A. James dj@bell-labs.com. License: GPL (version 2 or later)"
+  },
+  {
+    "objectID": "backends/index.html#dbi.rpgsql-0.1-2",
+    "href": "backends/index.html#dbi.rpgsql-0.1-2",
+    "title": "Backends for R-DBI",
+    "section": "DBI.RPgSQL 0.1-2",
+    "text": "DBI.RPgSQL 0.1-2\nDBI front-end to RPgSQL\nA simple DBI front-end to the RPgSQL package. This package uses version 4 style classes and methods to create a front-end to the existing RPgSQL (version 1.0-0) package.\nMaintainer: David A. James dj@bell-labs.com. License: GPL (version 2 or later)"
+  },
+  {
+    "objectID": "backends/index.html#dittodb-0.1.6-2023-04-17",
+    "href": "backends/index.html#dittodb-0.1.6-2023-04-17",
+    "title": "Backends for R-DBI",
+    "section": "dittodb 0.1.6 (2023-04-17) 🔗 🐛",
+    "text": "dittodb 0.1.6 (2023-04-17) 🔗 🐛\nA Test Environment for Database Requests\nTesting and documenting code that communicates with remote databases can be painful. Although the interaction with R is usually relatively simple (e.g. data(frames) passed to and from a database), because they rely on a separate service and the data there, testing them can be difficult to set up, unsustainable in a continuous integration environment, or impossible without replicating an entire production cluster. This package addresses that by allowing you to make recordings from your database interactions and then play them back while testing (or in other contexts) all without needing to spin up or have access to the database your code would typically connect to.\nMaintainer: Jonathan Keane jkeane@gmail.com. License: Apache License (>= 2.0)"
+  },
+  {
+    "objectID": "backends/index.html#duckdb-0.7.1-1-2023-03-01",
+    "href": "backends/index.html#duckdb-0.7.1-1-2023-03-01",
+    "title": "Backends for R-DBI",
+    "section": "duckdb 0.7.1-1 (2023-03-01) 🔗 🐛",
+    "text": "duckdb 0.7.1-1 (2023-03-01) 🔗 🐛\nDBI Package for the DuckDB Database Management System\nThe DuckDB project is an embedded analytical data management system with support for the Structured Query Language (SQL). This package includes all of DuckDB and a R Database Interface (DBI) connector.\nMaintainer: Hannes Mühleisen hannes@cwi.nl. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#implyr-0.4.0-2021-03-29",
+    "href": "backends/index.html#implyr-0.4.0-2021-03-29",
+    "title": "Backends for R-DBI",
+    "section": "implyr 0.4.0 (2021-03-29) 🐛",
+    "text": "implyr 0.4.0 (2021-03-29) 🐛\nR Interface for Apache Impala\n‘SQL’ back-end to ‘dplyr’ for Apache Impala, the massively parallel processing query engine for Apache ‘Hadoop’. Impala enables low-latency ‘SQL’ queries on data stored in the ‘Hadoop’ Distributed File System ‘(HDFS)’, Apache ‘HBase’, Apache ‘Kudu’, Amazon Simple Storage Service ‘(S3)’, Microsoft Azure Data Lake Store ‘(ADLS)’, and Dell ‘EMC’ ‘Isilon’. See https://impala.apache.org for more information about Impala.\nMaintainer: Ian Cook ianmcook@gmail.com. License: Apache License 2.0 | file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#lazysf-0.1.0-2020-11-14",
+    "href": "backends/index.html#lazysf-0.1.0-2020-11-14",
+    "title": "Backends for R-DBI",
+    "section": "lazysf 0.1.0 (2020-11-14) 🐛",
+    "text": "lazysf 0.1.0 (2020-11-14) 🐛\nDelayed Read for ‘GDAL’ Vector Data Sources\nLazy read for drawings. A ‘dplyr’ back end for data sources supported by ‘GDAL’ vector drivers, that allows working with local or remote sources as if they are in-memory data frames. Basic features works with any drawing format (‘GDAL vector data source’) supported by the ‘sf’ package.\nMaintainer: Michael Sumner mdsumner@gmail.com. License: GPL-3"
+  },
+  {
+    "objectID": "backends/index.html#monetdb.r-2.0.0-2020-08-14",
+    "href": "backends/index.html#monetdb.r-2.0.0-2020-08-14",
+    "title": "Backends for R-DBI",
+    "section": "MonetDB.R 2.0.0 (2020-08-14)",
+    "text": "MonetDB.R 2.0.0 (2020-08-14)\nConnect MonetDB to R\nAllows to pull data from MonetDB into R.\nMaintainer: Mitchell Weggemans mitchell.weggemans@monetdbsolutions.com. License: MPL (== 2.0)"
+  },
+  {
+    "objectID": "backends/index.html#monetdblite-0.6.0-2018-07-27",
+    "href": "backends/index.html#monetdblite-0.6.0-2018-07-27",
+    "title": "Backends for R-DBI",
+    "section": "MonetDBLite 0.6.0 (2018-07-27) 🐛",
+    "text": "MonetDBLite 0.6.0 (2018-07-27) 🐛\nIn-Process Version of ‘MonetDB’\nAn in-process version of ‘MonetDB’, a SQL database designed for analytical tasks. Similar to ‘SQLite’, the database runs entirely inside the ‘R’ shell.\nMaintainer: Hannes Mühleisen hannes@cwi.nl. License: MPL (== 2.0)"
+  },
+  {
+    "objectID": "backends/index.html#noctua-2.6.1-2022-12-20",
+    "href": "backends/index.html#noctua-2.6.1-2022-12-20",
+    "title": "Backends for R-DBI",
+    "section": "noctua 2.6.1 (2022-12-20) 🐛",
+    "text": "noctua 2.6.1 (2022-12-20) 🐛\nConnect to ‘AWS Athena’ using R ‘AWS SDK’ ‘paws’ (‘DBI’ Interface)\nDesigned to be compatible with the ‘R’ package ‘DBI’ (Database Interface) when connecting to Amazon Web Service (‘AWS’) Athena https://aws.amazon.com/athena/. To do this the ‘R’ ‘AWS’ Software Development Kit (‘SDK’) ‘paws’ https://github.com/paws-r/paws is used as a driver.\nMaintainer: Dyfan Jones dyfan.r.jones@gmail.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#odbc-1.3.4-2023-01-17",
+    "href": "backends/index.html#odbc-1.3.4-2023-01-17",
+    "title": "Backends for R-DBI",
+    "section": "odbc 1.3.4 (2023-01-17) 🔗 🔗 🐛",
+    "text": "odbc 1.3.4 (2023-01-17) 🔗 🔗 🐛\nConnect to ODBC Compatible Databases (using the DBI Interface)\nA DBI-compatible interface to ODBC databases.\nMaintainer: Hadley Wickham hadley@rstudio.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#pool-1.0.1-2023-02-21",
+    "href": "backends/index.html#pool-1.0.1-2023-02-21",
+    "title": "Backends for R-DBI",
+    "section": "pool 1.0.1 (2023-02-21) 🔗 🐛",
+    "text": "pool 1.0.1 (2023-02-21) 🔗 🐛\nObject Pooling\nEnables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are ‘DBI’ connections.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rathena-2.6.1-2022-12-20",
+    "href": "backends/index.html#rathena-2.6.1-2022-12-20",
+    "title": "Backends for R-DBI",
+    "section": "RAthena 2.6.1 (2022-12-20) 🐛",
+    "text": "RAthena 2.6.1 (2022-12-20) 🐛\nConnect to ‘AWS Athena’ using ‘Boto3’ (‘DBI’ Interface)\nDesigned to be compatible with the R package ‘DBI’ (Database Interface) when connecting to Amazon Web Service (‘AWS’) Athena https://aws.amazon.com/athena/. To do this ‘Python’ ‘Boto3’ Software Development Kit (‘SDK’) https://boto3.amazonaws.com/v1/documentation/api/latest/index.html is used as a driver.\nMaintainer: Dyfan Jones dyfan.r.jones@gmail.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rclickhouse-0.6.7-2023-04-02",
+    "href": "backends/index.html#rclickhouse-0.6.7-2023-04-02",
+    "title": "Backends for R-DBI",
+    "section": "RClickhouse 0.6.7 (2023-04-02) 🐛",
+    "text": "RClickhouse 0.6.7 (2023-04-02) 🐛\n‘Yandex Clickhouse’ Interface for R with Basic ‘dplyr’ Support\n‘Yandex Clickhouse’ (https://clickhouse.com/) is a high-performance relational column-store database to enable big data exploration and ‘analytics’ scaling to petabytes of data. Methods are provided that enable working with ‘Yandex Clickhouse’ databases via ‘DBI’ methods and using ‘dplyr’/‘dbplyr’ idioms.\nMaintainer: Christian Hotz-Behofsits christian.hotz-behofsits@wu.ac.at. License: GPL-2"
+  },
+  {
+    "objectID": "backends/index.html#rh2-0.2.4-2018-03-14",
+    "href": "backends/index.html#rh2-0.2.4-2018-03-14",
+    "title": "Backends for R-DBI",
+    "section": "RH2 0.2.4 (2018-03-14)",
+    "text": "RH2 0.2.4 (2018-03-14)\nDBI/RJDBC Interface to H2 Database\nDBI/RJDBC interface to h2 database. h2 version 1.3.175 is included.\nMaintainer: “David M. Kaplan” dmkaplan2000@gmail.com. License: Mozilla Public License 1.1"
+  },
+  {
+    "objectID": "backends/index.html#rjdbc-0.2-10-2022-03-24",
+    "href": "backends/index.html#rjdbc-0.2-10-2022-03-24",
+    "title": "Backends for R-DBI",
+    "section": "RJDBC 0.2-10 (2022-03-24)",
+    "text": "RJDBC 0.2-10 (2022-03-24)\nProvides Access to Databases Through the JDBC Interface\nThe RJDBC package is an implementation of R’s DBI interface using JDBC as a back-end. This allows R to connect to any DBMS that has a JDBC driver.\nMaintainer: Simon Urbanek Simon.Urbanek@r-project.org. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rmariadb-1.2.2-2022-06-19",
+    "href": "backends/index.html#rmariadb-1.2.2-2022-06-19",
+    "title": "Backends for R-DBI",
+    "section": "RMariaDB 1.2.2 (2022-06-19) 🔗 🔗 🐛",
+    "text": "RMariaDB 1.2.2 (2022-06-19) 🔗 🔗 🐛\nDatabase Interface and MariaDB Driver\nImplements a DBI-compliant interface to MariaDB (https://mariadb.org/) and MySQL (https://www.mysql.com/) databases.\nMaintainer: Kirill Müller krlmlr+r@mailbox.org. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rmysql-0.10.25-2022-12-06",
+    "href": "backends/index.html#rmysql-0.10.25-2022-12-06",
+    "title": "Backends for R-DBI",
+    "section": "RMySQL 0.10.25 (2022-12-06) 🐛",
+    "text": "RMySQL 0.10.25 (2022-12-06) 🐛\nDatabase Interface and ‘MySQL’ Driver for R\nLegacy ‘DBI’ interface to ‘MySQL’ / ‘MariaDB’ based on old code ported from S-PLUS. A modern ‘MySQL’ client based on ‘Rcpp’ is available from the ‘RMariaDB’ package.\nMaintainer: Jeroen Ooms jeroen@berkeley.edu. License: GPL-2"
+  },
+  {
+    "objectID": "backends/index.html#rodbcdbi-0.1.1-2016-03-14",
+    "href": "backends/index.html#rodbcdbi-0.1.1-2016-03-14",
+    "title": "Backends for R-DBI",
+    "section": "RODBCDBI 0.1.1 (2016-03-14)",
+    "text": "RODBCDBI 0.1.1 (2016-03-14)\nProvides Access to Databases Through the ODBC Interface\nAn implementation of R’s DBI interface using ODBC package as a back-end. This allows R to connect to any DBMS that has a ODBC driver.\nMaintainer: Nagi Teramo teramonagi@gmail.com. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#roracle-1.3-1.1-2021-11-10",
+    "href": "backends/index.html#roracle-1.3-1.1-2021-11-10",
+    "title": "Backends for R-DBI",
+    "section": "ROracle 1.3-1.1 (2021-11-10)",
+    "text": "ROracle 1.3-1.1 (2021-11-10)\nOCI Based Oracle Database Interface for R\nOracle Database interface (DBI) driver for R. This is a DBI-compliant Oracle driver based on the OCI.\nMaintainer: Rajendra S. Pingte rajendra.pingte@oracle.com. License: LGPL"
+  },
+  {
+    "objectID": "backends/index.html#rpostgres-1.4.5-2023-01-20",
+    "href": "backends/index.html#rpostgres-1.4.5-2023-01-20",
+    "title": "Backends for R-DBI",
+    "section": "RPostgres 1.4.5 (2023-01-20) 🔗 🐛",
+    "text": "RPostgres 1.4.5 (2023-01-20) 🔗 🐛\nRcpp Interface to PostgreSQL\nFully DBI-compliant Rcpp-backed interface to PostgreSQL https://www.postgresql.org/, an open-source relational database.\nMaintainer: Kirill Müller kirill@cynkra.com. License: GPL-3"
+  },
+  {
+    "objectID": "backends/index.html#rpostgresql-0.7-5-2023-02-10",
+    "href": "backends/index.html#rpostgresql-0.7-5-2023-02-10",
+    "title": "Backends for R-DBI",
+    "section": "RPostgreSQL 0.7-5 (2023-02-10) 🔗 🔗",
+    "text": "RPostgreSQL 0.7-5 (2023-02-10) 🔗 🔗\nR Interface to the ‘PostgreSQL’ Database System\nDatabase interface and ‘PostgreSQL’ driver for ‘R’. This package provides a Database Interface ‘DBI’ compliant driver for ‘R’ to access ‘PostgreSQL’ database systems. In order to build and install this package from source, ‘PostgreSQL’ itself must be present your system to provide ‘PostgreSQL’ functionality via its libraries and header files. These files are provided as ‘postgresql-devel’ package under some Linux distributions. On ‘macOS’ and ‘Microsoft Windows’ system the attached ‘libpq’ library source will be used.\nMaintainer: Tomoaki Nishiyama tomoakin@staff.kanazawa-u.ac.jp. License: GPL-3 | file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rpresto-1.4.5-2023-05-05",
+    "href": "backends/index.html#rpresto-1.4.5-2023-05-05",
+    "title": "Backends for R-DBI",
+    "section": "RPresto 1.4.5 (2023-05-05) 🐛",
+    "text": "RPresto 1.4.5 (2023-05-05) 🐛\nDBI Connector to Presto\nImplements a ‘DBI’ compliant interface to Presto. Presto is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes: https://prestodb.io/.\nMaintainer: Jarod G.R. Meng jarodm@fb.com. License: BSD_3_clause + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#rredshiftsql-0.1.2-2016-09-15",
+    "href": "backends/index.html#rredshiftsql-0.1.2-2016-09-15",
+    "title": "Backends for R-DBI",
+    "section": "RRedshiftSQL 0.1.2 (2016-09-15)",
+    "text": "RRedshiftSQL 0.1.2 (2016-09-15)\nR Interface to the ‘Redshift’ Database\nSuperclasses ‘PostgreSQL’ connection to help enable full ‘dplyr’ functionality on ‘Redshift’.\nMaintainer: Michael Treadwell michael.treadwell@interworks.com. License: GPL-2"
+  },
+  {
+    "objectID": "backends/index.html#rsqlite-2.3.1-2023-04-03",
+    "href": "backends/index.html#rsqlite-2.3.1-2023-04-03",
+    "title": "Backends for R-DBI",
+    "section": "RSQLite 2.3.1 (2023-04-03) 🔗 🐛",
+    "text": "RSQLite 2.3.1 (2023-04-03) 🔗 🐛\nSQLite Interface for R\nEmbeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions in a recent version is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.\nMaintainer: Kirill Müller kirill@cynkra.com. License: LGPL (>= 2.1)"
+  },
+  {
+    "objectID": "backends/index.html#rsqlserver-0.3.0-2017-06-17",
+    "href": "backends/index.html#rsqlserver-0.3.0-2017-06-17",
+    "title": "Backends for R-DBI",
+    "section": "RSQLServer 0.3.0 (2017-06-17) 🐛",
+    "text": "RSQLServer 0.3.0 (2017-06-17) 🐛\nSQL Server R Database Interface (DBI) and ‘dplyr’ SQL Backend\nUtilises The ‘jTDS’ project’s ‘JDBC’ 3.0 ‘SQL Server’ driver to extend ‘DBI’ classes and methods. The package also implements a ‘SQL’ backend to the ‘dplyr’ package.\nMaintainer: Imanuel Costigan i.costigan@me.com. License: GPL-2"
+  },
+  {
+    "objectID": "backends/index.html#sergeant-0.9.1-2021-11-29",
+    "href": "backends/index.html#sergeant-0.9.1-2021-11-29",
+    "title": "Backends for R-DBI",
+    "section": "sergeant 0.9.1 (2021-11-29) 🐛",
+    "text": "sergeant 0.9.1 (2021-11-29) 🐛\nTools to Transform and Query Data with Apache Drill\nApache Drill is a low-latency distributed query engine designed to enable data exploration and analysis on both relational and non-relational data stores, scaling to petabytes of data. Methods are provided that enable working with Apache Drill instances via the REST API, DBI methods and using ‘dplyr’/‘dbplyr’ idioms. Helper functions are included to facilitate using official Drill Docker images/containers.\nMaintainer: Bob Rudis bob@rud.is. License: MIT + file LICENSE"
+  },
+  {
+    "objectID": "backends/index.html#sparklyr-1.8.1-2023-03-22",
+    "href": "backends/index.html#sparklyr-1.8.1-2023-03-22",
+    "title": "Backends for R-DBI",
+    "section": "sparklyr 1.8.1 (2023-03-22) 🐛",
+    "text": "sparklyr 1.8.1 (2023-03-22) 🐛\nR Interface to Apache Spark\nR interface to Apache Spark, a fast and general engine for big data processing, see https://spark.apache.org/. This package supports connecting to local and remote Apache Spark clusters, provides a ‘dplyr’ compatible back-end, and provides an interface to Spark’s built-in machine learning algorithms.\nMaintainer: Edgar Ruiz edgar@rstudio.com. License: Apache License 2.0 | file LICENSE"
   }
 ]
