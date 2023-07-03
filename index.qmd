@@ -17,6 +17,7 @@ listing:
   - id: blog
     contents: blog/posts
     type: default
+    fields: [title, subtitle, author, description, date]
     sort: 
       - "date desc"
       - "title asc"
