@@ -329,11 +329,11 @@
     "text": "MonetDBLite 0.6.0 (2018-07-27) 🐛\nIn-Process Version of ‘MonetDB’\nAn in-process version of ‘MonetDB’, a SQL database designed for analytical tasks. Similar to ‘SQLite’, the database runs entirely inside the ‘R’ shell.\nMaintainer: Hannes Mühleisen hannes@cwi.nl. License: MPL (== 2.0)"
   },
   {
-    "objectID": "backends/index.html#noctua-2.6.1-2022-12-20",
-    "href": "backends/index.html#noctua-2.6.1-2022-12-20",
+    "objectID": "backends/index.html#noctua-2.6.2-2023-08-08",
+    "href": "backends/index.html#noctua-2.6.2-2023-08-08",
     "title": "Backends for R-DBI",
-    "section": "noctua 2.6.1 (2022-12-20) 🐛",
-    "text": "noctua 2.6.1 (2022-12-20) 🐛\nConnect to ‘AWS Athena’ using R ‘AWS SDK’ ‘paws’ (‘DBI’ Interface)\nDesigned to be compatible with the ‘R’ package ‘DBI’ (Database Interface) when connecting to Amazon Web Service (‘AWS’) Athena https://aws.amazon.com/athena/. To do this the ‘R’ ‘AWS’ Software Development Kit (‘SDK’) ‘paws’ https://github.com/paws-r/paws is used as a driver.\nMaintainer: Dyfan Jones dyfan.r.jones@gmail.com. License: MIT + file LICENSE"
+    "section": "noctua 2.6.2 (2023-08-08) 🐛",
+    "text": "noctua 2.6.2 (2023-08-08) 🐛\nConnect to ‘AWS Athena’ using R ‘AWS SDK’ ‘paws’ (‘DBI’ Interface)\nDesigned to be compatible with the ‘R’ package ‘DBI’ (Database Interface) when connecting to Amazon Web Service (‘AWS’) Athena https://aws.amazon.com/athena/. To do this the ‘R’ ‘AWS’ Software Development Kit (‘SDK’) ‘paws’ https://github.com/paws-r/paws is used as a driver.\nMaintainer: Dyfan Jones dyfan.r.jones@gmail.com. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#odbc-1.3.5-2023-06-29",
