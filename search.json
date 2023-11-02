@@ -196,11 +196,11 @@
     "text": "RPostgreSQL 0.7-5 (2023-02-10) 🔗 🔗\nR Interface to the ‘PostgreSQL’ Database System\nDatabase interface and ‘PostgreSQL’ driver for ‘R’. This package provides a Database Interface ‘DBI’ compliant driver for ‘R’ to access ‘PostgreSQL’ database systems. In order to build and install this package from source, ‘PostgreSQL’ itself must be present your system to provide ‘PostgreSQL’ functionality via its libraries and header files. These files are provided as ‘postgresql-devel’ package under some Linux distributions. On ‘macOS’ and ‘Microsoft Windows’ system the attached ‘libpq’ library source will be used.\nMaintainer: Tomoaki Nishiyama tomoakin@staff.kanazawa-u.ac.jp. License: GPL-3 | file LICENSE"
   },
   {
-    "objectID": "backends/index.html#rpresto-1.4.5-2023-05-05",
-    "href": "backends/index.html#rpresto-1.4.5-2023-05-05",
+    "objectID": "backends/index.html#rpresto-1.4.6-2023-11-01",
+    "href": "backends/index.html#rpresto-1.4.6-2023-11-01",
     "title": "Backends for R-DBI",
-    "section": "RPresto 1.4.5 (2023-05-05) 🐛",
-    "text": "RPresto 1.4.5 (2023-05-05) 🐛\nDBI Connector to Presto\nImplements a ‘DBI’ compliant interface to Presto. Presto is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes: https://prestodb.io/.\nMaintainer: Jarod G.R. Meng jarodm@fb.com. License: BSD_3_clause + file LICENSE"
+    "section": "RPresto 1.4.6 (2023-11-01) 🐛",
+    "text": "RPresto 1.4.6 (2023-11-01) 🐛\nDBI Connector to Presto\nImplements a ‘DBI’ compliant interface to Presto. Presto is an open source distributed SQL query engine for running interactive analytic queries against data sources of all sizes ranging from gigabytes to petabytes: https://prestodb.io/.\nMaintainer: Jarod G.R. Meng jarodm@fb.com. License: BSD_3_clause + file LICENSE"
   },
   {
     "objectID": "backends/index.html#rredshiftsql-0.1.2-2016-09-15",
