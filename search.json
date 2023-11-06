@@ -210,11 +210,11 @@
     "text": "RRedshiftSQL 0.1.2 (2016-09-15)\nR Interface to the ‘Redshift’ Database\nSuperclasses ‘PostgreSQL’ connection to help enable full ‘dplyr’ functionality on ‘Redshift’.\nMaintainer: Michael Treadwell michael.treadwell@interworks.com. License: GPL-2"
   },
   {
-    "objectID": "backends/index.html#rsqlite-2.3.2-2023-10-28",
-    "href": "backends/index.html#rsqlite-2.3.2-2023-10-28",
+    "objectID": "backends/index.html#rsqlite-2.3.3-2023-11-04",
+    "href": "backends/index.html#rsqlite-2.3.3-2023-11-04",
     "title": "Backends for R-DBI",
-    "section": "RSQLite 2.3.2 (2023-10-28) 🔗 🐛",
-    "text": "RSQLite 2.3.2 (2023-10-28) 🔗 🐛\nSQLite Interface for R\nEmbeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions in a recent version is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.\nMaintainer: Kirill Müller kirill@cynkra.com. License: LGPL (&gt;= 2.1)"
+    "section": "RSQLite 2.3.3 (2023-11-04) 🔗 🐛",
+    "text": "RSQLite 2.3.3 (2023-11-04) 🔗 🐛\nSQLite Interface for R\nEmbeds the SQLite database engine in R and provides an interface compliant with the DBI package. The source for the SQLite engine and for various extensions in a recent version is included. System libraries will never be consulted because this package relies on static linking for the plugins it includes; this also ensures a consistent experience across all installations.\nMaintainer: Kirill Müller kirill@cynkra.com. License: LGPL (&gt;= 2.1)"
   },
   {
     "objectID": "backends/index.html#rsqlserver-0.3.0-2017-06-17",
