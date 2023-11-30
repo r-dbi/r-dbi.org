@@ -42,11 +42,11 @@
     "text": "connections 0.1.1 (2020-02-07) 🐛\nIntegrates with the ‘RStudio’ Connections Pane and ‘pins’\nEnables ‘DBI’ compliant packages to integrate with the ‘RStudio’ connections pane, and the ‘pins’ package. It automates the display of schemata, tables, views, as well as the preview of the table’s top 1000 records.\nMaintainer: Javier Luraschi javier@rstudio.com. License: GPL-3"
   },
   {
-    "objectID": "backends/index.html#databaseconnector-6.3.0-2023-11-08",
-    "href": "backends/index.html#databaseconnector-6.3.0-2023-11-08",
+    "objectID": "backends/index.html#databaseconnector-6.3.1-2023-11-28",
+    "href": "backends/index.html#databaseconnector-6.3.1-2023-11-28",
     "title": "Backends for R-DBI",
-    "section": "DatabaseConnector 6.3.0 (2023-11-08) 🔗 🐛",
-    "text": "DatabaseConnector 6.3.0 (2023-11-08) 🔗 🐛\nConnecting to Various Database Platforms\nAn R ‘DataBase Interface’ (‘DBI’) compatible interface to various database platforms (‘PostgreSQL’, ‘Oracle’, ‘Microsoft SQL Server’, ‘Amazon Redshift’, ‘Microsoft Parallel Database Warehouse’, ‘IBM Netezza’, ‘Apache Impala’, ‘Google BigQuery’, ‘Snowflake’, ‘Spark’, and ‘SQLite’). Also includes support for fetching data as ‘Andromeda’ objects. Uses either ‘Java Database Connectivity’ (‘JDBC’) or other ‘DBI’ drivers to connect to databases.\nMaintainer: Martijn Schuemie schuemie@ohdsi.org. License: Apache License"
+    "section": "DatabaseConnector 6.3.1 (2023-11-28) 🔗 🐛",
+    "text": "DatabaseConnector 6.3.1 (2023-11-28) 🔗 🐛\nConnecting to Various Database Platforms\nAn R ‘DataBase Interface’ (‘DBI’) compatible interface to various database platforms (‘PostgreSQL’, ‘Oracle’, ‘Microsoft SQL Server’, ‘Amazon Redshift’, ‘Microsoft Parallel Database Warehouse’, ‘IBM Netezza’, ‘Apache Impala’, ‘Google BigQuery’, ‘Snowflake’, ‘Spark’, and ‘SQLite’). Also includes support for fetching data as ‘Andromeda’ objects. Uses either ‘Java Database Connectivity’ (‘JDBC’) or other ‘DBI’ drivers to connect to databases.\nMaintainer: Martijn Schuemie schuemie@ohdsi.org. License: Apache License"
   },
   {
     "objectID": "backends/index.html#dbi.rodbc-0.1-2",
@@ -70,11 +70,11 @@
     "text": "dittodb 0.1.7 (2023-08-13) 🔗 🐛\nA Test Environment for Database Requests\nTesting and documenting code that communicates with remote databases can be painful. Although the interaction with R is usually relatively simple (e.g. data(frames) passed to and from a database), because they rely on a separate service and the data there, testing them can be difficult to set up, unsustainable in a continuous integration environment, or impossible without replicating an entire production cluster. This package addresses that by allowing you to make recordings from your database interactions and then play them back while testing (or in other contexts) all without needing to spin up or have access to the database your code would typically connect to.\nMaintainer: Jonathan Keane jkeane@gmail.com. License: Apache License (&gt;= 2.0)"
   },
   {
-    "objectID": "backends/index.html#duckdb-0.9.2-2023-11-17",
-    "href": "backends/index.html#duckdb-0.9.2-2023-11-17",
+    "objectID": "backends/index.html#duckdb-0.9.2-1-2023-11-28",
+    "href": "backends/index.html#duckdb-0.9.2-1-2023-11-28",
     "title": "Backends for R-DBI",
-    "section": "duckdb 0.9.2 (2023-11-17) 🔗 🐛",
-    "text": "duckdb 0.9.2 (2023-11-17) 🔗 🐛\nDBI Package for the DuckDB Database Management System\nThe DuckDB project is an embedded analytical data management system with support for the Structured Query Language (SQL). This package includes all of DuckDB and a R Database Interface (DBI) connector.\nMaintainer: Hannes Mühleisen hannes@cwi.nl. License: MIT + file LICENSE"
+    "section": "duckdb 0.9.2-1 (2023-11-28) 🔗 🐛",
+    "text": "duckdb 0.9.2-1 (2023-11-28) 🔗 🐛\nDBI Package for the DuckDB Database Management System\nThe DuckDB project is an embedded analytical data management system with support for the Structured Query Language (SQL). This package includes all of DuckDB and a R Database Interface (DBI) connector.\nMaintainer: Hannes Mühleisen hannes@cwi.nl. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#implyr-0.4.0-2021-03-29",
