@@ -1,47 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-1.html</loc>
-    <lastmod>2023-12-14T07:12:42.027Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-4.html</loc>
-    <lastmod>2023-12-14T07:12:40.983Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-2.html</loc>
-    <lastmod>2023-12-14T07:12:39.667Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/rstudio-conf.html</loc>
-    <lastmod>2023-12-14T07:12:38.679Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/index.html</loc>
-    <lastmod>2023-12-14T07:12:38.003Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/backends/index.html</loc>
-    <lastmod>2023-12-14T07:12:36.355Z</lastmod>
-  </url>
-  <url>
-    <loc>https://maelle.github.io/rdbidotorg/index.html</loc>
-    <lastmod>2023-12-14T07:12:37.323Z</lastmod>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-3.html</loc>
+    <lastmod>2023-12-15T07:12:24.878Z</lastmod>
   </url>
   <url>
     <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-1-halfway.html</loc>
-    <lastmod>2023-12-14T07:12:38.395Z</lastmod>
+    <lastmod>2023-12-15T07:12:23.998Z</lastmod>
   </url>
   <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-2-final.html</loc>
-    <lastmod>2023-12-14T07:12:39.187Z</lastmod>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-4.html</loc>
+    <lastmod>2023-12-15T07:12:23.382Z</lastmod>
   </url>
   <url>
-    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-3.html</loc>
-    <lastmod>2023-12-14T07:12:40.159Z</lastmod>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-1.html</loc>
+    <lastmod>2023-12-15T07:12:22.118Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/blog/index.html</loc>
+    <lastmod>2023-12-15T07:12:21.150Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/backends/index.html</loc>
+    <lastmod>2023-12-15T07:12:19.646Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/index.html</loc>
+    <lastmod>2023-12-15T07:12:20.546Z</lastmod>
   </url>
   <url>
     <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-1-final.html</loc>
-    <lastmod>2023-12-14T07:12:41.435Z</lastmod>
+    <lastmod>2023-12-15T07:12:21.574Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-2-final.html</loc>
+    <lastmod>2023-12-15T07:12:22.622Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/rstudio-conf.html</loc>
+    <lastmod>2023-12-15T07:12:23.642Z</lastmod>
+  </url>
+  <url>
+    <loc>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-2.html</loc>
+    <lastmod>2023-12-15T07:12:24.426Z</lastmod>
   </url>
 </urlset>
