@@ -982,10 +982,10 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 <section id="link-to-video" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-video">Link to video</h2>
 <p>
-<a href="https://www.rstudio.com/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://maelle.github.io/rdbidotorg/blog/posts/https:/embedwistia-a.akamaihd.net/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://maelle.github.io/rdbidotorg/blog/posts/https:/embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
 </p>
 <p>
-<a href="https://www.rstudio.com/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5">Connecting to open source databases – RStudio</a>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5">Connecting to open source databases - Posit</a>
 </p>
 </section>
 <section id="slides" class="level2">
