@@ -189,11 +189,11 @@
     "text": "ClickHouseHTTP 0.3.2 (2023-07-04) 🐛\nA Simple HTTP Database Interface to ‘ClickHouse’\n‘ClickHouse’ (https://clickhouse.com/) is an open-source, high performance columnar OLAP (online analytical processing of queries) database management system for real-time analytics using SQL. This ‘DBI’ backend relies on the ‘ClickHouse’ HTTP interface and support HTTPS protocol.\nMaintainer: Patrice Godard patrice.godard@gmail.com. License: GPL-3"
   },
   {
-    "objectID": "backends/index.html#connections-0.1.1-2020-02-07",
-    "href": "backends/index.html#connections-0.1.1-2020-02-07",
+    "objectID": "backends/index.html#connections-0.2.0-2023-12-18",
+    "href": "backends/index.html#connections-0.2.0-2023-12-18",
     "title": "Backends for R-DBI",
-    "section": "connections 0.1.1 (2020-02-07) 🐛",
-    "text": "connections 0.1.1 (2020-02-07) 🐛\nIntegrates with the ‘RStudio’ Connections Pane and ‘pins’\nEnables ‘DBI’ compliant packages to integrate with the ‘RStudio’ connections pane, and the ‘pins’ package. It automates the display of schemata, tables, views, as well as the preview of the table’s top 1000 records.\nMaintainer: Javier Luraschi javier@rstudio.com. License: GPL-3"
+    "section": "connections 0.2.0 (2023-12-18) 🔗 🐛",
+    "text": "connections 0.2.0 (2023-12-18) 🔗 🐛\nIntegrates with the ‘RStudio’ Connections Pane and ‘pins’\nEnables ‘DBI’ compliant packages to integrate with the ‘RStudio’ connections pane, and the ‘pins’ package. It automates the display of schemata, tables, views, as well as the preview of the table’s top 1000 records.\nMaintainer: Edgar Ruiz edgar@posit.co. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#databaseconnector-6.3.2-2023-12-11",
