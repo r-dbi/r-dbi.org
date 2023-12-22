@@ -34,11 +34,11 @@ jobs:
           git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
           sudo make install
 
+      - uses: actions/checkout@v3
+
       - name: Avoid noise in file metadata
         run: |
           git-utimes --newer
-
-      - uses: actions/checkout@v3
 
       - uses: quarto-dev/quarto-actions/setup@v2
 
