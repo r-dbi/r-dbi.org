@@ -27,6 +27,17 @@ jobs:
           git config --global user.name "$GITHUB_ACTOR"
           git config --global user.email "$GITHUB_ACTOR@users.noreply.github.com"
 
+      - name: Install git-extras
+        run: |
+          git clone https://github.com/tj/git-extras.git
+          cd git-extras
+          git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
+          sudo make install
+
+      - name: Avoid noise in file metadata
+        run: |
+          git-utimes --newer
+
       - uses: actions/checkout@v3
 
       - uses: quarto-dev/quarto-actions/setup@v2
