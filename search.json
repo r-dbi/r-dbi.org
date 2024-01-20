@@ -273,11 +273,11 @@
     "text": "odbc 1.4.1 (2023-12-21) 🔗 🔗 🐛\nConnect to ODBC Compatible Databases (using the DBI Interface)\nA DBI-compatible interface to ODBC databases.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#pool-1.0.1-2023-02-21",
-    "href": "backends/index.html#pool-1.0.1-2023-02-21",
+    "objectID": "backends/index.html#pool-1.0.2-2024-01-18",
+    "href": "backends/index.html#pool-1.0.2-2024-01-18",
     "title": "Backends for R-DBI",
-    "section": "pool 1.0.1 (2023-02-21) 🔗 🐛",
-    "text": "pool 1.0.1 (2023-02-21) 🔗 🐛\nObject Pooling\nEnables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are ‘DBI’ connections.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
+    "section": "pool 1.0.2 (2024-01-18) 🔗 🐛",
+    "text": "pool 1.0.2 (2024-01-18) 🔗 🐛\nObject Pooling\nEnables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are ‘DBI’ connections.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#rathena-2.6.1-2022-12-20",
