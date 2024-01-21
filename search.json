@@ -287,11 +287,11 @@
     "text": "RAthena 2.6.1 (2022-12-20) 🐛\nConnect to ‘AWS Athena’ using ‘Boto3’ (‘DBI’ Interface)\nDesigned to be compatible with the R package ‘DBI’ (Database Interface) when connecting to Amazon Web Service (‘AWS’) Athena https://aws.amazon.com/athena/. To do this ‘Python’ ‘Boto3’ Software Development Kit (‘SDK’) https://boto3.amazonaws.com/v1/documentation/api/latest/index.html is used as a driver.\nMaintainer: Dyfan Jones dyfan.r.jones@gmail.com. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#rclickhouse-0.6.8-2023-08-21",
-    "href": "backends/index.html#rclickhouse-0.6.8-2023-08-21",
+    "objectID": "backends/index.html#rclickhouse-0.6.9-2024-01-19",
+    "href": "backends/index.html#rclickhouse-0.6.9-2024-01-19",
     "title": "Backends for R-DBI",
-    "section": "RClickhouse 0.6.8 (2023-08-21) 🐛",
-    "text": "RClickhouse 0.6.8 (2023-08-21) 🐛\n‘Yandex Clickhouse’ Interface for R with Basic ‘dplyr’ Support\n‘Yandex Clickhouse’ (https://clickhouse.com/) is a high-performance relational column-store database to enable big data exploration and ‘analytics’ scaling to petabytes of data. Methods are provided that enable working with ‘Yandex Clickhouse’ databases via ‘DBI’ methods and using ‘dplyr’/‘dbplyr’ idioms.\nMaintainer: Christian Hotz-Behofsits christian.hotz-behofsits@wu.ac.at. License: GPL-2"
+    "section": "RClickhouse 0.6.9 (2024-01-19) 🐛",
+    "text": "RClickhouse 0.6.9 (2024-01-19) 🐛\n‘Yandex Clickhouse’ Interface for R with Basic ‘dplyr’ Support\n‘Yandex Clickhouse’ (https://clickhouse.com/) is a high-performance relational column-store database to enable big data exploration and ‘analytics’ scaling to petabytes of data. Methods are provided that enable working with ‘Yandex Clickhouse’ databases via ‘DBI’ methods and using ‘dplyr’/‘dbplyr’ idioms.\nMaintainer: Christian Hotz-Behofsits christian.hotz-behofsits@wu.ac.at. License: GPL-2"
   },
   {
     "objectID": "backends/index.html#rh2-0.2.4-2018-03-14",
