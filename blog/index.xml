@@ -6,16 +6,17 @@
       version="2.0">
 <channel>
 <title>R-DBI</title>
-<link>https://maelle.github.io/rdbidotorg/blog/index.html</link>
+<link>https://maelle.github.io/rdbidotorg/blog/</link>
 <atom:link href="https://maelle.github.io/rdbidotorg/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
-<generator>quarto-1.3.450</generator>
+<generator>quarto-1.4.549</generator>
 <lastBuildDate>Tue, 21 Dec 2021 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Maintaining DBI, 4/4</title>
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-4.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -201,6 +202,7 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 
 
 
+
 <section id="what-is-dbi" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-dbi">What is DBI?</h2>
 <p>DBI stands for <strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface. The DBI package connects R to database management systems (DBMS). The goal of DBI is to provide a common interface for database access, regardless of the specific underlying DBMS. DBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, through dedicated <a href="https://github.com/r-dbi/backends#readme">backend packages</a>. For first-time users I recommend starting with the new <a href="https://dbi.r-dbi.org/articles/dbi">introductory tutorial</a>.</p>
@@ -326,6 +328,7 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-3-2.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -533,6 +536,7 @@ tbl %&gt;%
 
 
 
+
 <p>Much earlier this year my proposal for the third R Consortium project for working on DBI has been accepted. DBI is a set of virtual functions declared in the <em>DBI</em> package. Communication with the database is implemented by <em>DBI backends</em>, packages that import <em>DBI</em> and implement its methods. A common interface is helpful for both users and backend implementers. Users, including package developers for DBMS-agnostic packages, need to memoize only one set of functions. Backend developers can focus on functionality instead of design decisions, and can benefit from a large base of potential users right from the start.</p>
 <p>I’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up <a href="http://cynkra.com">cynkra</a>. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.</p>
 <p>This blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the <a href="https://github.com/r-dbi">r-dbi</a> GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development.</p>
@@ -558,8 +562,8 @@ tbl %&gt;%
 <p>After completing the process, projects are entitled to wear a badge like the one below for the DBI project:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://maelle.github.io/rdbidotorg/blog/posts/https:/bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img"></a></p>
-<figcaption class="figure-caption">OpenSSF Best Practices</figcaption>
+<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img" alt="OpenSSF Best Practices"></a></p>
+<figcaption>OpenSSF Best Practices</figcaption>
 </figure>
 </div>
 <p>A click on the badge takes you to the detailed assessment. In addition to the badge, completing the self-certification allows the maintainer to rethink if workflows and practices can be improved.</p>
@@ -655,8 +659,8 @@ tbl %&gt;%
 <p>Thanks to all contributors to <em>DBI</em> and the other projects in the <a href="https://github.com/r-dbi">r-dbi organization</a>!</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://maelle.github.io/rdbidotorg/blog/posts/https:/krlmlr.github.io/dbi-slides/2018-09-zurich-meetup/img/contributors.svg" class="img-fluid figure-img"></p>
-<figcaption class="figure-caption">DBI contributors</figcaption>
+<p><img src="https://krlmlr.github.io/dbi-slides/2018-09-zurich-meetup/img/contributors.svg" class="img-fluid figure-img"></p>
+<figcaption>DBI contributors</figcaption>
 </figure>
 </div>
 
@@ -672,6 +676,7 @@ tbl %&gt;%
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-2-final.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -979,10 +984,11 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 
 
 
+
 <section id="link-to-video" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-video">Link to video</h2>
 <p>
-<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://maelle.github.io/rdbidotorg/blog/posts/https:/embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
 </p>
 <p>
 <a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5">Connecting to open source databases - Posit</a>
@@ -1007,6 +1013,7 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-1-final.html</link>
   <description><![CDATA[ 
+
 
 
 
@@ -1077,6 +1084,7 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-1-halfway.html</link>
   <description><![CDATA[ 
+
 
 
 
