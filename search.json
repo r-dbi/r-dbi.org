@@ -238,6 +238,27 @@
     "text": "sparklyr 1.8.4 (2023-10-30) 🐛\nR Interface to Apache Spark\nR interface to Apache Spark, a fast and general engine for big data processing, see https://spark.apache.org/. This package supports connecting to local and remote Apache Spark clusters, provides a ‘dplyr’ compatible back-end, and provides an interface to Spark’s built-in machine learning algorithms.\nMaintainer: Edgar Ruiz edgar@rstudio.com. License: Apache License 2.0 | file LICENSE"
   },
   {
+    "objectID": "blog/posts/rstudio-conf.html",
+    "href": "blog/posts/rstudio-conf.html",
+    "title": "Connecting to open source databases",
+    "section": "",
+    "text": "Connecting to open source databases - Posit"
+  },
+  {
+    "objectID": "blog/posts/rstudio-conf.html#link-to-video",
+    "href": "blog/posts/rstudio-conf.html#link-to-video",
+    "title": "Connecting to open source databases",
+    "section": "",
+    "text": "Connecting to open source databases - Posit"
+  },
+  {
+    "objectID": "blog/posts/rstudio-conf.html#slides",
+    "href": "blog/posts/rstudio-conf.html#slides",
+    "title": "Connecting to open source databases",
+    "section": "Slides",
+    "text": "Slides\n\n\n\nFull screen version"
+  },
+  {
     "objectID": "blog/posts/dbi-2-final.html",
     "href": "blog/posts/dbi-2-final.html",
     "title": "Done “Establishing DBI”!?",
@@ -320,6 +341,216 @@
     "title": "Done “Establishing DBI”!?",
     "section": "Acknowledgments",
     "text": "Acknowledgments\nI’d like to thank the R Consortium for their generous financial support. Many thanks to the numerous contributors who helped make the past two projects a success."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html",
+    "href": "blog/posts/dbi-3-2.html",
+    "title": "Maintaining DBI, 2/4",
+    "section": "",
+    "text": "DBI stands for database interface, and DBI is a package for connecting to database management systems (DBMS). The goal of DBI is to provide a common interface for accessing a database, regardless of the specific underlying DBMS.\nDBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, allowing users to focus on the specifics of their project instead of setting up the infrastructure for data import and export.\nThe DBI package is perfect for anyone looking to connect to a database, read/write entire tables, and/or execute SQL queries. DBI offers more control to the user than packages such as {dbplyr}.\nThe current version of DBI is 1.1.0. This blog post summarizes recent developments in DBI and related packages."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#what-is-dbi",
+    "href": "blog/posts/dbi-3-2.html#what-is-dbi",
+    "title": "Maintaining DBI, 2/4",
+    "section": "",
+    "text": "DBI stands for database interface, and DBI is a package for connecting to database management systems (DBMS). The goal of DBI is to provide a common interface for accessing a database, regardless of the specific underlying DBMS.\nDBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, allowing users to focus on the specifics of their project instead of setting up the infrastructure for data import and export.\nThe DBI package is perfect for anyone looking to connect to a database, read/write entire tables, and/or execute SQL queries. DBI offers more control to the user than packages such as {dbplyr}.\nThe current version of DBI is 1.1.0. This blog post summarizes recent developments in DBI and related packages."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#specification-of-immediate-argument-to-dbsendquery-and-friends",
+    "href": "blog/posts/dbi-3-2.html#specification-of-immediate-argument-to-dbsendquery-and-friends",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Specification of immediate argument to dbSendQuery() and friends",
+    "text": "Specification of immediate argument to dbSendQuery() and friends\nTom Nolan raised an issue on GitHub, requesting to specify details of the behavior of query execution. It became apparent that the DBI specification did not account for database drivers where the execution path is substantially different for queries with or without parameters. Recent version of DBI mandated the use of a prepared statement or query for everything.\nSimilar problems have been noted in MariaDB, Postgres and SQL Server (when accessed through {odbc}): some statements cannot be executed as prepared statements, or prepared statements are disabled. Over the course of several months, the details of the required extension of this API were fleshed out.\nThe dbSendQuery(), dbGetQuery(), dbSendStatement() and dbExecute() methods gain a new immediate argument. By setting this argument to TRUE, a direct query is created, allowing to execute queries that could not be run previously. Arguably, this is one of those obscure features that are not noted until they are missed.\nIt is up to the individual backends to add support for this argument. The default value should be made backward-compatible with the previous version of DBI 1.0.0. It has already been implemented in the {odbc} package. Plans to implement this feature in both {RMariaDB} and {RPostgres} are underway.\n\nExamples using immediate\nlibrary(DBI)\ncon &lt;- dbConnect(odbc::odbc(), dsn = \"SQLServerConnection\")\n\n# Create local temporary tables:\n# Did not work before, temporary table was removed immediately.\ndbExecute(con, \"CREATE TABLE #temp (a integer)\", immediate = TRUE)\ndbExecute(con, \"INSERT INTO #temp VALUES (1)\", immediate = TRUE)\n\n# Show execution plan:\n# Did not work before, execution plan was never shown\ndbExecute(con, \"SET SHOWPLAN_TEXT ON\", immediate = TRUE)\ndbGetQuery(con, \"SELECT * FROM #temp WHERE a &gt; 0\")\ndbExecute(con, \"SET SHOWPLAN_TEXT OFF\", immediate = TRUE)"
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#connector-objects",
+    "href": "blog/posts/dbi-3-2.html#connector-objects",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Connector objects",
+    "text": "Connector objects\nThe existing method in DBI has been to create the driver object and then call dbConnect() with the connection arguments. However there are times when a user may need to do the following:\n\nSeparate connection arguments from establishing a connection\nSerialize the connector to file in order to establish the same connection later\nMaintain multiple connectors in a list for testing different DBMS\n\nIn order to address these use cases, users now have the ability to create a “connector object” that combines the driver and connection arguments, allowing the user to call dbConnect() without additional arguments. This feature is implemented in {DBI}, and works out of the box for all DBI backends.\n\nExample\nlibrary(DBI)\n\n# Old way:\ndrv &lt;- RSQLite::SQLite()\ncon &lt;- dbConnect(drv, dbname = \":memory:\")\ndbDisconnect(con)\n\n# New connector object:\ncnr &lt;- new(\"DBIConnector\",\n  .drv = RSQLite::SQLite(),\n  .conn_args = list(dbname = \":memory:\")\n)\ncnr\n\n## &lt;DBIConnector&gt;&lt;SQLiteDriver&gt;\n## Arguments:\n## $dbname\n## [1] \":memory:\"\n\ncon &lt;- dbConnect(cnr)\ndbDisconnect(con)\nIn addition, arguments can be functions, a useful feature for passwords and other sensitive connection data."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#logging-with-the-dblog-package",
+    "href": "blog/posts/dbi-3-2.html#logging-with-the-dblog-package",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Logging with the {dblog} package",
+    "text": "Logging with the {dblog} package\nWhen using applications in production, keeping logs is an invaluable part of a sound infrastructure. The new {dblog} package is designed to be as simple as possible. It can be used as a standalone package or in conjunction with packages like {dbplyr}.\n{dblog} helps both with troubleshooting as well as auditing the queries that that are used to access a database. Similar to Perl’s DBI::log, the goal of {dblog} is to implement logging for arbitrary DBI backends.\n{dblog} is straightforward in its use. Start by initializing a logging driver using dblog() prior to connecting to a database management system. All calls to DBI methods are logged and by default printed to the console (or redirected to a file). The entirety of the logging output is runnable R code, so users can copy, paste, and execute the logging code for debugging.\n\nUsing dblog() to connect to SQLite\nlibrary(dblog)\n\ndrv &lt;- dblog(RSQLite::SQLite())\n#&gt; drv1 &lt;- RSQLite::SQLite()\n\n\nAll calls to DBI methods are logged, by default to the console\nconn &lt;- dbConnect(drv, file = \":memory:\")\n#&gt; conn1 &lt;- dbConnect(drv1, file = \":memory:\")\n\ndbWriteTable(conn, \"iris\", iris[1:3, ])\n#&gt; dbWriteTable(conn1, name = \"iris\", value = structure(list(Sepal.Length = c(5.1, 4.9, \n#&gt; 4.7), Sepal.Width = c(3.5, 3, 3.2), Petal.Length = c(1.4, 1.4, 1.3), Petal.Width = c(0.2, \n#&gt; 0.2, 0.2), Species = structure(c(1L, 1L, 1L), .Label = c(\"setosa\", \"versicolor\", \n#&gt; \"virginica\"), class = \"factor\")), row.names = c(NA, 3L), class = \"data.frame\"), overwrite = FALSE, \n#&gt;     append = FALSE)\n\ndata &lt;- dbGetQuery(conn, \"SELECT * FROM iris\")\n#&gt; dbGetQuery(conn1, \"SELECT * FROM iris\")\n#&gt; ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n#&gt; ## 1          5.1         3.5          1.4         0.2  setosa\n#&gt; ## 2          4.9         3.0          1.4         0.2  setosa\n#&gt; ## 3          4.7         3.2          1.3         0.2  setosa\n\ndbDisconnect(conn)\n#&gt; dbDisconnect(conn1)\n\ndata\n#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n#&gt; 1          5.1         3.5          1.4         0.2  setosa\n#&gt; 2          4.9         3.0          1.4         0.2  setosa\n#&gt; 3          4.7         3.2          1.3         0.2  setosa\nThis also works in scenarios where DBI is used under the hood by other packages like dbplyr or tidypredict. The log will represent the DBI operations issued, which allows for a better understanding of the internals."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#testing-your-infrastructure-for-dbi-compatibility",
+    "href": "blog/posts/dbi-3-2.html#testing-your-infrastructure-for-dbi-compatibility",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Testing your infrastructure for DBI compatibility",
+    "text": "Testing your infrastructure for DBI compatibility\nDBItest (on CRAN in version 1.7.0) is currently geared towards usage as part of a package’s test suite. With some effort it is possible to test a database backend against a custom database. This can help verify that your database installation gives expected results when accessed with DBI with specific connection arguments. The DBItest article contains a new section that describes how to achieve this, including a primer on using {dblog} to understand the cause of test failures."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#a-list-of-dbi-backends",
+    "href": "blog/posts/dbi-3-2.html#a-list-of-dbi-backends",
+    "title": "Maintaining DBI, 2/4",
+    "section": "A list of DBI backends",
+    "text": "A list of DBI backends\nThe new backends repository lists all known DBI backends, as retrieved via a code search on GitHub. The list is available in the README, and as a static web API for programmatic processing."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#better-handling-of-time-zones",
+    "href": "blog/posts/dbi-3-2.html#better-handling-of-time-zones",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Better handling of time zones",
+    "text": "Better handling of time zones\nTime zones are used to convert between absolute time and civil time, where absolute time exists independent of human-created measures such as calendars, days, and dates, whereas civil time is comprised of years, months, days, hours, minutes, and seconds. For a more in-depth reading on absolute time, civil time, and time zones, please read this excerpt from the ODBC README.\nFor programming and data analysis, accurate handling time zones is crucial. {odbc} has set an example for how to handle time zones through the inclusion of timezone and timezone_out arguments to dbConnect(). The timezone argument controls the server time zone, which may be different from UTC. The timezone_out argument specifies the time zone to use for displaying times.\nThis strategy gives the user control over datetime information passed on to and retrieved from the database. Both arguments in combination should be able to support a broad variety of use cases and server setups. {RMariaDB} and {RPostgres} will incorporate this strategy with their next CRAN release. {RPostgres} already has gained a timezone argument in its dbConnect() method."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#window-function-support-in-rsqlite",
+    "href": "blog/posts/dbi-3-2.html#window-function-support-in-rsqlite",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Window function support in {RSQLite}",
+    "text": "Window function support in {RSQLite}\nRSQLite 2.1.4 and later includes sqlite &gt;= 3.29.0, which introduces support for window functions.\nlibrary(tidyverse)\nlibrary(dbplyr)\n\ntbl &lt;- memdb_frame(a = rep(1:2, 5), b = 1:10)\n\ntbl %&gt;% \n  group_by(a) %&gt;%\n  window_order(b) %&gt;% \n  mutate(c = cumsum(b)) %&gt;% \n  ungroup()\n\n## # Source:     lazy query [?? x 3]\n## # Database:   sqlite 3.30.1 [:memory:]\n## # Ordered by: b\n##        a     b     c\n##    &lt;int&gt; &lt;int&gt; &lt;int&gt;\n##  1     1     1     1\n##  2     1     3     4\n##  3     1     5     9\n##  4     1     7    16\n##  5     1     9    25\n##  6     2     2     2\n##  7     2     4     6\n##  8     2     6    12\n##  9     2     8    20\n## 10     2    10    30"
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#cii-best-practices-badges-for-all-repos",
+    "href": "blog/posts/dbi-3-2.html#cii-best-practices-badges-for-all-repos",
+    "title": "Maintaining DBI, 2/4",
+    "section": "CII “best practices” badges for all repos",
+    "text": "CII “best practices” badges for all repos\nCII “best practices” have been implemented for {DBItest}, {RMariaDB}, {RPostgres} and {RSQLite}. The {DBItest} repository has a brand-new badge, the badges for the other repositories will follow suit."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#package-updates",
+    "href": "blog/posts/dbi-3-2.html#package-updates",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Package updates",
+    "text": "Package updates\nThe following package versions were sent to CRAN in conjunction with this blog post:\n\nDBI 1.1.0 (NEWS)\nDBItest 1.7.0 (NEWS)\nRMariaDB 1.0.8 (NEWS)\nRPostgres 1.2.0 (NEWS)\nRSQLite 2.1.5 (NEWS)\n\nBefore that, minor updates of the database backend packages were necessary to comply with stricter CRAN checks and toolchain updates."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#future-work",
+    "href": "blog/posts/dbi-3-2.html#future-work",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Future work",
+    "text": "Future work\nThe remainder of the blog post discusses future directions for DBI and the backend packages.\n\nDBI tutorials\nImproving documentation is a priority. DBI is still lacking an up-to-date tutorial with a low entry bar that helps users connect to their database and execute queries. The updated README is a little step forward, but a slightly more comprehensive versions with link to more detailed information would be helpful.\n\n\nTerraforming databases\nNow that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. Terraform helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.\nIt would be helpful to have a selection of open-source and commercial databases in different configuration settings ready for testing.\n\n\nQuery cancellation\nCurrently, {odbc} and many other backends freeze while a query is executed. It is easy to underestimate the runtime of a query, or to accidentally execute a query that is running too long. This severely hampers interactive workflows: a frozen R session means forcibly restarting R, or worse, the development environment.\nMateusz Żółtak has contributed a pull request that implements support for graceful query cancellation in {RPostgres}. Initial research suggests that for {odbc} it may be possible to implement this in a similar fashion. It remains to be seen if an implementation is viable, and if the database libraries used by {RMariaDB} and {RSQLite} support this mode of operation."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-2.html#acknowledgments",
+    "href": "blog/posts/dbi-3-2.html#acknowledgments",
+    "title": "Maintaining DBI, 2/4",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nI’d like to thank Katharina Brunner and Jesse Mostipak for help with composing this blog post."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html",
+    "href": "blog/posts/dbi-3-1.html",
+    "title": "Maintaining DBI, 1/4",
+    "section": "",
+    "text": "Much earlier this year my proposal for the third R Consortium project for working on DBI has been accepted. DBI is a set of virtual functions declared in the DBI package. Communication with the database is implemented by DBI backends, packages that import DBI and implement its methods. A common interface is helpful for both users and backend implementers. Users, including package developers for DBMS-agnostic packages, need to memoize only one set of functions. Backend developers can focus on functionality instead of design decisions, and can benefit from a large base of potential users right from the start.\nI’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up cynkra. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.\nThis blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the r-dbi GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html#presentations-at-meetups",
+    "href": "blog/posts/dbi-3-1.html#presentations-at-meetups",
+    "title": "Maintaining DBI, 1/4",
+    "section": "Presentations at meetups",
+    "text": "Presentations at meetups\nI presented DBI at the Berlin R user group, at the amstRdays, and at the Zurich R meetup. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. These slides, and the intro at db.rstudio.com seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html#cii-badge",
+    "href": "blog/posts/dbi-3-1.html#cii-badge",
+    "title": "Maintaining DBI, 1/4",
+    "section": "CII badge",
+    "text": "CII badge\nFrom https://bestpractices.coreinfrastructure.org/en:\n\nThe Linux Foundation (LF) Core Infrastructure Initiative (CII) Best Practices badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The CII Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and as a result are more likely to produce higher-quality secure software.\n\nThe CII badge can be obtained after a self-certification process that comprises ~70 soft and hard questions about the project around the following topics:\n\nBasics: Project URLs, license, documentation\nChange Control: Version control and version numbers\nReporting: Tracking issues and vulnerabilities\nQuality: Build and test system, best practices\nSecurity (software)\nAnalysis (static and dynamic)\n\nAfter completing the process, projects are entitled to wear a badge like the one below for the DBI project:\n\n\n\nOpenSSF Best Practices\n\n\nA click on the badge takes you to the detailed assessment. In addition to the badge, completing the self-certification allows the maintainer to rethink if workflows and practices can be improved.\nDBI is currently has the “passing” status, the backend packages and DBItest will follow. I have compiled the changes that were necessary to obtain that status below. It appears to be much more difficult but not impossible to obtain the “silver” status.\n\nNecessary changes to the DBI package\nSeveral files had to be added or updated:\n\nCONTRIBUTING.md: This file describes how to contribute to the project. A link to this file is available when you open a new issue. The function usethis::use_tidy_contributing() created the files which I tweaked a bit.\nLICENSE.md: The full license terms need to be available as part of the project. To create the file, I contributed usethis::use_lgpl_2.1_license(). Because CRAN discourages redistribution of copies of standard license texts in packages, the file has been added to .Rbuildignore. This makes the file available in the GitHub repository, but not package file on CRAN.\nREADME.md: Added missing installation instructions.\n\nThough not on the CII badge checklist, I also added:\n\nISSUE_TEMPLATE.md: pre-populates the issue description when opening a new issue. This is a tweaked version of the file provided by usethis::use_tidy_issue_template().\nCODE_OF_CONDUCT.md: The default file as added by usethis::use_code_of_conduct().\n\nOne badge still had an HTTP image source, after changing it to HTTPS the criterion that the website needs to use TLS was satisfied.\nEstablishing a process for reporting code vulnerabilities was perhaps the most challenging part. It seems unclear if it applies to R packages at all, in particular to an interface-only package such as DBI. The solution was to add a link with text to the project page https://dbi.r-dbi.org, asking to send an e-mail and await further instructions."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html#future-development",
+    "href": "blog/posts/dbi-3-1.html#future-development",
+    "title": "Maintaining DBI, 1/4",
+    "section": "Future development",
+    "text": "Future development\nThe principal roadmap for future development has been outlined in the project proposal. There are both “hard” and “soft” issues to solve, repeated below, with comments based on experience from the past year.\n\n“Hard” issues\n\nThe test suite for the DBI specificaton in DBItest is currently designed to run as part of the package checks. The next step is to support running the test suite against a particular R + DBMS installation, to ensure that code interoperating with that DBMS in that environment runs as expected.\n\nShouldn’t be too hard, but need to keep the second “soft” issue in mind.\n\nUsers expect the hard disk or the DBMS to be the limiting factor for loading data, but DBI still lacks a consistent interface for fast data import.\n\nThe new arkdb package offers a dedicated interface for importing data, I still think this functionality should better live there (or elsewhere).\n\nThe syntax for query placeholders currently depends on the DBMS. A consistent interface would be useful, in particular for implementers of packages that compute on the database.\n\nThis has already caused some confusion. Shouldn’t be too hard either, but requires a compatibility mode so that existing code doesn’t break.\n\nThe RPostgres package now has special handling for geometry data. A generic extension to arbitrary data types via hooks would allow e.g. returning JSON data directly as a \"json\" class without user-initiated manual conversion.\n\nThis seems to be a bigger problem, requiring some thought and design.\n\n\n\n\n“Soft” issues\n\nSome users reported installation problems on specific architectures, or connectivity problems with certain databases, or other specific issues. Making the new backends accessible for various combinations of OS/hardware, software, and configuration, will help the adoption of the new packages.\n\nI remember seeing many SSL and timezone issues, as well as genuine bugs like the representation of times before 1970 on Windows. Expect some progress for the second blog post.\n\nThe internal architecture of the DBI specification in DBItest requires a bit of reworking. Currently, it is difficult to understand a test failure without inspecting the source code of DBItest. It is difficult to locate the source of a failure in the specification and in the code. Ideally, each test failure would come with a precise link to the part of the specification that is violated, and with a simple sequence of DBI method calls that allow replicating the failure externally.\n\nThat code I wrote 1-2 years ago requires some attention…\n\nThe communication related to the projects has been rather terse so far. The new website https://r-dbi.org can host blog posts highlighting different aspects of DBI, and serve as a resource for advice on connecting R with databases and computing on the database. This includes coordination and support for developments around DBI like sqlr, an interface for data definition statements on top of DBI.\n\nTogether with the new Databases CRAN Task View maintained by Yuan (Terry) Tang and https://db.rstudio.com/, the https://r-dbi.org should become a viable resource for new and experienced users alike. New users should be directed to tutorials and introductory material, whereas experienced users should expect to find pointers to solve the most common problems. The role of each of these websites remains to be shaped, some overlap may be desired.\n\nAll operations on DBI currently block until a result is available or the DBMS has indicated completion. Asynchronous operations allow parallel processing of multiple queries or statements, however some research is necessary to understand to what extent this can be supported realistically in DBI and for the existing backends.\n\nAdditional arguments to dbConnect(), like the new check_interrupts argument contributed to RPostgres by Mateusz Żółtak, are an option to experiment with asynchronous processing without disrupting existing code.\n\n\nThese lists are not comprehensive, new issues may surface over time, or the importance of issues mentioned above may fade."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html#outlook-next-blog-post",
+    "href": "blog/posts/dbi-3-1.html#outlook-next-blog-post",
+    "title": "Maintaining DBI, 1/4",
+    "section": "Outlook: next blog post",
+    "text": "Outlook: next blog post\nThe “Maintaining DBI” project is driven by blog posts. I promised four blog posts, describing the ongoing maintenance and development. Each blog post will get a corresponding GitHub project, like the project for this and for the next blog post.\nFor the next iteration, I plan to improve documentation, do a release round for all packages, furnish more packages with a CII badge, review several new packages that build on top of DBI, and improve my responsiveness.\nA Walkthrough for first-time DBI users seems to be the highest priority, perhaps accompanied by an online course. Other documentation improvements mostly will address https://r-dbi.org.\nThe following is an excerpt of changes in the forthcoming CRAN releases of the DBI packages:\n\nRSQLite: window functions!\nRMariaDB: better handling for time zones\nDBItest: minor improvements\n\nNew packages worth reviewing include:\n\narkdb: Consistent (and fast?) import and export\nflobr: Converting files to blobs and back\nsqlr: SQLAlchemy-like DSL for data definition, work in progress\ndbplot: Plotting from the database\nand many others.\n\nAdding CII badges for the backend packages and DBItest will give a more consistent appearance of the entire project.\nAs a New Year’s resolution, I pledge to do a better job as package maintainer for DBI and related packages. I reserved a few hours each Monday to respond to issues raised on GitHub and other channels (SO, RStudio Community, Twitter, and the somewhat underappreciated R-SIG-DB mailing list). CI builds on Travis and AppVeyor also require occasional intervention. The remaining time will be spent on resolving known problems."
+  },
+  {
+    "objectID": "blog/posts/dbi-3-1.html#acknowledgments",
+    "href": "blog/posts/dbi-3-1.html#acknowledgments",
+    "title": "Maintaining DBI, 1/4",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nThanks to all contributors to DBI and the other projects in the r-dbi organization!\n\n\n\nDBI contributors"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "DBI for R",
+    "section": "",
+    "text": "R’s interface to databases, with a testable and human-readable specification, a selection of backend packages to connect with various databases, and a boilerplate for developing new backends.\n \n  \n   \n  \n    \n     GitHub"
+  },
+  {
+    "objectID": "index.html#packages",
+    "href": "index.html#packages",
+    "title": "DBI for R",
+    "section": "Packages",
+    "text": "Packages\n\n\nInterface\nThe DBI package defines generic methods that work almost identically across databases. This is checked by DBItest, which also provides a human-readable specification.\n\n\nBackends\nThe RSQLite, MariaDB, and RPostgres packages implement methods defined by DBI that connect to specific databases. There are more packages that connect to other databases.\n\n\nBoilerplate\nThe RKazam package makes it easy for package developers to create a new package to a new DBMS."
+  },
+  {
+    "objectID": "index.html#blog-posts",
+    "href": "index.html#blog-posts",
+    "title": "DBI for R",
+    "section": "Blog posts",
+    "text": "Blog posts\n\n\n\n\n\nMaintaining DBI, 4/4\n\n\n\n\n\nSummarizing the progress of 2021\n\n\n\n\n\nDec 21, 2021\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 3/4\n\n\n\n\n\nSummarizing the progress of 2020\n\n\n\n\n\nJan 20, 2021\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 2/4\n\n\n\n\n\nSummarizing the progress of 2019\n\n\n\n\n\nDec 19, 2019\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 1/4\n\n\n\n\n\nSummarizing the progress of 2018\n\n\n\n\n\nDec 31, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nDone “Establishing DBI”!?\n\n\n\n\n\nSummary of the “Establishing DBI” project\n\n\n\n\n\nMay 1, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nConnecting to open source databases\n\n\n\n\n\nPresentation at rstudio::conf, San Diego\n\n\n\n\n\nFeb 2, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nDBItest: Specification\n\n\n\n\n\nSummary of the “Improving DBI” project\n\n\n\n\n\nMay 15, 2017\n\n\nKirill Müller\n\n\n\n\n\n\n\nHalfway through “Improving DBI”\n\n\n\n\n\nIntermediate status report on the “Improving DBI” project\n\n\n\n\n\nDec 6, 2016\n\n\nKirill Müller\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/index.html",
+    "href": "blog/index.html",
+    "title": "R-DBI blog",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 4/4\n\n\n\n\n\nSummarizing the progress of 2021\n\n\n\n\n\n21 December 2021\n\n\nKirill Müller\n\n\n11 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 3/4\n\n\n\n\n\nSummarizing the progress of 2020\n\n\n\n\n\n20 January 2021\n\n\nKirill Müller\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 2/4\n\n\n\n\n\nSummarizing the progress of 2019\n\n\n\n\n\n19 December 2019\n\n\nKirill Müller\n\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 1/4\n\n\n\n\n\nSummarizing the progress of 2018\n\n\n\n\n\n31 December 2018\n\n\nKirill Müller\n\n\n11 min\n\n\n\n\n\n\n\n\n\n\n\n\nDone “Establishing DBI”!?\n\n\n\n\n\nSummary of the “Establishing DBI” project\n\n\n\n\n\n01 May 2018\n\n\nKirill Müller\n\n\n15 min\n\n\n\n\n\n\n\n\n\n\n\n\nConnecting to open source databases\n\n\n\n\n\nPresentation at rstudio::conf, San Diego\n\n\n\n\n\n02 February 2018\n\n\nKirill Müller\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nDBItest: Specification\n\n\n\n\n\nSummary of the “Improving DBI” project\n\n\n\n\n\n15 May 2017\n\n\nKirill Müller\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\nHalfway through “Improving DBI”\n\n\n\n\n\nIntermediate status report on the “Improving DBI” project\n\n\n\n\n\n06 December 2016\n\n\nKirill Müller\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html",
+    "href": "blog/posts/dbi-1-final.html",
+    "title": "R-DBI",
+    "section": "",
+    "text": "The “Improving DBI” project, funded by the R consortium, started about a year ago. It includes\nBesides the established DBI and RSQLite packages, I have spent a lot of time on the new DBItest package. Final updates to these packages will be pushed to CRAN end of May this year, to give downstream maintainers some time to accommodate.\nThe follow-up project “Establishing DBI” will focus on fully DBI-compliant backends for MySQL/MariaDB and PostgreSQL, and on minor updates to the specs where appropriate."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#dbitest-specification",
+    "href": "blog/posts/dbi-1-final.html#dbitest-specification",
+    "title": "R-DBI",
+    "section": "DBItest: Specification",
+    "text": "DBItest: Specification\nA comprehensive backend-agnostic test suite for DBI backends is provided by the new DBItest package. When the project started, it was merely a collection of test cases. I have considerably expanded the test cases and provided a human-readable description for each, using literate programming techniques powered by roxygen2. The DBI package weaves these chunks of text to a single document that describes all test cases covered by the test suite, the textual DBI specification. This approach ensures that further updates to the specification are reflected in both the automatic tests and the text.\nThis package is aimed at backend implementers, who now can programmatically check with very little effort if their DBI backend conforms to the DBI specification. The verification can be integrated in the automated tests which are run as part of R’s package check mechanism in R CMD check. The odbc package, a new DBI-compliant interface to the ODBC interface, has been using DBItest from day one to enable test-driven development. The bigrquery package is another user of DBItest.\nBecause not all DBMS support all aspects of DBI, the DBItest package allows to restrict which parts of the specification are tested, or “tweak” certain aspects of the tests, e.g., the format of placeholders in parametrized queries. Adapting to other DBMS may require more work due to subtle differences in the implementation of SQL between various DBMS."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#dbi-definition",
+    "href": "blog/posts/dbi-1-final.html#dbi-definition",
+    "title": "R-DBI",
+    "section": "DBI: Definition",
+    "text": "DBI: Definition\nThis package has been around since 2001, it defines the actual DataBase Interface in R. I have taken over maintenance, and released versions 0.4-1, 0.5-1, and 0.6-1, with release of version 0.7 pending.\nThe most prominent change in this package is, of course, the textual DBI specification, which is included as an HTML vignette in the package. The documentation for the various methods defined by DBI is obtained directly from the specification. These help topics are combined in a sensible order to a single, self-contained document. This format is useful for both DBI users and implementers: users can look up the behavior of a method directly from its help page, and implementers can browse a comprehensive document that describes all aspects of the interface. I have also revised the description and the examples for all help topics.\nOther changes include:\n\nthe definition of new generics dbSendStatement() and dbExecute(), for backends that distinguish between queries that return a table and statements that manipulate data,\nthe new dbWithTransaction() generic and the dbBreak() helper function, thanks Barbara Borges Ribero,\nimproved or new default implementations for methods like dbGetQuery(), dbReadTable(), dbQuoteString(), dbQuoteIdentifier(),\ninternal changes that allow methods that don’t have a meaningful return value to return silently,\ntranslation of a helper function from C++ to R, to remove the dependency on Rcpp (thanks Hannes Mühleisen).\n\nFortunately, none of the changes seemed to have introduced any major regressions with downstream packages. The news contain a comprehensive list of changes."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#rsqlite-implementation",
+    "href": "blog/posts/dbi-1-final.html#rsqlite-implementation",
+    "title": "R-DBI",
+    "section": "RSQLite: Implementation",
+    "text": "RSQLite: Implementation\nRSQLite 1.1-2 is a complete rewrite of the original C implementation. Before focusing on compliance to the new DBI specification, it was important to assert compatibility to more than 100 packages on CRAN and Bioconductor that use RSQLite. These packages revealed many usage patterns that were difficult to foresee. Most of these usage patterns are supported in version 1.1-2, the more esoteric ones (such as supplying an integer where a logical is required) trigger a warning.\nSeveral rounds of “revdep checking” were necessary before most packages showed no difference in their check output compared to the original implementation. The downstream maintainers and the Bioconductor team were very supportive, and helped spotting functional and performance regressions during the release process. Two point releases were necessary to finally achieve a stable state.\nSupporting 64-bit integers also was trickier than anticipated. There is no built-in way to represent 64-bit integers in R. The bit64 package works around this limitation by using a numeric vector as storage, which also happens to use 8 bytes per element, and providing coercion functions. But when an integer column is fetched, it cannot be foreseen if a 64-bit value will occur in the result, and smaller integers must use R’s built-in integer type. For this purpose, an efficient data structure for collecting vectors, which is capable of changing the data type on the fly, has been implemented in C++. This data structure will be useful for many other DBI backends that need support for a 64-bit integer data type, and will be ported to the RKazam package in the follow-up project.\nOnce the DBI specification was completed, the process of making RSQLite compliant was easy: enable one of the disabled tests, fix the code, make sure all tests pass, rinse, and repeat. If you haven’t tried it, I seriosly recommend test-driven development, especially when the tests are already implemented.\nThe upcoming release of RSQLite 2.0 will require stronger adherence to the DBI specification also from callers. Where possible I tried to maintain backward compatibility, but in some cases breaks were inevitable because otherwise I’d have had to introduce far too many exceptions and corner cases in the DBI spec. For instance, row names are no longer included by default when writing or reading tables. The original behavior can be reenabled by calling pkgconfig::set_config(), so that packages or scripts that rely on row names continue to work as before. (The setting is active for the duration of the session, but only for the caller that has called pkgconfig::set_config().) I’m happy to include compatibility switches for other breaking changes if necessary and desired, to achieve both adherence to the specs and compatibility with existing behavior.\nA comprehensive list of changes can be found in the news."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#other-bits-and-pieces",
+    "href": "blog/posts/dbi-1-final.html#other-bits-and-pieces",
+    "title": "R-DBI",
+    "section": "Other bits and pieces",
+    "text": "Other bits and pieces\nThe RKazam package is a ready-to-use boilerplate for a DBI backend, named after the hypothetical DBMS used as example in a DBI vignette. It already “passes” all tests of the DBItest package, mostly by calling a function that skips the current test. Starting a DBI backend from scratch requires only copying and renaming the package’s code.\nR has limited support for time-of-day data. The hms package aims at filling this gap. It will be useful especially in the follow-up project, because SQLite doesn’t have an intrinsic type for time-of-day data, unlike many other DBMS."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#next-steps",
+    "href": "blog/posts/dbi-1-final.html#next-steps",
+    "title": "R-DBI",
+    "section": "Next steps",
+    "text": "Next steps\nThe ensemble CRAN release of the three packages DBI, DBItest and RSQLite will occur in parallel to the startup phase for the “Establishing DBI” follow-up project. This project consists of:\n\nFully DBI compatible backends for MySQL/MariaDB and Postgres\nA backend-agnostic C++ data structure to collect column data in the RKazam package\nSupport for spatial data\n\nIn addition, it will contain an update to the DBI specification, mostly concerning support for schemas and for querying the structure of the table returned for a query. Targeting three DBMS instead of one will help properly specify these two particularly tricky parts of DBI. I’m happy to take further feedback from users and backend implementers towards further improvement of the DBI specification."
+  },
+  {
+    "objectID": "blog/posts/dbi-1-final.html#acknowledgments",
+    "href": "blog/posts/dbi-1-final.html#acknowledgments",
+    "title": "R-DBI",
+    "section": "Acknowledgments",
+    "text": "Acknowledgments\nMany thanks to the R Consortium, who has sponsored this project, and to the many contributors who have spotted problems, suggested improvements, submitted pull requests, or otherwise helped make this project a great success. In particular, I’d like to thank Hadley Wickham, who suggested the idea, supported initial development of the DBItest package, and provided helpful feedback; and Christoph Hösler, Hannes Mühleisen, Imanuel Costigan, Jim Hester, Marcel Boldt, and @thrasibule for using it and contributing to it. I enjoyed working on this project, looking forward to “Establishing DBI”!"
   },
   {
     "objectID": "blog/posts/dbi-1-halfway.html",
@@ -425,236 +656,5 @@
     "title": "Maintaining DBI, 4/4",
     "section": "Acknowledgments",
     "text": "Acknowledgments\nI’d like to thank Jeroen Ooms and Gábor Csárdi for providing crucial infrastructure to support this and many other projects in the R ecosystem.\nThanks to the numerous contributors to the packages in the “Maintaining DBI” project in 2021:\n\nDBI: @bwohl, @cboettig, @dcassol, @jawond, @mmccarthy404, @pnacht, @r2evans, @vituri, and @zoushucai;\nRSQLite: @ablack3, @billy34, @edwindj, @gaborcsardi, @ggrothendieck, @giocomai, @habilzare, @honghh2018, @Jeff-Gui, @kevinushey, @mgirlich, @plantton, @schuemie, @Shicheng-Guo, and @tschoonj;\nRPostgres: @aleaficionado, @armenic, @ateucher, @baderstine, @beralef, @carlganz, @ColinFay, @dcaud, @dpprdan, @f-ritter, @galachad, @GitHubGeniusOverlord, @gontcharovd, @gtm19, @hadley, @jakob-r, @jeroen, @jkylearmstrong, @JSchoenbachler, @matthewgson, @mgirlich, @mmuurr, @mskyttner, @phedinkus, @ppssphysics, @RakeshG1, @rickbpdq, @samiaab1990, @sawnaanwas, @tomasjanikds, @vspinu, @waynelapierre, @zmbc, and @zozlak;\nRMariaDB: @bakiunal, @dirkschumacher, @hadley, @jeroen, @Mosk915, @noamross, @paulmaunders, @retowyss, @rorynolan, @twentytitus, @verajosemanuel, @wiligl, @Woosah, and @zoushucai.\nDBItest: @adamsma, and @michaelquinn32;\n\nThanks also to Nicolas Bennett for reviewing and editing this blog post."
-  },
-  {
-    "objectID": "blog/index.html",
-    "href": "blog/index.html",
-    "title": "R-DBI blog",
-    "section": "",
-    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 4/4\n\n\n\n\n\nSummarizing the progress of 2021\n\n\n\n\n\n21 December 2021\n\n\nKirill Müller\n\n\n11 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 3/4\n\n\n\n\n\nSummarizing the progress of 2020\n\n\n\n\n\n20 January 2021\n\n\nKirill Müller\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 2/4\n\n\n\n\n\nSummarizing the progress of 2019\n\n\n\n\n\n19 December 2019\n\n\nKirill Müller\n\n\n12 min\n\n\n\n\n\n\n\n\n\n\n\n\nMaintaining DBI, 1/4\n\n\n\n\n\nSummarizing the progress of 2018\n\n\n\n\n\n31 December 2018\n\n\nKirill Müller\n\n\n11 min\n\n\n\n\n\n\n\n\n\n\n\n\nDone “Establishing DBI”!?\n\n\n\n\n\nSummary of the “Establishing DBI” project\n\n\n\n\n\n01 May 2018\n\n\nKirill Müller\n\n\n15 min\n\n\n\n\n\n\n\n\n\n\n\n\nConnecting to open source databases\n\n\n\n\n\nPresentation at rstudio::conf, San Diego\n\n\n\n\n\n02 February 2018\n\n\nKirill Müller\n\n\n1 min\n\n\n\n\n\n\n\n\n\n\n\n\nDBItest: Specification\n\n\n\n\n\nSummary of the “Improving DBI” project\n\n\n\n\n\n15 May 2017\n\n\nKirill Müller\n\n\n7 min\n\n\n\n\n\n\n\n\n\n\n\n\nHalfway through “Improving DBI”\n\n\n\n\n\nIntermediate status report on the “Improving DBI” project\n\n\n\n\n\n06 December 2016\n\n\nKirill Müller\n\n\n4 min\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html",
-    "href": "blog/posts/dbi-3-1.html",
-    "title": "Maintaining DBI, 1/4",
-    "section": "",
-    "text": "Much earlier this year my proposal for the third R Consortium project for working on DBI has been accepted. DBI is a set of virtual functions declared in the DBI package. Communication with the database is implemented by DBI backends, packages that import DBI and implement its methods. A common interface is helpful for both users and backend implementers. Users, including package developers for DBMS-agnostic packages, need to memoize only one set of functions. Backend developers can focus on functionality instead of design decisions, and can benefit from a large base of potential users right from the start.\nI’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up cynkra. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.\nThis blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the r-dbi GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html#presentations-at-meetups",
-    "href": "blog/posts/dbi-3-1.html#presentations-at-meetups",
-    "title": "Maintaining DBI, 1/4",
-    "section": "Presentations at meetups",
-    "text": "Presentations at meetups\nI presented DBI at the Berlin R user group, at the amstRdays, and at the Zurich R meetup. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. These slides, and the intro at db.rstudio.com seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html#cii-badge",
-    "href": "blog/posts/dbi-3-1.html#cii-badge",
-    "title": "Maintaining DBI, 1/4",
-    "section": "CII badge",
-    "text": "CII badge\nFrom https://bestpractices.coreinfrastructure.org/en:\n\nThe Linux Foundation (LF) Core Infrastructure Initiative (CII) Best Practices badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The CII Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and as a result are more likely to produce higher-quality secure software.\n\nThe CII badge can be obtained after a self-certification process that comprises ~70 soft and hard questions about the project around the following topics:\n\nBasics: Project URLs, license, documentation\nChange Control: Version control and version numbers\nReporting: Tracking issues and vulnerabilities\nQuality: Build and test system, best practices\nSecurity (software)\nAnalysis (static and dynamic)\n\nAfter completing the process, projects are entitled to wear a badge like the one below for the DBI project:\n\n\n\nOpenSSF Best Practices\n\n\nA click on the badge takes you to the detailed assessment. In addition to the badge, completing the self-certification allows the maintainer to rethink if workflows and practices can be improved.\nDBI is currently has the “passing” status, the backend packages and DBItest will follow. I have compiled the changes that were necessary to obtain that status below. It appears to be much more difficult but not impossible to obtain the “silver” status.\n\nNecessary changes to the DBI package\nSeveral files had to be added or updated:\n\nCONTRIBUTING.md: This file describes how to contribute to the project. A link to this file is available when you open a new issue. The function usethis::use_tidy_contributing() created the files which I tweaked a bit.\nLICENSE.md: The full license terms need to be available as part of the project. To create the file, I contributed usethis::use_lgpl_2.1_license(). Because CRAN discourages redistribution of copies of standard license texts in packages, the file has been added to .Rbuildignore. This makes the file available in the GitHub repository, but not package file on CRAN.\nREADME.md: Added missing installation instructions.\n\nThough not on the CII badge checklist, I also added:\n\nISSUE_TEMPLATE.md: pre-populates the issue description when opening a new issue. This is a tweaked version of the file provided by usethis::use_tidy_issue_template().\nCODE_OF_CONDUCT.md: The default file as added by usethis::use_code_of_conduct().\n\nOne badge still had an HTTP image source, after changing it to HTTPS the criterion that the website needs to use TLS was satisfied.\nEstablishing a process for reporting code vulnerabilities was perhaps the most challenging part. It seems unclear if it applies to R packages at all, in particular to an interface-only package such as DBI. The solution was to add a link with text to the project page https://dbi.r-dbi.org, asking to send an e-mail and await further instructions."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html#future-development",
-    "href": "blog/posts/dbi-3-1.html#future-development",
-    "title": "Maintaining DBI, 1/4",
-    "section": "Future development",
-    "text": "Future development\nThe principal roadmap for future development has been outlined in the project proposal. There are both “hard” and “soft” issues to solve, repeated below, with comments based on experience from the past year.\n\n“Hard” issues\n\nThe test suite for the DBI specificaton in DBItest is currently designed to run as part of the package checks. The next step is to support running the test suite against a particular R + DBMS installation, to ensure that code interoperating with that DBMS in that environment runs as expected.\n\nShouldn’t be too hard, but need to keep the second “soft” issue in mind.\n\nUsers expect the hard disk or the DBMS to be the limiting factor for loading data, but DBI still lacks a consistent interface for fast data import.\n\nThe new arkdb package offers a dedicated interface for importing data, I still think this functionality should better live there (or elsewhere).\n\nThe syntax for query placeholders currently depends on the DBMS. A consistent interface would be useful, in particular for implementers of packages that compute on the database.\n\nThis has already caused some confusion. Shouldn’t be too hard either, but requires a compatibility mode so that existing code doesn’t break.\n\nThe RPostgres package now has special handling for geometry data. A generic extension to arbitrary data types via hooks would allow e.g. returning JSON data directly as a \"json\" class without user-initiated manual conversion.\n\nThis seems to be a bigger problem, requiring some thought and design.\n\n\n\n\n“Soft” issues\n\nSome users reported installation problems on specific architectures, or connectivity problems with certain databases, or other specific issues. Making the new backends accessible for various combinations of OS/hardware, software, and configuration, will help the adoption of the new packages.\n\nI remember seeing many SSL and timezone issues, as well as genuine bugs like the representation of times before 1970 on Windows. Expect some progress for the second blog post.\n\nThe internal architecture of the DBI specification in DBItest requires a bit of reworking. Currently, it is difficult to understand a test failure without inspecting the source code of DBItest. It is difficult to locate the source of a failure in the specification and in the code. Ideally, each test failure would come with a precise link to the part of the specification that is violated, and with a simple sequence of DBI method calls that allow replicating the failure externally.\n\nThat code I wrote 1-2 years ago requires some attention…\n\nThe communication related to the projects has been rather terse so far. The new website https://r-dbi.org can host blog posts highlighting different aspects of DBI, and serve as a resource for advice on connecting R with databases and computing on the database. This includes coordination and support for developments around DBI like sqlr, an interface for data definition statements on top of DBI.\n\nTogether with the new Databases CRAN Task View maintained by Yuan (Terry) Tang and https://db.rstudio.com/, the https://r-dbi.org should become a viable resource for new and experienced users alike. New users should be directed to tutorials and introductory material, whereas experienced users should expect to find pointers to solve the most common problems. The role of each of these websites remains to be shaped, some overlap may be desired.\n\nAll operations on DBI currently block until a result is available or the DBMS has indicated completion. Asynchronous operations allow parallel processing of multiple queries or statements, however some research is necessary to understand to what extent this can be supported realistically in DBI and for the existing backends.\n\nAdditional arguments to dbConnect(), like the new check_interrupts argument contributed to RPostgres by Mateusz Żółtak, are an option to experiment with asynchronous processing without disrupting existing code.\n\n\nThese lists are not comprehensive, new issues may surface over time, or the importance of issues mentioned above may fade."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html#outlook-next-blog-post",
-    "href": "blog/posts/dbi-3-1.html#outlook-next-blog-post",
-    "title": "Maintaining DBI, 1/4",
-    "section": "Outlook: next blog post",
-    "text": "Outlook: next blog post\nThe “Maintaining DBI” project is driven by blog posts. I promised four blog posts, describing the ongoing maintenance and development. Each blog post will get a corresponding GitHub project, like the project for this and for the next blog post.\nFor the next iteration, I plan to improve documentation, do a release round for all packages, furnish more packages with a CII badge, review several new packages that build on top of DBI, and improve my responsiveness.\nA Walkthrough for first-time DBI users seems to be the highest priority, perhaps accompanied by an online course. Other documentation improvements mostly will address https://r-dbi.org.\nThe following is an excerpt of changes in the forthcoming CRAN releases of the DBI packages:\n\nRSQLite: window functions!\nRMariaDB: better handling for time zones\nDBItest: minor improvements\n\nNew packages worth reviewing include:\n\narkdb: Consistent (and fast?) import and export\nflobr: Converting files to blobs and back\nsqlr: SQLAlchemy-like DSL for data definition, work in progress\ndbplot: Plotting from the database\nand many others.\n\nAdding CII badges for the backend packages and DBItest will give a more consistent appearance of the entire project.\nAs a New Year’s resolution, I pledge to do a better job as package maintainer for DBI and related packages. I reserved a few hours each Monday to respond to issues raised on GitHub and other channels (SO, RStudio Community, Twitter, and the somewhat underappreciated R-SIG-DB mailing list). CI builds on Travis and AppVeyor also require occasional intervention. The remaining time will be spent on resolving known problems."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-1.html#acknowledgments",
-    "href": "blog/posts/dbi-3-1.html#acknowledgments",
-    "title": "Maintaining DBI, 1/4",
-    "section": "Acknowledgments",
-    "text": "Acknowledgments\nThanks to all contributors to DBI and the other projects in the r-dbi organization!\n\n\n\nDBI contributors"
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html",
-    "href": "blog/posts/dbi-1-final.html",
-    "title": "R-DBI",
-    "section": "",
-    "text": "The “Improving DBI” project, funded by the R consortium, started about a year ago. It includes\nBesides the established DBI and RSQLite packages, I have spent a lot of time on the new DBItest package. Final updates to these packages will be pushed to CRAN end of May this year, to give downstream maintainers some time to accommodate.\nThe follow-up project “Establishing DBI” will focus on fully DBI-compliant backends for MySQL/MariaDB and PostgreSQL, and on minor updates to the specs where appropriate."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#dbitest-specification",
-    "href": "blog/posts/dbi-1-final.html#dbitest-specification",
-    "title": "R-DBI",
-    "section": "DBItest: Specification",
-    "text": "DBItest: Specification\nA comprehensive backend-agnostic test suite for DBI backends is provided by the new DBItest package. When the project started, it was merely a collection of test cases. I have considerably expanded the test cases and provided a human-readable description for each, using literate programming techniques powered by roxygen2. The DBI package weaves these chunks of text to a single document that describes all test cases covered by the test suite, the textual DBI specification. This approach ensures that further updates to the specification are reflected in both the automatic tests and the text.\nThis package is aimed at backend implementers, who now can programmatically check with very little effort if their DBI backend conforms to the DBI specification. The verification can be integrated in the automated tests which are run as part of R’s package check mechanism in R CMD check. The odbc package, a new DBI-compliant interface to the ODBC interface, has been using DBItest from day one to enable test-driven development. The bigrquery package is another user of DBItest.\nBecause not all DBMS support all aspects of DBI, the DBItest package allows to restrict which parts of the specification are tested, or “tweak” certain aspects of the tests, e.g., the format of placeholders in parametrized queries. Adapting to other DBMS may require more work due to subtle differences in the implementation of SQL between various DBMS."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#dbi-definition",
-    "href": "blog/posts/dbi-1-final.html#dbi-definition",
-    "title": "R-DBI",
-    "section": "DBI: Definition",
-    "text": "DBI: Definition\nThis package has been around since 2001, it defines the actual DataBase Interface in R. I have taken over maintenance, and released versions 0.4-1, 0.5-1, and 0.6-1, with release of version 0.7 pending.\nThe most prominent change in this package is, of course, the textual DBI specification, which is included as an HTML vignette in the package. The documentation for the various methods defined by DBI is obtained directly from the specification. These help topics are combined in a sensible order to a single, self-contained document. This format is useful for both DBI users and implementers: users can look up the behavior of a method directly from its help page, and implementers can browse a comprehensive document that describes all aspects of the interface. I have also revised the description and the examples for all help topics.\nOther changes include:\n\nthe definition of new generics dbSendStatement() and dbExecute(), for backends that distinguish between queries that return a table and statements that manipulate data,\nthe new dbWithTransaction() generic and the dbBreak() helper function, thanks Barbara Borges Ribero,\nimproved or new default implementations for methods like dbGetQuery(), dbReadTable(), dbQuoteString(), dbQuoteIdentifier(),\ninternal changes that allow methods that don’t have a meaningful return value to return silently,\ntranslation of a helper function from C++ to R, to remove the dependency on Rcpp (thanks Hannes Mühleisen).\n\nFortunately, none of the changes seemed to have introduced any major regressions with downstream packages. The news contain a comprehensive list of changes."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#rsqlite-implementation",
-    "href": "blog/posts/dbi-1-final.html#rsqlite-implementation",
-    "title": "R-DBI",
-    "section": "RSQLite: Implementation",
-    "text": "RSQLite: Implementation\nRSQLite 1.1-2 is a complete rewrite of the original C implementation. Before focusing on compliance to the new DBI specification, it was important to assert compatibility to more than 100 packages on CRAN and Bioconductor that use RSQLite. These packages revealed many usage patterns that were difficult to foresee. Most of these usage patterns are supported in version 1.1-2, the more esoteric ones (such as supplying an integer where a logical is required) trigger a warning.\nSeveral rounds of “revdep checking” were necessary before most packages showed no difference in their check output compared to the original implementation. The downstream maintainers and the Bioconductor team were very supportive, and helped spotting functional and performance regressions during the release process. Two point releases were necessary to finally achieve a stable state.\nSupporting 64-bit integers also was trickier than anticipated. There is no built-in way to represent 64-bit integers in R. The bit64 package works around this limitation by using a numeric vector as storage, which also happens to use 8 bytes per element, and providing coercion functions. But when an integer column is fetched, it cannot be foreseen if a 64-bit value will occur in the result, and smaller integers must use R’s built-in integer type. For this purpose, an efficient data structure for collecting vectors, which is capable of changing the data type on the fly, has been implemented in C++. This data structure will be useful for many other DBI backends that need support for a 64-bit integer data type, and will be ported to the RKazam package in the follow-up project.\nOnce the DBI specification was completed, the process of making RSQLite compliant was easy: enable one of the disabled tests, fix the code, make sure all tests pass, rinse, and repeat. If you haven’t tried it, I seriosly recommend test-driven development, especially when the tests are already implemented.\nThe upcoming release of RSQLite 2.0 will require stronger adherence to the DBI specification also from callers. Where possible I tried to maintain backward compatibility, but in some cases breaks were inevitable because otherwise I’d have had to introduce far too many exceptions and corner cases in the DBI spec. For instance, row names are no longer included by default when writing or reading tables. The original behavior can be reenabled by calling pkgconfig::set_config(), so that packages or scripts that rely on row names continue to work as before. (The setting is active for the duration of the session, but only for the caller that has called pkgconfig::set_config().) I’m happy to include compatibility switches for other breaking changes if necessary and desired, to achieve both adherence to the specs and compatibility with existing behavior.\nA comprehensive list of changes can be found in the news."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#other-bits-and-pieces",
-    "href": "blog/posts/dbi-1-final.html#other-bits-and-pieces",
-    "title": "R-DBI",
-    "section": "Other bits and pieces",
-    "text": "Other bits and pieces\nThe RKazam package is a ready-to-use boilerplate for a DBI backend, named after the hypothetical DBMS used as example in a DBI vignette. It already “passes” all tests of the DBItest package, mostly by calling a function that skips the current test. Starting a DBI backend from scratch requires only copying and renaming the package’s code.\nR has limited support for time-of-day data. The hms package aims at filling this gap. It will be useful especially in the follow-up project, because SQLite doesn’t have an intrinsic type for time-of-day data, unlike many other DBMS."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#next-steps",
-    "href": "blog/posts/dbi-1-final.html#next-steps",
-    "title": "R-DBI",
-    "section": "Next steps",
-    "text": "Next steps\nThe ensemble CRAN release of the three packages DBI, DBItest and RSQLite will occur in parallel to the startup phase for the “Establishing DBI” follow-up project. This project consists of:\n\nFully DBI compatible backends for MySQL/MariaDB and Postgres\nA backend-agnostic C++ data structure to collect column data in the RKazam package\nSupport for spatial data\n\nIn addition, it will contain an update to the DBI specification, mostly concerning support for schemas and for querying the structure of the table returned for a query. Targeting three DBMS instead of one will help properly specify these two particularly tricky parts of DBI. I’m happy to take further feedback from users and backend implementers towards further improvement of the DBI specification."
-  },
-  {
-    "objectID": "blog/posts/dbi-1-final.html#acknowledgments",
-    "href": "blog/posts/dbi-1-final.html#acknowledgments",
-    "title": "R-DBI",
-    "section": "Acknowledgments",
-    "text": "Acknowledgments\nMany thanks to the R Consortium, who has sponsored this project, and to the many contributors who have spotted problems, suggested improvements, submitted pull requests, or otherwise helped make this project a great success. In particular, I’d like to thank Hadley Wickham, who suggested the idea, supported initial development of the DBItest package, and provided helpful feedback; and Christoph Hösler, Hannes Mühleisen, Imanuel Costigan, Jim Hester, Marcel Boldt, and @thrasibule for using it and contributing to it. I enjoyed working on this project, looking forward to “Establishing DBI”!"
-  },
-  {
-    "objectID": "blog/posts/rstudio-conf.html",
-    "href": "blog/posts/rstudio-conf.html",
-    "title": "Connecting to open source databases",
-    "section": "",
-    "text": "Connecting to open source databases - Posit"
-  },
-  {
-    "objectID": "blog/posts/rstudio-conf.html#link-to-video",
-    "href": "blog/posts/rstudio-conf.html#link-to-video",
-    "title": "Connecting to open source databases",
-    "section": "",
-    "text": "Connecting to open source databases - Posit"
-  },
-  {
-    "objectID": "blog/posts/rstudio-conf.html#slides",
-    "href": "blog/posts/rstudio-conf.html#slides",
-    "title": "Connecting to open source databases",
-    "section": "Slides",
-    "text": "Slides\n\n\n\nFull screen version"
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html",
-    "href": "blog/posts/dbi-3-2.html",
-    "title": "Maintaining DBI, 2/4",
-    "section": "",
-    "text": "DBI stands for database interface, and DBI is a package for connecting to database management systems (DBMS). The goal of DBI is to provide a common interface for accessing a database, regardless of the specific underlying DBMS.\nDBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, allowing users to focus on the specifics of their project instead of setting up the infrastructure for data import and export.\nThe DBI package is perfect for anyone looking to connect to a database, read/write entire tables, and/or execute SQL queries. DBI offers more control to the user than packages such as {dbplyr}.\nThe current version of DBI is 1.1.0. This blog post summarizes recent developments in DBI and related packages."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#what-is-dbi",
-    "href": "blog/posts/dbi-3-2.html#what-is-dbi",
-    "title": "Maintaining DBI, 2/4",
-    "section": "",
-    "text": "DBI stands for database interface, and DBI is a package for connecting to database management systems (DBMS). The goal of DBI is to provide a common interface for accessing a database, regardless of the specific underlying DBMS.\nDBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, allowing users to focus on the specifics of their project instead of setting up the infrastructure for data import and export.\nThe DBI package is perfect for anyone looking to connect to a database, read/write entire tables, and/or execute SQL queries. DBI offers more control to the user than packages such as {dbplyr}.\nThe current version of DBI is 1.1.0. This blog post summarizes recent developments in DBI and related packages."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#specification-of-immediate-argument-to-dbsendquery-and-friends",
-    "href": "blog/posts/dbi-3-2.html#specification-of-immediate-argument-to-dbsendquery-and-friends",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Specification of immediate argument to dbSendQuery() and friends",
-    "text": "Specification of immediate argument to dbSendQuery() and friends\nTom Nolan raised an issue on GitHub, requesting to specify details of the behavior of query execution. It became apparent that the DBI specification did not account for database drivers where the execution path is substantially different for queries with or without parameters. Recent version of DBI mandated the use of a prepared statement or query for everything.\nSimilar problems have been noted in MariaDB, Postgres and SQL Server (when accessed through {odbc}): some statements cannot be executed as prepared statements, or prepared statements are disabled. Over the course of several months, the details of the required extension of this API were fleshed out.\nThe dbSendQuery(), dbGetQuery(), dbSendStatement() and dbExecute() methods gain a new immediate argument. By setting this argument to TRUE, a direct query is created, allowing to execute queries that could not be run previously. Arguably, this is one of those obscure features that are not noted until they are missed.\nIt is up to the individual backends to add support for this argument. The default value should be made backward-compatible with the previous version of DBI 1.0.0. It has already been implemented in the {odbc} package. Plans to implement this feature in both {RMariaDB} and {RPostgres} are underway.\n\nExamples using immediate\nlibrary(DBI)\ncon &lt;- dbConnect(odbc::odbc(), dsn = \"SQLServerConnection\")\n\n# Create local temporary tables:\n# Did not work before, temporary table was removed immediately.\ndbExecute(con, \"CREATE TABLE #temp (a integer)\", immediate = TRUE)\ndbExecute(con, \"INSERT INTO #temp VALUES (1)\", immediate = TRUE)\n\n# Show execution plan:\n# Did not work before, execution plan was never shown\ndbExecute(con, \"SET SHOWPLAN_TEXT ON\", immediate = TRUE)\ndbGetQuery(con, \"SELECT * FROM #temp WHERE a &gt; 0\")\ndbExecute(con, \"SET SHOWPLAN_TEXT OFF\", immediate = TRUE)"
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#connector-objects",
-    "href": "blog/posts/dbi-3-2.html#connector-objects",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Connector objects",
-    "text": "Connector objects\nThe existing method in DBI has been to create the driver object and then call dbConnect() with the connection arguments. However there are times when a user may need to do the following:\n\nSeparate connection arguments from establishing a connection\nSerialize the connector to file in order to establish the same connection later\nMaintain multiple connectors in a list for testing different DBMS\n\nIn order to address these use cases, users now have the ability to create a “connector object” that combines the driver and connection arguments, allowing the user to call dbConnect() without additional arguments. This feature is implemented in {DBI}, and works out of the box for all DBI backends.\n\nExample\nlibrary(DBI)\n\n# Old way:\ndrv &lt;- RSQLite::SQLite()\ncon &lt;- dbConnect(drv, dbname = \":memory:\")\ndbDisconnect(con)\n\n# New connector object:\ncnr &lt;- new(\"DBIConnector\",\n  .drv = RSQLite::SQLite(),\n  .conn_args = list(dbname = \":memory:\")\n)\ncnr\n\n## &lt;DBIConnector&gt;&lt;SQLiteDriver&gt;\n## Arguments:\n## $dbname\n## [1] \":memory:\"\n\ncon &lt;- dbConnect(cnr)\ndbDisconnect(con)\nIn addition, arguments can be functions, a useful feature for passwords and other sensitive connection data."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#logging-with-the-dblog-package",
-    "href": "blog/posts/dbi-3-2.html#logging-with-the-dblog-package",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Logging with the {dblog} package",
-    "text": "Logging with the {dblog} package\nWhen using applications in production, keeping logs is an invaluable part of a sound infrastructure. The new {dblog} package is designed to be as simple as possible. It can be used as a standalone package or in conjunction with packages like {dbplyr}.\n{dblog} helps both with troubleshooting as well as auditing the queries that that are used to access a database. Similar to Perl’s DBI::log, the goal of {dblog} is to implement logging for arbitrary DBI backends.\n{dblog} is straightforward in its use. Start by initializing a logging driver using dblog() prior to connecting to a database management system. All calls to DBI methods are logged and by default printed to the console (or redirected to a file). The entirety of the logging output is runnable R code, so users can copy, paste, and execute the logging code for debugging.\n\nUsing dblog() to connect to SQLite\nlibrary(dblog)\n\ndrv &lt;- dblog(RSQLite::SQLite())\n#&gt; drv1 &lt;- RSQLite::SQLite()\n\n\nAll calls to DBI methods are logged, by default to the console\nconn &lt;- dbConnect(drv, file = \":memory:\")\n#&gt; conn1 &lt;- dbConnect(drv1, file = \":memory:\")\n\ndbWriteTable(conn, \"iris\", iris[1:3, ])\n#&gt; dbWriteTable(conn1, name = \"iris\", value = structure(list(Sepal.Length = c(5.1, 4.9, \n#&gt; 4.7), Sepal.Width = c(3.5, 3, 3.2), Petal.Length = c(1.4, 1.4, 1.3), Petal.Width = c(0.2, \n#&gt; 0.2, 0.2), Species = structure(c(1L, 1L, 1L), .Label = c(\"setosa\", \"versicolor\", \n#&gt; \"virginica\"), class = \"factor\")), row.names = c(NA, 3L), class = \"data.frame\"), overwrite = FALSE, \n#&gt;     append = FALSE)\n\ndata &lt;- dbGetQuery(conn, \"SELECT * FROM iris\")\n#&gt; dbGetQuery(conn1, \"SELECT * FROM iris\")\n#&gt; ##   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n#&gt; ## 1          5.1         3.5          1.4         0.2  setosa\n#&gt; ## 2          4.9         3.0          1.4         0.2  setosa\n#&gt; ## 3          4.7         3.2          1.3         0.2  setosa\n\ndbDisconnect(conn)\n#&gt; dbDisconnect(conn1)\n\ndata\n#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species\n#&gt; 1          5.1         3.5          1.4         0.2  setosa\n#&gt; 2          4.9         3.0          1.4         0.2  setosa\n#&gt; 3          4.7         3.2          1.3         0.2  setosa\nThis also works in scenarios where DBI is used under the hood by other packages like dbplyr or tidypredict. The log will represent the DBI operations issued, which allows for a better understanding of the internals."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#testing-your-infrastructure-for-dbi-compatibility",
-    "href": "blog/posts/dbi-3-2.html#testing-your-infrastructure-for-dbi-compatibility",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Testing your infrastructure for DBI compatibility",
-    "text": "Testing your infrastructure for DBI compatibility\nDBItest (on CRAN in version 1.7.0) is currently geared towards usage as part of a package’s test suite. With some effort it is possible to test a database backend against a custom database. This can help verify that your database installation gives expected results when accessed with DBI with specific connection arguments. The DBItest article contains a new section that describes how to achieve this, including a primer on using {dblog} to understand the cause of test failures."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#a-list-of-dbi-backends",
-    "href": "blog/posts/dbi-3-2.html#a-list-of-dbi-backends",
-    "title": "Maintaining DBI, 2/4",
-    "section": "A list of DBI backends",
-    "text": "A list of DBI backends\nThe new backends repository lists all known DBI backends, as retrieved via a code search on GitHub. The list is available in the README, and as a static web API for programmatic processing."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#better-handling-of-time-zones",
-    "href": "blog/posts/dbi-3-2.html#better-handling-of-time-zones",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Better handling of time zones",
-    "text": "Better handling of time zones\nTime zones are used to convert between absolute time and civil time, where absolute time exists independent of human-created measures such as calendars, days, and dates, whereas civil time is comprised of years, months, days, hours, minutes, and seconds. For a more in-depth reading on absolute time, civil time, and time zones, please read this excerpt from the ODBC README.\nFor programming and data analysis, accurate handling time zones is crucial. {odbc} has set an example for how to handle time zones through the inclusion of timezone and timezone_out arguments to dbConnect(). The timezone argument controls the server time zone, which may be different from UTC. The timezone_out argument specifies the time zone to use for displaying times.\nThis strategy gives the user control over datetime information passed on to and retrieved from the database. Both arguments in combination should be able to support a broad variety of use cases and server setups. {RMariaDB} and {RPostgres} will incorporate this strategy with their next CRAN release. {RPostgres} already has gained a timezone argument in its dbConnect() method."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#window-function-support-in-rsqlite",
-    "href": "blog/posts/dbi-3-2.html#window-function-support-in-rsqlite",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Window function support in {RSQLite}",
-    "text": "Window function support in {RSQLite}\nRSQLite 2.1.4 and later includes sqlite &gt;= 3.29.0, which introduces support for window functions.\nlibrary(tidyverse)\nlibrary(dbplyr)\n\ntbl &lt;- memdb_frame(a = rep(1:2, 5), b = 1:10)\n\ntbl %&gt;% \n  group_by(a) %&gt;%\n  window_order(b) %&gt;% \n  mutate(c = cumsum(b)) %&gt;% \n  ungroup()\n\n## # Source:     lazy query [?? x 3]\n## # Database:   sqlite 3.30.1 [:memory:]\n## # Ordered by: b\n##        a     b     c\n##    &lt;int&gt; &lt;int&gt; &lt;int&gt;\n##  1     1     1     1\n##  2     1     3     4\n##  3     1     5     9\n##  4     1     7    16\n##  5     1     9    25\n##  6     2     2     2\n##  7     2     4     6\n##  8     2     6    12\n##  9     2     8    20\n## 10     2    10    30"
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#cii-best-practices-badges-for-all-repos",
-    "href": "blog/posts/dbi-3-2.html#cii-best-practices-badges-for-all-repos",
-    "title": "Maintaining DBI, 2/4",
-    "section": "CII “best practices” badges for all repos",
-    "text": "CII “best practices” badges for all repos\nCII “best practices” have been implemented for {DBItest}, {RMariaDB}, {RPostgres} and {RSQLite}. The {DBItest} repository has a brand-new badge, the badges for the other repositories will follow suit."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#package-updates",
-    "href": "blog/posts/dbi-3-2.html#package-updates",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Package updates",
-    "text": "Package updates\nThe following package versions were sent to CRAN in conjunction with this blog post:\n\nDBI 1.1.0 (NEWS)\nDBItest 1.7.0 (NEWS)\nRMariaDB 1.0.8 (NEWS)\nRPostgres 1.2.0 (NEWS)\nRSQLite 2.1.5 (NEWS)\n\nBefore that, minor updates of the database backend packages were necessary to comply with stricter CRAN checks and toolchain updates."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#future-work",
-    "href": "blog/posts/dbi-3-2.html#future-work",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Future work",
-    "text": "Future work\nThe remainder of the blog post discusses future directions for DBI and the backend packages.\n\nDBI tutorials\nImproving documentation is a priority. DBI is still lacking an up-to-date tutorial with a low entry bar that helps users connect to their database and execute queries. The updated README is a little step forward, but a slightly more comprehensive versions with link to more detailed information would be helpful.\n\n\nTerraforming databases\nNow that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. Terraform helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.\nIt would be helpful to have a selection of open-source and commercial databases in different configuration settings ready for testing.\n\n\nQuery cancellation\nCurrently, {odbc} and many other backends freeze while a query is executed. It is easy to underestimate the runtime of a query, or to accidentally execute a query that is running too long. This severely hampers interactive workflows: a frozen R session means forcibly restarting R, or worse, the development environment.\nMateusz Żółtak has contributed a pull request that implements support for graceful query cancellation in {RPostgres}. Initial research suggests that for {odbc} it may be possible to implement this in a similar fashion. It remains to be seen if an implementation is viable, and if the database libraries used by {RMariaDB} and {RSQLite} support this mode of operation."
-  },
-  {
-    "objectID": "blog/posts/dbi-3-2.html#acknowledgments",
-    "href": "blog/posts/dbi-3-2.html#acknowledgments",
-    "title": "Maintaining DBI, 2/4",
-    "section": "Acknowledgments",
-    "text": "Acknowledgments\nI’d like to thank Katharina Brunner and Jesse Mostipak for help with composing this blog post."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "DBI for R",
-    "section": "",
-    "text": "R’s interface to databases, with a testable and human-readable specification, a selection of backend packages to connect with various databases, and a boilerplate for developing new backends.\n \n  \n   \n  \n    \n     GitHub"
-  },
-  {
-    "objectID": "index.html#packages",
-    "href": "index.html#packages",
-    "title": "DBI for R",
-    "section": "Packages",
-    "text": "Packages\n\n\nInterface\nThe DBI package defines generic methods that work almost identically across databases. This is checked by DBItest, which also provides a human-readable specification.\n\n\nBackends\nThe RSQLite, MariaDB, and RPostgres packages implement methods defined by DBI that connect to specific databases. There are more packages that connect to other databases.\n\n\nBoilerplate\nThe RKazam package makes it easy for package developers to create a new package to a new DBMS."
-  },
-  {
-    "objectID": "index.html#blog-posts",
-    "href": "index.html#blog-posts",
-    "title": "DBI for R",
-    "section": "Blog posts",
-    "text": "Blog posts\n\n\n\n\n\nMaintaining DBI, 4/4\n\n\n\n\n\nSummarizing the progress of 2021\n\n\n\n\n\nDec 21, 2021\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 3/4\n\n\n\n\n\nSummarizing the progress of 2020\n\n\n\n\n\nJan 20, 2021\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 2/4\n\n\n\n\n\nSummarizing the progress of 2019\n\n\n\n\n\nDec 19, 2019\n\n\nKirill Müller\n\n\n\n\n\n\n\nMaintaining DBI, 1/4\n\n\n\n\n\nSummarizing the progress of 2018\n\n\n\n\n\nDec 31, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nDone “Establishing DBI”!?\n\n\n\n\n\nSummary of the “Establishing DBI” project\n\n\n\n\n\nMay 1, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nConnecting to open source databases\n\n\n\n\n\nPresentation at rstudio::conf, San Diego\n\n\n\n\n\nFeb 2, 2018\n\n\nKirill Müller\n\n\n\n\n\n\n\nDBItest: Specification\n\n\n\n\n\nSummary of the “Improving DBI” project\n\n\n\n\n\nMay 15, 2017\n\n\nKirill Müller\n\n\n\n\n\n\n\nHalfway through “Improving DBI”\n\n\n\n\n\nIntermediate status report on the “Improving DBI” project\n\n\n\n\n\nDec 6, 2016\n\n\nKirill Müller\n\n\n\n\n\n\nNo matching items"
   }
 ]
