@@ -434,11 +434,11 @@
     "text": "AzureKusto 1.1.3 (2023-10-12) 🔗 🐛\nInterface to ‘Kusto’/‘Azure Data Explorer’\nAn interface to ‘Azure Data Explorer’, also known as ‘Kusto’, a fast, distributed data exploration service from Microsoft: https://azure.microsoft.com/en-us/products/data-explorer/. Includes ‘DBI’ and ‘dplyr’ interfaces, with the latter modelled after the ‘dbplyr’ package, whereby queries are translated from R into the native ‘KQL’ query language and executed lazily. On the admin side, the package extends the object framework provided by ‘AzureRMR’ to support creation and deletion of databases, and management of database principals. Part of the ‘AzureR’ family of packages.\nMaintainer: Alex Kyllo jekyllo@microsoft.com. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#bigrquery-1.5.0-2024-01-22",
-    "href": "backends/index.html#bigrquery-1.5.0-2024-01-22",
+    "objectID": "backends/index.html#bigrquery-1.5.1-2024-03-14",
+    "href": "backends/index.html#bigrquery-1.5.1-2024-03-14",
     "title": "Backends for R-DBI",
-    "section": "bigrquery 1.5.0 (2024-01-22) 🔗 🐛",
-    "text": "bigrquery 1.5.0 (2024-01-22) 🔗 🐛\nAn Interface to Google’s ‘BigQuery’ ‘API’\nEasily talk to Google’s ‘BigQuery’ database from R.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
+    "section": "bigrquery 1.5.1 (2024-03-14) 🔗 🐛",
+    "text": "bigrquery 1.5.1 (2024-03-14) 🔗 🐛\nAn Interface to Google’s ‘BigQuery’ ‘API’\nEasily talk to Google’s ‘BigQuery’ database from R.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#ckanr-0.7.0-2023-03-17",
