@@ -85,7 +85,7 @@ The first three items directly affect DBI users, the last item much less so. It 
 James Wondrasek substantially expanded the  "Introduction to DBI" article and added a second article.
 DBI now features two tutorials.
 The [introduction](https://dbi.r-dbi.org/articles/dbi) includes a walkthrough that describes connecting and querying a real database.
-The ["Advanced DBI usage"](https://dbi.r-dbi.org/articles/dbi-advanced) tutorial shows more advanced examples of quoting and parameter binding.
+The ["Advanced DBI usage"](https://dbi.r-dbi.org/articles/DBI-advanced.html) tutorial shows more advanced examples of quoting and parameter binding.
 The tutorials are an important first-hand resource for new users.
 
 
