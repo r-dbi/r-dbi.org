@@ -10,7 +10,7 @@ description: "Summarizing the progress of 2022 and 2023"
 ## What is DBI?
 
 The {DBI} package (**d**ata**b**ase **i**nterface) is a layer between R and database management systems (DBMSes).
-Users interact with DBMSes via the DBI package using an API that is common to all DBMSes.
+Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes.
 Implementations of this API are provided by DBMS-specific [backend packages](https://github.com/r-dbi/backends#readme), such as [RPostgres](https://rpostgres.r-dbi.org/), [RMariaDB](https://rmariadb.r-dbi.org/), and [RSQLite](https://rsqlite.r-dbi.org/).
 If you are new to DBI, you can find a good entry point in the [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html).
 
