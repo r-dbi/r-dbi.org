@@ -118,7 +118,7 @@ See the new [vignette on Arrow support in DBI](https://dbi.r-dbi.org/articles/DB
 
 A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package.
 Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does.
-More on that below, thanks to Voltron Data for supporting this effort!
+More on that below, thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
 
 
 ### Object identifiers
