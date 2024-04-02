@@ -3,6 +3,8 @@ author: "Kirill Müller"
 date: "2024-04-02"
 title: "The future of DBI (1/*)"
 description: "Summarizing the progress of 2022 and 2023"
+aliases:
+  - posts/dbi-4-1.html
 ---
 
 
