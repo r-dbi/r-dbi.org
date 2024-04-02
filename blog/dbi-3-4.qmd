@@ -12,7 +12,7 @@ description: "Summarizing the progress of 2021"
 The {DBI} package (**d**ata**b**ase **i**nterface) provides an abstraction for communication between R and database management systems (DBMSes) by specifying a common application programming interface (API).
 Actual connectivity to DBMSes is established via database specific [backend packages](https://github.com/r-dbi/backends#readme), implementing this interface.
 Examples for such backends include [RPostgres](https://rpostgres.r-dbi.org/), [RMariaDB](https://rmariadb.r-dbi.org/), and [RSQLite](https://rsqlite.r-dbi.org/).
-For users that are new to DBI, the [introductory tutorial](https://dbi.r-dbi.org/articles/dbi) provides a good entry point for getting acquainted with some key concepts.
+For users that are new to DBI, the [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html) provides a good entry point for getting acquainted with some key concepts.
 
 This blog post summarizes recent developments in {DBI} and related packages and concludes with an outlook on potential future directions.
 Similar articles are available from previous years, reporting on earlier states of the {DBI} ecosystem:
