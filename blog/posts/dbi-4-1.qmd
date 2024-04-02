@@ -88,16 +88,13 @@ Feedback and contributions are welcome.
 Various documentation improvements have been made:
 
 - DBI specification is now version-controlled as Markdown files.
-
-    Previously has been assembled at package build time from various sources.
+  Previously has been assembled at package build time from various sources.
 
 - The command execution and data retrieval flow has been clarified in the documentation.
-
-    This has been a common source of confusion for new users.
+  This has been a common source of confusion for new users.
 
 - All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> has been redesigned.
-
-    Thanks to Maëlle Salmon!
+  Thanks to Maëlle Salmon!
 
 ### Move to cpp11
 
