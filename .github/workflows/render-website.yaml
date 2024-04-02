@@ -48,7 +48,7 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
 
-      - name: Render book
+      - name: Render blog
         run: quarto render
 
       - name: Deploy to GitHub Pages
