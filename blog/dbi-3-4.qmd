@@ -17,13 +17,13 @@ For users that are new to DBI, the [introductory tutorial](https://dbi.r-dbi.org
 This blog post summarizes recent developments in {DBI} and related packages and concludes with an outlook on potential future directions.
 Similar articles are available from previous years, reporting on earlier states of the {DBI} ecosystem:
 
-- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3/)
-- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2/)
-- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1/)
+- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
+- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2.html)
+- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1.html)
 
 ## Recent developments
 
-Several packages associated with DBI have been updated since [early 2021](https://www.r-dbi.org/blog/dbi-3-3/):
+Several packages associated with DBI have been updated since [early 2021](https://www.r-dbi.org/blog/dbi-3-3.html):
 
 - DBI 1.1.1 -> 1.1.2 ([NEWS](https://dbi.r-dbi.org/news/))
 - RMariaDB 1.1.0 -> 1.2.1 ([NEWS](https://rmariadb.r-dbi.org/news/))
@@ -117,7 +117,7 @@ Code transformation was carried out in semi-automated fashion, with the help of 
 
 ## Future work
 
-The {DBI} package provides a low-level interface for database connectivity with a [narrow scope](https://www.r-dbi.org/blog/dbi-3-3/).
+The {DBI} package provides a low-level interface for database connectivity with a [narrow scope](https://www.r-dbi.org/blog/dbi-3-3.html).
 Data query and manipulation tasks that are not in-scope for {DBI} are currently left to auxiliary packages, including [dbplyr](https://dbplyr.tidyverse.org/), [dm](https://cynkra.github.io/dm/), [dbx](https://github.com/ankane/dbx) and [rquery](https://winvector.github.io/rquery/).
 {DBI} uses S4, one of several systems for object-oriented programming in R.
 While S4 offers several advantages over its predecessor S3, including increased strictness and multiple dispatch, it also is more rigid compared to S3.
