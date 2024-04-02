@@ -15,7 +15,7 @@ provide a common interface for database access,
 regardless of the
 specific underlying DBMS.
 DBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, through dedicated [backend packages](https://github.com/r-dbi/backends#readme).
-For first-time users I recommend starting with the new [introductory tutorial](https://dbi.r-dbi.org/articles/dbi).
+For first-time users I recommend starting with the new [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html).
 
 The current version of DBI is 1.1.1.
 This blog post attempts to define the scope of the DBI project, summarizes recent developments in DBI and related packages, and showcases future work.
