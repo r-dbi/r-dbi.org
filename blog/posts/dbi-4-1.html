@@ -190,7 +190,7 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-dbi" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-dbi">What is DBI?</h2>
-<p>The {DBI} package (<strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface) is a layer between R and database management systems (DBMSes). Users interact with DBMSes via the DBI package using an API that is common to all DBMSes. Implementations of this API are provided by DBMS-specific <a href="https://github.com/r-dbi/backends#readme">backend packages</a>, such as <a href="https://rpostgres.r-dbi.org/">RPostgres</a>, <a href="https://rmariadb.r-dbi.org/">RMariaDB</a>, and <a href="https://rsqlite.r-dbi.org/">RSQLite</a>. If you are new to DBI, you can find a good entry point in the <a href="https://dbi.r-dbi.org/articles/DBI.html">introductory tutorial</a>.</p>
+<p>The {DBI} package (<strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface) is a layer between R and database management systems (DBMSes). Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes. Implementations of this API are provided by DBMS-specific <a href="https://github.com/r-dbi/backends#readme">backend packages</a>, such as <a href="https://rpostgres.r-dbi.org/">RPostgres</a>, <a href="https://rmariadb.r-dbi.org/">RMariaDB</a>, and <a href="https://rsqlite.r-dbi.org/">RSQLite</a>. If you are new to DBI, you can find a good entry point in the <a href="https://dbi.r-dbi.org/articles/DBI.html">introductory tutorial</a>.</p>
 <p>The interface is designed to be simple and consistent, making it easy to switch between different DBMSes. Packages built on top of DBI, such as <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://docs.ropensci.org/arkdb/">arkdb</a>, provide additional functionality and convenience. New backends can be implemented by following the <a href="https://dbi.r-dbi.org/articles/spec.html">DBI specification</a>, which comes with a comprehensive test suite in the <a href="https://dbitest.r-dbi.org/">DBItest</a> package. The <a href="https://rkazam.r-dbi.org/">RKazam</a> template makes it easy to get started. (Spoiler alert: We know because a new backend has been added recently. Read on!)</p>
 <p>This blog post is split into multiple parts. In this first part, we will summarize recent developments in {DBI} and related packages. The second part reviews the time it takes to respond to issues and pull requests. In the third part, we will do a deeper dive into the new adbi and adbcdrivermanager packages, which use the Arrow data exchange format and offer a more sustainable approach to database connectivity.</p>
 <p>Similar articles are available from previous years, reporting on earlier states of the {DBI} ecosystem:</p>
@@ -200,7 +200,6 @@ ul.task-list li input[type="checkbox"] {
 <li><a href="https://www.r-dbi.org/blog/dbi-3-2/">2/4: December 2019</a></li>
 <li><a href="https://www.r-dbi.org/blog/dbi-3-1/">1/4: December 2018</a></li>
 </ul>
-<p>The remainder of this article describes overall improvements, highlights changes to specific packages, and gives a glimpse on the new adbi package.</p>
 </section>
 <section id="overall" class="level2">
 <h2 class="anchored" data-anchor-id="overall">Overall</h2>
@@ -233,12 +232,9 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="documentation-improvements">Documentation improvements</h3>
 <p>Various documentation improvements have been made:</p>
 <ul>
-<li><p>DBI specification is now version-controlled as Markdown files.</p>
-<p>Previously has been assembled at package build time from various sources.</p></li>
-<li><p>The command execution and data retrieval flow has been clarified in the documentation.</p>
-<p>This has been a common source of confusion for new users.</p></li>
-<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> has been redesigned.</p>
-<p>Thanks to Maëlle Salmon!</p></li>
+<li><p>DBI specification is now version-controlled as Markdown files. Previously has been assembled at package build time from various sources.</p></li>
+<li><p>The command execution and data retrieval flow has been clarified in the documentation. This has been a common source of confusion for new users.</p></li>
+<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon!</p></li>
 </ul>
 </section>
 <section id="move-to-cpp11" class="level3">
@@ -255,7 +251,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="integration-with-arrow" class="level3">
 <h3 class="anchored" data-anchor-id="integration-with-arrow">Integration with Arrow</h3>
 <p>DBI backens can now optionally support Arrow arrays and streams as the primary data exchange format. This is accessed through the new generics <code>dbSendQueryArrow()</code>, <code>dbFetchArrow()</code>, <code>dbFetchArrowChunk()</code>, <code>dbGetQueryArrow()</code>, <code>dbReadTableArrow()</code>, <code>dbWriteTableArrow()</code>, <code>dbCreateTableArrow()</code>, <code>dbAppendTableArrow()</code>, and <code>dbBindArrow()</code>. See the new <a href="https://dbi.r-dbi.org/articles/DBI-arrow.html">vignette on Arrow support in DBI</a> for details.</p>
-<p>A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package. Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does. More on that below, thanks to Voltron Data for supporting this effort!</p>
+<p>A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package. Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does. More on that below, thanks to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort!</p>
 </section>
 <section id="object-identifiers" class="level3">
 <h3 class="anchored" data-anchor-id="object-identifiers">Object identifiers</h3>
@@ -267,7 +263,7 @@ ul.task-list li input[type="checkbox"] {
 <section id="code-generation" class="level3">
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
 <p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement. In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
-<p>The DBItest package home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
+<p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
 <p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
 </section>
