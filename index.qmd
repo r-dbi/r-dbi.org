@@ -43,7 +43,7 @@ This is checked by [DBItest](https://dbitest.r-dbi.org/), which also provides a 
 
 ### Backends
 
-The [RSQLite](https://rsqlite.r-dbi.org/), [MariaDB](https://mariadb.r-dbi.org/), and [RPostgres](https://rpostgres.r-dbi.org/) packages implement methods defined by DBI that connect to specific databases. 
+The [RSQLite](https://rsqlite.r-dbi.org/), [RMariaDB](https://rmariadb.r-dbi.org/), and [RPostgres](https://rpostgres.r-dbi.org/) packages implement methods defined by DBI that connect to specific databases.
 There are [more packages](/backends) that connect to other databases.
 
 
