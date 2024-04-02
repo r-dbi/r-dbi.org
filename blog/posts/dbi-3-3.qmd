@@ -101,7 +101,7 @@ This poses a few problems in practice:
 - Conversion of timestamps to dates via the SQL function `DATE` is only correct when the session time zone is set correctly.
 
 RMariaDB 1.1.0 and RPostgres 1.3.0 gained more robust support for datetime values.
-As proposed in the [previous blog post](https://www.r-dbi.org/blog/dbi-3-2/), new arguments `timezone` and `timezone_out` were added.
+As proposed in the [previous blog post](https://www.r-dbi.org/blog/dbi-3-2.html), new arguments `timezone` and `timezone_out` were added.
 Both arguments should use Olson names such as `Europe/Berlin` or `America/New_York`, not time offsets like `+01:00`; the latter may change with daylight time savings season.
 If `timezone` is set to `NULL`, an attempt is made to detect the correct time zone on the database.
 Thanks to Philipp Schauberger for contributing the initial `timezone` argument for RMariaDB.
