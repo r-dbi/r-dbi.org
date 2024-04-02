@@ -126,7 +126,7 @@ The adbi package allows existing code that uses DBI to seamlessly interact with 
 To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI.
 For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.
 
-![Data flow from libpq to consumers](dbi-4.1-adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
+![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
 
 Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
 Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
