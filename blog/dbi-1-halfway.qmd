@@ -56,7 +56,7 @@ RSQLite 1.1 brings a number of improvements:
 -   Improved mapping between SQLite’s cell-types and R’s column-types.
 
 See the [release
-notes](https://github.com/rstats-db/RSQLite/releases/tag/v1.1) for
+notes](https://github.com/r-dbi/RSQLite/releases/tag/v1.1) for
 further changes.
 
 The rewrite was implemented by Hadley Wickham before the “Improving DBI”
@@ -81,7 +81,7 @@ new generics such as `dbBind()` (for parametrized/prepared queries) or
 `dbSendStatement()` and `dbExecute()` (for statements which don’t return
 data). The definition of a formal DBI specification is part of the
 project, a [formatted
-version](http://rstats-db.github.io/DBI/DBIspec.html) is updated
+version](https://dbi.r-dbi.org/articles/spec.html) is updated
 continuously.
 
 DBItest

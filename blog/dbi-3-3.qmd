@@ -30,7 +30,7 @@ DBI gives a direct access to the database driver,
 leaving more sophisticated data query and manipulation tasks to packages like [dbplyr](https://dbplyr.tidyverse.org/), [dbx](https://github.com/ankane/dbx) and [rquery](https://winvector.github.io/rquery/).
 
 The core DBI project in R provides an interface for databases, specified in textual form and via automated tests.
-The [DBI specification](https://dbi.r-dbi.org/articles/spec) contains a detailed description of the methods provided by DBI.
+The [DBI specification](https://dbi.r-dbi.org/articles/spec.html) contains a detailed description of the methods provided by DBI.
 In summary, the interface covers:
 
 - Discovery of tables, also in schemas
@@ -84,7 +84,7 @@ The first three items directly affect DBI users, the last item much less so. It 
 
 James Wondrasek substantially expanded the  "Introduction to DBI" article and added a second article.
 DBI now features two tutorials.
-The [introduction](https://dbi.r-dbi.org/articles/dbi) includes a walkthrough that describes connecting and querying a real database.
+The [introduction](https://dbi.r-dbi.org/articles/DBI.html) includes a walkthrough that describes connecting and querying a real database.
 The ["Advanced DBI usage"](https://dbi.r-dbi.org/articles/DBI-advanced.html) tutorial shows more advanced examples of quoting and parameter binding.
 The tutorials are an important first-hand resource for new users.
 
