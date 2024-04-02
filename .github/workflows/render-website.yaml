@@ -51,13 +51,47 @@ jobs:
       - name: Render blog
         run: quarto render
 
+      - name: Restore lychee cache
+        id: restore-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1
+        with:
+          fail: true
+          args: "docs --exclude-loopback --insecure --exclude-mail --exclude-path docs/site_libs --cache --max-cache-age 1d"
+
+      - name: "Read lychee's out.md"
+        if: failure()
+        id: lychee-output
+        uses: juliangruber/read-file-action@v1
+        with:
+          path: ./lychee/out.md
+
+      - uses: mshick/add-pr-comment@v2
+        if: failure()
+        with:
+          message: ${{ steps.lychee-output.outputs.content }}
+
+      - name: Save lychee cache
+        uses: actions/cache/save@v4
+        if: success()
+        with:
+          path: .lycheecache
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
+
       - name: Deploy to GitHub Pages
         if: contains(env.isExtPR, 'false')
         id: gh-pages-deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: _book
+          folder: docs
 
       # - name: Deploy to Netlify
       #   if: contains(env.isExtPR, 'false')
