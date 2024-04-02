@@ -5,12 +5,6 @@ title: "The future of DBI (1/*)"
 description: "Summarizing the progress of 2022 and 2023"
 ---
 
-FIXME: dm
-
-FIXME: adbi
-
-FIXME: Intro, summary
-
 
 
 ## What is DBI?
