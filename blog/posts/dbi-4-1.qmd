@@ -93,7 +93,7 @@ Various documentation improvements have been made:
 - The command execution and data retrieval flow has been clarified in the documentation.
   This has been a common source of confusion for new users.
 
-- All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> has been redesigned.
+- All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> is now built using Quarto.
   Thanks to Maëlle Salmon!
 
 ### Move to cpp11
