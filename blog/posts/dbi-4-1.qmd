@@ -135,7 +135,7 @@ This also affects the `dbQuoteIdentifier()`, `dbUnquoteIdentifier()`, and `dbLis
 I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement.
 In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.
 
-The DBItest package home to both the specification of the DBI package and a test suite for DBI backends.
+The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends.
 As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends.
 Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful.
 Backend developers typically have to read the test code to understand what went wrong.
