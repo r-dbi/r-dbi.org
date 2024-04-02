@@ -126,8 +126,8 @@
 <p>Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 and server description does not contain <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code>dbConnect()</code> allows overriding the autodetection.</p>
 <p>Support <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>, needs <code>CLIENT_MULTI_STATEMENTS</code>.</p>
 </section>
-<section id="adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" class="level1">
-<h1>adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)</h1>
+<section id="adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" class="level2">
+<h2 class="anchored" data-anchor-id="adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity">adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)</h2>
 <p>The new adbi package bridges ADBC drivers and DBI. Examples include:</p>
 <ul>
 <li>adbcsqlite, on CRAN</li>
@@ -141,6 +141,7 @@
 </blockquote>
 <p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. The subsequent section contains a more detailed example.</p>
 <p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
+</section>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
 <p>Thanks to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
@@ -153,7 +154,6 @@
 </ul>
 
 
-</section>
 </section>
 
  ]]></description>
