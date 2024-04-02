@@ -4,7 +4,6 @@ comments: false
 margin-header: "MIT License"
 listing:
   - id: posts
-    contents: posts
     sort: 
       - "date desc"
       - "title asc"

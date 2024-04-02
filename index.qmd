@@ -15,7 +15,7 @@ about:
       href: https://github.com/r-dbi
 listing:
   - id: blog
-    contents: blog/posts
+    contents: blog
     type: default
     fields: [title, subtitle, author, description, date]
     sort: 
