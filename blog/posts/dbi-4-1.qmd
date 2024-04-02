@@ -190,7 +190,7 @@ Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (
 
 Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS`.
 
-# adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)
+## adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)
 
 The new adbi package bridges ADBC drivers and DBI.
 Examples include:
