@@ -1,7 +1,7 @@
 ---
 author: "Kirill Müller"
 date: "2024-04-02"
-title: "The future of DBI (1/*)"
+title: "The future of DBI, 1/*"
 description: "Summarizing the progress of 2022 and 2023"
 aliases:
   - blog/posts/dbi-4-1.html
@@ -12,7 +12,7 @@ aliases:
 ## What is DBI?
 
 The {DBI} package (**d**ata**b**ase **i**nterface) is a layer between R and database management systems (DBMSes).
-Users interact with DBMSes via the DBI package using an API that is common to all DBMSes.
+Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes.
 Implementations of this API are provided by DBMS-specific [backend packages](https://github.com/r-dbi/backends#readme), such as [RPostgres](https://rpostgres.r-dbi.org/), [RMariaDB](https://rmariadb.r-dbi.org/), and [RSQLite](https://rsqlite.r-dbi.org/).
 If you are new to DBI, you can find a good entry point in the [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html).
 
@@ -34,9 +34,6 @@ Similar articles are available from previous years, reporting on earlier states 
 - [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
 - [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2.html)
 - [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1.html)
-
-The remainder of this article describes overall improvements, highlights changes to specific packages, and gives a glimpse on the new adbi package.
-
 
 ## Overall
 
@@ -93,16 +90,13 @@ Feedback and contributions are welcome.
 Various documentation improvements have been made:
 
 - DBI specification is now version-controlled as Markdown files.
-
-    Previously has been assembled at package build time from various sources.
+  Previously has been assembled at package build time from various sources.
 
 - The command execution and data retrieval flow has been clarified in the documentation.
+  This has been a common source of confusion for new users.
 
-    This has been a common source of confusion for new users.
-
-- All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> has been redesigned.
-
-    Thanks to Maëlle Salmon!
+- All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> is now built using Quarto.
+  Thanks to Maëlle Salmon!
 
 ### Move to cpp11
 
@@ -126,7 +120,7 @@ See the new [vignette on Arrow support in DBI](https://dbi.r-dbi.org/articles/DB
 
 A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package.
 Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does.
-More on that below, thanks to Voltron Data for supporting this effort!
+More on that below, thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
 
 
 ### Object identifiers
@@ -143,7 +137,7 @@ This also affects the `dbQuoteIdentifier()`, `dbUnquoteIdentifier()`, and `dbLis
 I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement.
 In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.
 
-The DBItest package home to both the specification of the DBI package and a test suite for DBI backends.
+The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends.
 As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends.
 Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful.
 Backend developers typically have to read the test code to understand what went wrong.
