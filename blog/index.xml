@@ -9,7 +9,7 @@
 <link>https://maelle.github.io/rdbidotorg/blog/</link>
 <atom:link href="https://maelle.github.io/rdbidotorg/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
-<generator>quarto-1.4.552</generator>
+<generator>quarto-1.4.553</generator>
 <lastBuildDate>Tue, 02 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The future of DBI, 1/*</title>
