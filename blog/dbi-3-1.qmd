@@ -43,7 +43,7 @@ presentation in Berlin made me realize that a progress report isn't that
 helpful for a general audience. The Zurich version of the presentation
 featured a DBI intro also suitable for new users, merely highlighting
 recent developments. [These slides](https://bit.ly/2wFJix3), and the
-[intro at db.rstudio.com](https://db.rstudio.com/dbi/) seem to be the
+[intro at db.rstudio.com](https://solutions.posit.co/connections/db/r-packages/dbi/) seem to be the
 most recent general-purpose introduction materials available. I think an
 entry-level tutorial would be a good fit for a DBI vignette.
 
