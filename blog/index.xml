@@ -6,15 +6,15 @@
       version="2.0">
 <channel>
 <title>R-DBI</title>
-<link>https://maelle.github.io/rdbidotorg/blog/</link>
-<atom:link href="https://maelle.github.io/rdbidotorg/blog/index.xml" rel="self" type="application/rss+xml"/>
+<link>https://r-dbi.org/blog/</link>
+<atom:link href="https://r-dbi.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
 <generator>quarto-1.5.28</generator>
 <lastBuildDate>Tue, 02 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>The future of DBI, 1/*</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-4-1.html</link>
+  <link>https://r-dbi.org/blog/dbi-4-1.html</link>
   <description><![CDATA[ 
 
 
@@ -157,13 +157,13 @@
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-4-1.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-4-1.html</guid>
   <pubDate>Tue, 02 Apr 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>The future of DBI, 1/*</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/posts/dbi-4-1/</link>
+  <link>https://r-dbi.org/blog/posts/dbi-4-1/</link>
   <description><![CDATA[ 
 
 
@@ -243,7 +243,7 @@
 <p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><img src="https://maelle.github.io/rdbidotorg/blog/posts/dbi-4-1/adbi.png" class="img-fluid figure-img" alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."></p>
+<p><img src="https://r-dbi.org/blog/posts/dbi-4-1/adbi.png" class="img-fluid figure-img" alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."></p>
 <figcaption>Data flow from libpq to consumers</figcaption>
 </figure>
 </div>
@@ -312,13 +312,13 @@
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/posts/dbi-4-1/</guid>
+  <guid>https://r-dbi.org/blog/posts/dbi-4-1/</guid>
   <pubDate>Tue, 02 Apr 2024 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 4/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-3-4.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-4.html</link>
   <description><![CDATA[ 
 
 
@@ -497,13 +497,13 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-3-4.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-4.html</guid>
   <pubDate>Tue, 21 Dec 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 3/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-3-3.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-3.html</link>
   <description><![CDATA[ 
 
 
@@ -626,13 +626,13 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-3-3.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-3.html</guid>
   <pubDate>Wed, 20 Jan 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 2/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-3-2.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-2.html</link>
   <description><![CDATA[ 
 
 
@@ -831,13 +831,13 @@ tbl %&gt;%
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-3-2.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-2.html</guid>
   <pubDate>Thu, 19 Dec 2019 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 1/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-3-1.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-1.html</link>
   <description><![CDATA[ 
 
 
@@ -974,13 +974,13 @@ tbl %&gt;%
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-3-1.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-1.html</guid>
   <pubDate>Mon, 31 Dec 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Done “Establishing DBI”!?</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-2-final.html</link>
+  <link>https://r-dbi.org/blog/dbi-2-final.html</link>
   <description><![CDATA[ 
 
 
@@ -1279,13 +1279,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-2-final.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-2-final.html</guid>
   <pubDate>Tue, 01 May 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Connecting to open source databases</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/rstudio-conf.html</link>
+  <link>https://r-dbi.org/blog/rstudio-conf.html</link>
   <description><![CDATA[ 
 
 
@@ -1311,13 +1311,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/rstudio-conf.html</guid>
+  <guid>https://r-dbi.org/blog/rstudio-conf.html</guid>
   <pubDate>Fri, 02 Feb 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title></title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-1-final.html</link>
+  <link>https://r-dbi.org/blog/dbi-1-final.html</link>
   <description><![CDATA[ 
 
 
@@ -1382,13 +1382,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-1-final.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-1-final.html</guid>
   <pubDate>Mon, 15 May 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Halfway through “Improving DBI”</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://maelle.github.io/rdbidotorg/blog/dbi-1-halfway.html</link>
+  <link>https://r-dbi.org/blog/dbi-1-halfway.html</link>
   <description><![CDATA[ 
 
 
@@ -1432,7 +1432,7 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://maelle.github.io/rdbidotorg/blog/dbi-1-halfway.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-1-halfway.html</guid>
   <pubDate>Tue, 06 Dec 2016 00:00:00 GMT</pubDate>
 </item>
 </channel>
