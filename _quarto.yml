@@ -5,7 +5,7 @@ project:
 website:
   title: "R-DBI"
   description: "R + databases"
-  site-url: https://maelle.github.io/rdbidotorg/
+  site-url: https://r-dbi.org/
   page-footer:
     left:
       - text: "© Licence MIT."
