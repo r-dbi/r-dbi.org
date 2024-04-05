@@ -206,7 +206,7 @@ repeated below, with comments based on experience from the past year.
     -   Together with the new [Databases CRAN Task
         View](https://github.com/terrytangyuan/ctv-databases) maintained
         by Yuan (Terry) Tang and
-        <a href="https://db.rstudio.com/" class="uri">https://db.rstudio.com/</a>,
+        <a href="https://solutions.posit.co/connections/db/" class="uri">https://solutions.posit.co/connections/db/</a>,
         the
         <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a>
         should become a viable resource for new and experienced users
