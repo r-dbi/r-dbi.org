@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.28">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2018-12-31">
 <meta name="description" content="Summarizing the progress of 2018">
 
-<title>R-DBI - Maintaining DBI, 1/4</title>
+<title>R-DBI – Maintaining DBI, 1/4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R-DBI</span>
     </a>
   </div>
@@ -92,20 +92,20 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html"> 
+    <a class="nav-link" href="../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../backends/index.html"> 
+    <a class="nav-link" href="../backends/index.html"> 
 <span class="menu-text">Backends</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -178,7 +178,7 @@ ul.task-list li input[type="checkbox"] {
 <p>This blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the <a href="https://github.com/r-dbi">r-dbi</a> GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development.</p>
 <section id="presentations-at-meetups" class="level2">
 <h2 class="anchored" data-anchor-id="presentations-at-meetups">Presentations at meetups</h2>
-<p>I presented DBI at the <a href="https://www.meetup.com/Berlin-R-Users-Group/">Berlin R user group</a>, at the <a href="https://amsterdam2018.satrdays.org/">amstRdays</a>, and at the <a href="https://zurich-r-user-group.github.io/index.html">Zurich R meetup</a>. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. <a href="https://bit.ly/2wFJix3">These slides</a>, and the <a href="https://db.rstudio.com/dbi/">intro at db.rstudio.com</a> seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette.</p>
+<p>I presented DBI at the <a href="https://www.meetup.com/Berlin-R-Users-Group/">Berlin R user group</a>, at the <a href="https://amsterdam2018.satrdays.org/">amstRdays</a>, and at the <a href="https://zurich-r-user-group.github.io/index.html">Zurich R meetup</a>. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. <a href="https://bit.ly/2wFJix3">These slides</a>, and the <a href="https://solutions.posit.co/connections/db/r-packages/dbi/">intro at db.rstudio.com</a> seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette.</p>
 </section>
 <section id="cii-badge" class="level2">
 <h2 class="anchored" data-anchor-id="cii-badge">CII badge</h2>
@@ -258,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 </ul></li>
 <li><p>The communication related to the projects has been rather terse so far. The new website <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> can host blog posts highlighting different aspects of DBI, and serve as a resource for advice on connecting R with databases and computing on the database. This includes coordination and support for developments around DBI like <em>sqlr</em>, an interface for data definition statements on top of DBI.</p>
 <ul>
-<li>Together with the new <a href="https://github.com/terrytangyuan/ctv-databases">Databases CRAN Task View</a> maintained by Yuan (Terry) Tang and <a href="https://db.rstudio.com/" class="uri">https://db.rstudio.com/</a>, the <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> should become a viable resource for new and experienced users alike. New users should be directed to tutorials and introductory material, whereas experienced users should expect to find pointers to solve the most common problems. The role of each of these websites remains to be shaped, some overlap may be desired.</li>
+<li>Together with the new <a href="https://github.com/terrytangyuan/ctv-databases">Databases CRAN Task View</a> maintained by Yuan (Terry) Tang and <a href="https://solutions.posit.co/connections/db/" class="uri">https://solutions.posit.co/connections/db/</a>, the <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> should become a viable resource for new and experienced users alike. New users should be directed to tutorials and introductory material, whereas experienced users should expect to find pointers to solve the most common problems. The role of each of these websites remains to be shaped, some overlap may be desired.</li>
 </ul></li>
 <li><p>All operations on DBI currently block until a result is available or the DBMS has indicated completion. Asynchronous operations allow parallel processing of multiple queries or statements, however some research is necessary to understand to what extent this can be supported realistically in DBI and for the existing backends.</p>
 <ul>
@@ -270,7 +270,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="outlook-next-blog-post" class="level2">
 <h2 class="anchored" data-anchor-id="outlook-next-blog-post">Outlook: next blog post</h2>
-<p>The “Maintaining DBI” project is driven by blog posts. I promised four blog posts, describing the ongoing maintenance and development. Each blog post will get a corresponding GitHub project, like the project for <a href="https://github.com/orgs/r-dbi/projects/2">this</a> and for the <a href="https://github.com/orgs/r-dbi/projects/3">next</a> blog post.</p>
+<p>The “Maintaining DBI” project is driven by blog posts. I promised four blog posts, describing the ongoing maintenance and development.</p>
 <p>For the next iteration, I plan to improve documentation, do a release round for all packages, furnish more packages with a CII badge, review several new packages that build on top of <em>DBI</em>, and improve my responsiveness.</p>
 <p>A Walkthrough for first-time DBI users seems to be the highest priority, perhaps accompanied by an online course. Other documentation improvements mostly will address <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a>.</p>
 <p>The following is an excerpt of changes in the forthcoming CRAN releases of the DBI packages:</p>
@@ -339,18 +339,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -382,7 +371,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/maelle\.github\.io\/rdbidotorg\/");
@@ -390,7 +401,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

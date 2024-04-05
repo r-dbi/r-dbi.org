@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../../">
-<script src="../../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R-DBI</span>
     </a>
   </div>
@@ -92,15 +92,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../blog/index.html"> 
+    <a class="nav-link" href="../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../../backends/index.html"> 
+    <a class="nav-link" href="../backends/index.html"> 
 <span class="menu-text">Backends</span></a>
   </li>  
 </ul>
@@ -128,20 +128,24 @@ ul.task-list li input[type="checkbox"] {
   <li><a href="#move-to-cpp11" id="toc-move-to-cpp11" class="nav-link" data-scroll-target="#move-to-cpp11">Move to cpp11</a></li>
   <li><a href="#avoid-tidying-of-duplicate-column-names" id="toc-avoid-tidying-of-duplicate-column-names" class="nav-link" data-scroll-target="#avoid-tidying-of-duplicate-column-names">Avoid tidying of duplicate column names</a></li>
   </ul></li>
-  <li><a href="#adbi-new-release-in-collaboration-with-voltron-data" id="toc-adbi-new-release-in-collaboration-with-voltron-data" class="nav-link" data-scroll-target="#adbi-new-release-in-collaboration-with-voltron-data">adbi: new release in collaboration with Voltron Data</a></li>
-  <li><a href="#dbi" id="toc-dbi" class="nav-link" data-scroll-target="#dbi">DBI</a>
+  <li><a href="#dbi-minor-update-to-1.2.2" id="toc-dbi-minor-update-to-1.2.2" class="nav-link" data-scroll-target="#dbi-minor-update-to-1.2.2">DBI: minor update to 1.2.2</a>
   <ul class="collapse">
   <li><a href="#integration-with-arrow" id="toc-integration-with-arrow" class="nav-link" data-scroll-target="#integration-with-arrow">Integration with Arrow</a></li>
   <li><a href="#object-identifiers" id="toc-object-identifiers" class="nav-link" data-scroll-target="#object-identifiers">Object identifiers</a></li>
   </ul></li>
-  <li><a href="#dbitest" id="toc-dbitest" class="nav-link" data-scroll-target="#dbitest">DBItest</a>
+  <li><a href="#dbitest-minor-update-to-1.8.1" id="toc-dbitest-minor-update-to-1.8.1" class="nav-link" data-scroll-target="#dbitest-minor-update-to-1.8.1">DBItest: minor update to 1.8.1</a>
   <ul class="collapse">
   <li><a href="#code-generation" id="toc-code-generation" class="nav-link" data-scroll-target="#code-generation">Code generation</a></li>
   <li><a href="#decoupling-from-backends" id="toc-decoupling-from-backends" class="nav-link" data-scroll-target="#decoupling-from-backends">Decoupling from backends</a></li>
   <li><a href="#other-improvements" id="toc-other-improvements" class="nav-link" data-scroll-target="#other-improvements">Other improvements</a></li>
   </ul></li>
-  <li><a href="#backend-packages-rsqlite-rmariadb-rpostgres" id="toc-backend-packages-rsqlite-rmariadb-rpostgres" class="nav-link" data-scroll-target="#backend-packages-rsqlite-rmariadb-rpostgres">Backend packages: RSQLite, RMariaDB, RPostgres</a></li>
+  <li><a href="#rsqlite-minor-update-to-2.3.6-continuous-updates-following-upstream-sqlite-releases" id="toc-rsqlite-minor-update-to-2.3.6-continuous-updates-following-upstream-sqlite-releases" class="nav-link" data-scroll-target="#rsqlite-minor-update-to-2.3.6-continuous-updates-following-upstream-sqlite-releases">RSQLite: minor update to 2.3.6, continuous updates following upstream SQLite releases</a></li>
+  <li><a href="#rpostgres-minor-update-to-1.4.6" id="toc-rpostgres-minor-update-to-1.4.6" class="nav-link" data-scroll-target="#rpostgres-minor-update-to-1.4.6">RPostgres: minor update to 1.4.6</a></li>
+  <li><a href="#rmariadb-minor-update-to-1.3.1" id="toc-rmariadb-minor-update-to-1.3.1" class="nav-link" data-scroll-target="#rmariadb-minor-update-to-1.3.1">RMariaDB: minor update to 1.3.1</a></li>
+  <li><a href="#adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" id="toc-adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" class="nav-link" data-scroll-target="#adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity">adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)</a>
+  <ul class="collapse">
   <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
+  </ul></li>
   </ul>
 </nav>
     </div>
@@ -186,15 +190,15 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-dbi" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-dbi">What is DBI?</h2>
-<p>The <a href="https://dbi.r-dbi.org/">DBI package</a> (<strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface) is a layer between R and database management systems (DBMSes). Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes. Implementations of this API are provided by DBMS-specific <a href="https://github.com/r-dbi/backends#readme">backend packages</a>, such as <a href="https://rpostgres.r-dbi.org/">RPostgres</a>, <a href="https://rmariadb.r-dbi.org/">RMariaDB</a>, and <a href="https://rsqlite.r-dbi.org/">RSQLite</a>. If you are new to DBI, you can find a good entry point in the <a href="https://dbi.r-dbi.org/articles/DBI.html">introductory tutorial</a>.</p>
+<p>The {DBI} package (<strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface) is a layer between R and database management systems (DBMSes). Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes. Implementations of this API are provided by DBMS-specific <a href="https://github.com/r-dbi/backends#readme">backend packages</a>, such as <a href="https://rpostgres.r-dbi.org/">RPostgres</a>, <a href="https://rmariadb.r-dbi.org/">RMariaDB</a>, and <a href="https://rsqlite.r-dbi.org/">RSQLite</a>. If you are new to DBI, you can find a good entry point in the <a href="https://dbi.r-dbi.org/articles/DBI.html">introductory tutorial</a>.</p>
 <p>The interface is designed to be simple and consistent, making it easy to switch between different DBMSes. Packages built on top of DBI, such as <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://docs.ropensci.org/arkdb/">arkdb</a>, provide additional functionality and convenience. New backends can be implemented by following the <a href="https://dbi.r-dbi.org/articles/spec.html">DBI specification</a>, which comes with a comprehensive test suite in the <a href="https://dbitest.r-dbi.org/">DBItest</a> package. The <a href="https://rkazam.r-dbi.org/">RKazam</a> template makes it easy to get started. (Spoiler alert: We know because a new backend has been added recently. Read on!)</p>
-<p>This blog post is split into multiple parts. In this first part, we summarize recent developments in DBI and related packages, including a glimpse on the new <a href="https://adbi.r-dbi.org/">adbi</a> package. The second part reviews the time it takes to respond to issues and pull requests. In the third part, we will do a deeper dive into the new adbi and adbcdrivermanager packages, which use the Arrow data exchange format and offer a more sustainable approach to database connectivity.</p>
-<p>Similar articles are available from previous years, reporting on earlier states of the DBI ecosystem:</p>
+<p>This blog post is split into multiple parts. In this first part, we will summarize recent developments in {DBI} and related packages. The second part reviews the time it takes to respond to issues and pull requests. In the third part, we will do a deeper dive into the new adbi and adbcdrivermanager packages, which use the Arrow data exchange format and offer a more sustainable approach to database connectivity.</p>
+<p>Similar articles are available from previous years, reporting on earlier states of the {DBI} ecosystem:</p>
 <ul>
-<li><a href="https://www.r-dbi.org/blog/dbi-3-3/">4/4: December 2021</a></li>
-<li><a href="https://www.r-dbi.org/blog/dbi-3-3/">3/4: January 2021</a></li>
-<li><a href="https://www.r-dbi.org/blog/dbi-3-2/">2/4: December 2019</a></li>
-<li><a href="https://www.r-dbi.org/blog/dbi-3-1/">1/4: December 2018</a></li>
+<li><a href="https://www.r-dbi.org/blog/dbi-3-3.html">4/4: December 2021</a></li>
+<li><a href="https://www.r-dbi.org/blog/dbi-3-3.html">3/4: January 2021</a></li>
+<li><a href="https://www.r-dbi.org/blog/dbi-3-2.html">2/4: December 2019</a></li>
+<li><a href="https://www.r-dbi.org/blog/dbi-3-1.html">1/4: December 2018</a></li>
 </ul>
 </section>
 <section id="overall" class="level2">
@@ -242,31 +246,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The RSQLite, RPostgres, and RMariaDB packages no longer change duplicate column names. The behavior in the presence of duplicate column names was not specified in the DBI specification, but imposing a tidying step seems out of scope for a database interface. It is now up to the user to handle duplicate column names, for example by using <code>janitor::clean_names()</code>.</p>
 </section>
 </section>
-<section id="adbi-new-release-in-collaboration-with-voltron-data" class="level2">
-<h2 class="anchored" data-anchor-id="adbi-new-release-in-collaboration-with-voltron-data">adbi: new release in collaboration with Voltron Data</h2>
-<p>The new adbi package bridges ADBC drivers and DBI. Examples include:</p>
-<ul>
-<li>adbcsqlite, on CRAN</li>
-<li>adbcpostgresql, on CRAN</li>
-<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/">Snowflake</a></li>
-<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql">adbcflightsql</a> for <a href="https://arrow.apache.org/docs/format/FlightSql.html">FlightSQL</a></li>
-</ul>
-<p><a href="https://arrow.apache.org/adbc/">ADBC</a> (Arrow database connectivity) is</p>
-<blockquote class="blockquote">
-<p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
-</blockquote>
-<p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.</p>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="adbi.png" class="img-fluid figure-img" alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."></p>
-<figcaption>Data flow from libpq to consumers</figcaption>
-</figure>
-</div>
-<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
-</section>
-<section id="dbi" class="level2">
-<h2 class="anchored" data-anchor-id="dbi">DBI</h2>
-<p>This package has seen a minor update to 1.2.2. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for the full details.</p>
+<section id="dbi-minor-update-to-1.2.2" class="level2">
+<h2 class="anchored" data-anchor-id="dbi-minor-update-to-1.2.2">DBI: minor update to 1.2.2</h2>
 <section id="integration-with-arrow" class="level3">
 <h3 class="anchored" data-anchor-id="integration-with-arrow">Integration with Arrow</h3>
 <p>DBI backens can now optionally support Arrow arrays and streams as the primary data exchange format. This is accessed through the new generics <code>dbSendQueryArrow()</code>, <code>dbFetchArrow()</code>, <code>dbFetchArrowChunk()</code>, <code>dbGetQueryArrow()</code>, <code>dbReadTableArrow()</code>, <code>dbWriteTableArrow()</code>, <code>dbCreateTableArrow()</code>, <code>dbAppendTableArrow()</code>, and <code>dbBindArrow()</code>. See the new <a href="https://dbi.r-dbi.org/articles/DBI-arrow.html">vignette on Arrow support in DBI</a> for details.</p>
@@ -277,9 +258,8 @@ ul.task-list li input[type="checkbox"] {
 <p>The <code>Id()</code> class has been changed to unnamed components, as the explicit naming of the components (“database”, “schema”, “table”) was not used in practice. This also affects the <code>dbQuoteIdentifier()</code>, <code>dbUnquoteIdentifier()</code>, and <code>dbListObjects()</code> generics, which now accept and return unnamed <code>Id()</code> objects.</p>
 </section>
 </section>
-<section id="dbitest" class="level2">
-<h2 class="anchored" data-anchor-id="dbitest">DBItest</h2>
-<p>The DBItest package has seen a minor update to 1.8.1. See the <a href="https://dbitest.r-dbi.org/news/index.html">change log</a> for details.</p>
+<section id="dbitest-minor-update-to-1.8.1" class="level2">
+<h2 class="anchored" data-anchor-id="dbitest-minor-update-to-1.8.1">DBItest: minor update to 1.8.1</h2>
 <section id="code-generation" class="level3">
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
 <p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement. In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
@@ -297,24 +277,41 @@ ul.task-list li input[type="checkbox"] {
 <p>A new tweak <code>allow_na_rows_affected</code> has been added to support <code>NA</code> values returned from <code>dbGetRowsAffected()</code> and passed as the <code>n</code> argument to <code>dbFetch()</code>.</p>
 </section>
 </section>
-<section id="backend-packages-rsqlite-rmariadb-rpostgres" class="level2">
-<h2 class="anchored" data-anchor-id="backend-packages-rsqlite-rmariadb-rpostgres">Backend packages: RSQLite, RMariaDB, RPostgres</h2>
-<p>RSQLite has seen a minor update, the current version is 2.3.6. See the <a href="https://rsqlite.r-dbi.org/news/index.html">change log</a> for details.</p>
+<section id="rsqlite-minor-update-to-2.3.6-continuous-updates-following-upstream-sqlite-releases" class="level2">
+<h2 class="anchored" data-anchor-id="rsqlite-minor-update-to-2.3.6-continuous-updates-following-upstream-sqlite-releases">RSQLite: minor update to 2.3.6, continuous updates following upstream SQLite releases</h2>
 <p>The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN. The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it. For this reason, the known authors of SQLite have been added to the <code>DESCRIPTION</code> file. This process allows quicker updates of SQLite than if installing from <a href="https://repology.org/project/sqlite/versions">OS package repositories</a>, and precise control of the underlying SQLite version used in a project.</p>
 <p>Other minor changes include support for the icpc compiler, and a new <code>sqliteIsTransacting()</code> function that returns if a transaction is active on the current connection.</p>
-<p>RMariaDB has also seen a minor update. The current version is 1.3.1. See the <a href="https://rmariadb.r-dbi.org/news/index.html">change log</a> for details.</p>
-<p>MariaDB is a fork of MySQL, and both packages continue to evolve. There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences. Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 and server description does not contain <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code>dbConnect()</code> allows overriding the autodetection. This means that code can behave differently depending on the underlying database server.</p>
-<p>Similarly to RPostgres and odbc, RMariaDB now supports <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>. This sends the query to the server without preparing it, which is mandatory for some queries. For this to work, the connection needs to be opened with the <code>CLIENT_MULTI_STATEMENTS</code> flag.</p>
-<p>Other changes include:</p>
-<ul>
-<li><p>Support for <code>TIME</code> columns with subsecond precision.</p></li>
-<li><p>The use of strings as default for JSON and all unknown column types.</p></li>
-</ul>
-<p>RPostgres has seen a minor update, mostly focusing on maintenance. The current version is 1.4.6. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for details.</p>
 </section>
+<section id="rpostgres-minor-update-to-1.4.6" class="level2">
+<h2 class="anchored" data-anchor-id="rpostgres-minor-update-to-1.4.6">RPostgres: minor update to 1.4.6</h2>
+<p>Maintenance updates.</p>
+</section>
+<section id="rmariadb-minor-update-to-1.3.1" class="level2">
+<h2 class="anchored" data-anchor-id="rmariadb-minor-update-to-1.3.1">RMariaDB: minor update to 1.3.1</h2>
+<p>Align with updates to the MySQL C API, e.g., avoiding the deprecated <code>mysql_ssl_set()</code> function.</p>
+<p>Support <code>TIME</code> columns with subsecond precision.</p>
+<p>Use string as default for JSON (#296) and all unknown column types.</p>
+<p>Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 and server description does not contain <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code>dbConnect()</code> allows overriding the autodetection.</p>
+<p>Support <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>, needs <code>CLIENT_MULTI_STATEMENTS</code>.</p>
+</section>
+<section id="adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" class="level1">
+<h1>adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)</h1>
+<p>The new adbi package bridges ADBC drivers and DBI. Examples include:</p>
+<ul>
+<li>adbcsqlite, on CRAN</li>
+<li>adbcpostgresql, on CRAN</li>
+<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/">Snowflake</a></li>
+<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql">adbcflightsql</a> for <a href="https://arrow.apache.org/docs/format/FlightSql.html">FlightSQL</a></li>
+</ul>
+<p><a href="https://arrow.apache.org/adbc/">ADBC</a> is</p>
+<blockquote class="blockquote">
+<p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
+</blockquote>
+<p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. The subsequent section contains a more detailed example.</p>
+<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
-<p>Thanks to Maëlle Salmon for her help with the blog post, and to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
+<p>Thanks to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
 <ul>
 <li><p>DBI: <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/bcorwin">@bcorwin</a>, <a href="https://github.com/capitantyler">@capitantyler</a>, <a href="https://github.com/chrisdane">@chrisdane</a>, <a href="https://github.com/eauleaf">@eauleaf</a>, <a href="https://github.com/eitsupi">@eitsupi</a>, <a href="https://github.com/eriksquires">@eriksquires</a>, <a href="https://github.com/fnavarro94">@fnavarro94</a>, <a href="https://github.com/GitHunter0">@GitHunter0</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/hannes101">@hannes101</a>, <a href="https://github.com/Jay123ub">@Jay123ub</a>, <a href="https://github.com/jd4ds">@jd4ds</a>, <a href="https://github.com/kelseyroberts">@kelseyroberts</a>, <a href="https://github.com/latot">@latot</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/matthiasgomolka">@matthiasgomolka</a>, <a href="https://github.com/mgirlich">@mgirlich</a>, <a href="https://github.com/mmuurr">@mmuurr</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/philibe">@philibe</a>, <a href="https://github.com/pnacht">@pnacht</a>, <a href="https://github.com/r2evans">@r2evans</a>, <a href="https://github.com/renkun-ken">@renkun-ken</a>, <a href="https://github.com/salim-b">@salim-b</a>, <a href="https://github.com/scottfrechette">@scottfrechette</a>, and <a href="https://github.com/tzakharko">@tzakharko</a>.</p></li>
 <li><p>DBItest: <a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/detule">@detule</a>, <a href="https://github.com/dpprdan">@dpprdan</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/MichaelChirico">@MichaelChirico</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/psychelzh">@psychelzh</a>, and <a href="https://github.com/TSchiefer">@TSchiefer</a>.</p></li>
@@ -324,6 +321,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->

@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.28">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Kirill Müller">
-<meta name="dcterms.date" content="2016-12-06">
-<meta name="description" content="Intermediate status report on the “Improving DBI” project">
+<meta name="dcterms.date" content="2018-02-02">
+<meta name="description" content="Presentation at rstudio::conf, San Diego">
 
-<title>R-DBI - Halfway through “Improving DBI”</title>
+<title>R-DBI – Connecting to open source databases</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R-DBI</span>
     </a>
   </div>
@@ -92,20 +92,20 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html"> 
+    <a class="nav-link" href="../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../backends/index.html"> 
+    <a class="nav-link" href="../backends/index.html"> 
 <span class="menu-text">Backends</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -119,9 +119,8 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#rsqlite" id="toc-rsqlite" class="nav-link active" data-scroll-target="#rsqlite">RSQLite</a></li>
-  <li><a href="#dbitest" id="toc-dbitest" class="nav-link" data-scroll-target="#dbitest">DBItest</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  <li><a href="#link-to-video" id="toc-link-to-video" class="nav-link active" data-scroll-target="#link-to-video">Link to video</a></li>
+  <li><a href="#slides" id="toc-slides" class="nav-link" data-scroll-target="#slides">Slides</a></li>
   </ul>
 </nav>
     </div>
@@ -130,12 +129,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Halfway through “Improving DBI”</h1>
+<h1 class="title">Connecting to open source databases</h1>
 </div>
 
 <div>
   <div class="description">
-    Intermediate status report on the “Improving DBI” project
+    Presentation at rstudio::conf, San Diego
   </div>
 </div>
 
@@ -152,7 +151,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">December 6, 2016</p>
+      <p class="date">February 2, 2018</p>
     </div>
   </div>
   
@@ -164,39 +163,21 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>In early 2016 the R Consortium partially accepted my “Improving DBI” proposal. An important part is the design and implementation of a testable DBI specification. Initially I also proposed to make three DBI backends to open-source databases engines (RSQLite, RMySQL, and RPostgres) compatible to the new DBI specification, but funding allows to work on only one DBI backend. I chose RSQLite for a number of reasons:</p>
-<ul>
-<li>It is a very important package, judging by the number of reverse CRAN and Bioconductor dependencies</li>
-<li>It’s easy to work with, because everything (including the database engine) is bundled with the package</li>
-<li>It seemed to be the most advanced package, closest to the (yet to be completed) DBI specification</li>
-<li>An <a href="https://twitter.com/krlmlr/status/712950420969283584">informal Twitter poll</a> supports this decision by a tiny margin</li>
-</ul>
-<p>The project has reached an important milestone, with the release of RSQLite 1.1. This post reports the progress achieved so far, and outlines the next steps.</p>
-<section id="rsqlite" class="level2">
-<h2 class="anchored" data-anchor-id="rsqlite">RSQLite</h2>
-<p>While the RSQLite API has changed very little (hence the minor version update), it includes a complete rewrite of the original 1.0.0 sources in C++. This has considerably simplified the code, which makes future maintenance easier, and allows us to take advantage of the more sophisticated memory management tools available in Rcpp, which help protect against memory leaks and crashes.</p>
-<p>RSQLite 1.1 brings a number of improvements:</p>
-<ul>
-<li>New strategy for prepared queries: Create a prepared query with <code>dbSendQuery()</code> or <code>dbSendStatement()</code> and bind values with <code>dbBind()</code>. This allows you to efficiently re-execute the same query/statement with different parameter values iteratively (by calling <code>dbBind()</code> several times) or in a batch (by calling <code>dbBind()</code> once with a data-frame-like object).</li>
-<li>Support for inline parametrised queries via the param argument to <code>dbSendQuery()</code>, <code>dbGetQuery()</code>, <code>dbSendStatement()</code> and <code>dbExecute()</code>, to protect from <a href="https://xkcd.com/327/">SQL injection</a>.</li>
-<li>The existing methods <code>dbSendPreparedQuery()</code> and <code>dbGetPreparedQuery()</code> have been soft-deprecated, because the new API is more versatile, more consistent and stricter about parameter validation.</li>
-<li>Using UTF8 for queries and parameters: this mean that non-English data should just work without any additional intervention.</li>
-<li>Improved mapping between SQLite’s cell-types and R’s column-types.</li>
-</ul>
-<p>See the <a href="https://github.com/rstats-db/RSQLite/releases/tag/v1.1">release notes</a> for further changes.</p>
-<p>The rewrite was implemented by Hadley Wickham before the “Improving DBI” project started, and has been available for a long time on GitHub. Nevertheless, the CRAN release has proven much more challenging than anticipated, because so many CRAN and Bioconductor packages import it. (Maintainers of reverse dependencies might remember multiple e-mails where I was threatening to release RSQLite “for real”.) My aim was to break as little existing code as possible. After numerous rounds of revdep-checking and improving RSQLite, I’m proud to report that the vast majority of reverse dependencies pass their checks just as well (and as quickly!) as they did with v1.0.0. Most tests from v1.0.0 are still present in the current codebase. This means that non-packaged code also has a good chance to work unchanged. I’m happy to work with package maintainers or users whose code breaks after the update.</p>
-<p>DBI</p>
-<hr>
-<p>I have also released several DBI updates to CRAN, mostly to introduce new generics such as <code>dbBind()</code> (for parametrized/prepared queries) or <code>dbSendStatement()</code> and <code>dbExecute()</code> (for statements which don’t return data). The definition of a formal DBI specification is part of the project, a <a href="http://rstats-db.github.io/DBI/DBIspec.html">formatted version</a> is updated continuously.</p>
+<section id="link-to-video" class="level2">
+<h2 class="anchored" data-anchor-id="link-to-video">Link to video</h2>
+<p>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
+</p>
+<p>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5">Connecting to open source databases - Posit</a>
+</p>
 </section>
-<section id="dbitest" class="level2">
-<h2 class="anchored" data-anchor-id="dbitest">DBItest</h2>
-<p>In addition to the textual specification in the DBI package, the DBItest package provides backend independent tests for DBI packages. It can be easily used by package authors to ensure that they follow the DBI specification. This is important because it allows you to take code that works with one DBI backend and easily switch to a different backend (providing that they both support the same SQL dialect). Literate programming techniques using advanced features of roxygen2 help keeping both code and textual specifications in close proximity, so that amendments to the text can be easily tracked back to changes of the test code, and vice versa.</p>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<p>The rest of the project will focus on finalizing the specification in both code and text (mostly discussed on GitHub in the issue trackers for the <a href="https://github.com/rstats-db/DBI/issues">DBI</a> and <a href="https://github.com/rstats-db/DBItest/issues">DBItest</a> projects). At least one new helper package (to handle 64-bit integer types) will be created, and DBI, DBItest, and RSQLite will see yet another release: The first two will finalize the DBI specification, and RSQLite will fully conform to it.</p>
-<p>The development happens entirely on GitHub in repositories of the <a href="https://github.com/rstats-db">rstats-db</a> organization. Feel free to try out development versions of the packages found there, and to report any problems or ideas at the issue trackers.</p>
+<section id="slides" class="level2">
+<h2 class="anchored" data-anchor-id="slides">Slides</h2>
+<div style="position:relative;padding-top:56.25%;">
+<p><iframe src="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf" frameborder="0" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></p>
+</div>
+<p><a href="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf" target="_blank">Full screen version</a></p>
 
 
 </section>
@@ -237,18 +218,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -280,7 +250,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/maelle\.github\.io\/rdbidotorg\/");
@@ -288,7 +280,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.4.553">
+<meta name="generator" content="quarto-1.5.28">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -10,7 +10,7 @@
 <meta name="dcterms.date" content="2021-01-20">
 <meta name="description" content="Summarizing the progress of 2020">
 
-<title>R-DBI - Maintaining DBI, 3/4</title>
+<title>R-DBI – Maintaining DBI, 3/4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
-<script src="../../site_libs/quarto-html/quarto.js"></script>
-<script src="../../site_libs/quarto-html/popper.min.js"></script>
-<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../../styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../../index.html">
+    <a class="navbar-brand" href="../index.html">
     <span class="navbar-title">R-DBI</span>
     </a>
   </div>
@@ -92,20 +92,20 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../../index.html"> 
+    <a class="nav-link" href="../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../blog/index.html"> 
+    <a class="nav-link" href="../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../../backends/index.html"> 
+    <a class="nav-link" href="../backends/index.html"> 
 <span class="menu-text">Backends</span></a>
   </li>  
 </ul>
           </div> <!-- /navcollapse -->
-          <div class="quarto-navbar-tools">
+            <div class="quarto-navbar-tools">
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -174,13 +174,13 @@ ul.task-list li input[type="checkbox"] {
 
 <section id="what-is-dbi" class="level2">
 <h2 class="anchored" data-anchor-id="what-is-dbi">What is DBI?</h2>
-<p>DBI stands for <strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface. The DBI package connects R to database management systems (DBMS). The goal of DBI is to provide a common interface for database access, regardless of the specific underlying DBMS. DBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, through dedicated <a href="https://github.com/r-dbi/backends#readme">backend packages</a>. For first-time users I recommend starting with the new <a href="https://dbi.r-dbi.org/articles/dbi">introductory tutorial</a>.</p>
+<p>DBI stands for <strong>d</strong>ata<strong>b</strong>ase <strong>i</strong>nterface. The DBI package connects R to database management systems (DBMS). The goal of DBI is to provide a common interface for database access, regardless of the specific underlying DBMS. DBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, through dedicated <a href="https://github.com/r-dbi/backends#readme">backend packages</a>. For first-time users I recommend starting with the new <a href="https://dbi.r-dbi.org/articles/DBI.html">introductory tutorial</a>.</p>
 <p>The current version of DBI is 1.1.1. This blog post attempts to define the scope of the DBI project, summarizes recent developments in DBI and related packages, and showcases future work.</p>
 </section>
 <section id="scope-of-the-dbi-project" class="level2">
 <h2 class="anchored" data-anchor-id="scope-of-the-dbi-project">Scope of the DBI project</h2>
 <p>The DBI package is perfect for anyone looking to connect to a database, read/write entire tables, and/or execute SQL queries. DBI gives a direct access to the database driver, leaving more sophisticated data query and manipulation tasks to packages like <a href="https://dbplyr.tidyverse.org/">dbplyr</a>, <a href="https://github.com/ankane/dbx">dbx</a> and <a href="https://winvector.github.io/rquery/">rquery</a>.</p>
-<p>The core DBI project in R provides an interface for databases, specified in textual form and via automated tests. The <a href="https://dbi.r-dbi.org/articles/spec">DBI specification</a> contains a detailed description of the methods provided by DBI. In summary, the interface covers:</p>
+<p>The core DBI project in R provides an interface for databases, specified in textual form and via automated tests. The <a href="https://dbi.r-dbi.org/articles/spec.html">DBI specification</a> contains a detailed description of the methods provided by DBI. In summary, the interface covers:</p>
 <ul>
 <li><p>Discovery of tables, also in schemas</p></li>
 <li><p>Reading/writing/creating/removing tables</p></li>
@@ -213,7 +213,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The first three items directly affect DBI users, the last item much less so. It is nevertheless an important investment in the stability of the DBI infrastructure.</p>
 <section id="new-tutorials" class="level3">
 <h3 class="anchored" data-anchor-id="new-tutorials">New tutorials</h3>
-<p>James Wondrasek substantially expanded the “Introduction to DBI” article and added a second article. DBI now features two tutorials. The <a href="https://dbi.r-dbi.org/articles/dbi">introduction</a> includes a walkthrough that describes connecting and querying a real database. The <a href="https://dbi.r-dbi.org/articles/dbi-advanced">“Advanced DBI usage”</a> tutorial shows more advanced examples of quoting and parameter binding. The tutorials are an important first-hand resource for new users.</p>
+<p>James Wondrasek substantially expanded the “Introduction to DBI” article and added a second article. DBI now features two tutorials. The <a href="https://dbi.r-dbi.org/articles/DBI.html">introduction</a> includes a walkthrough that describes connecting and querying a real database. The <a href="https://dbi.r-dbi.org/articles/DBI-advanced.html">“Advanced DBI usage”</a> tutorial shows more advanced examples of quoting and parameter binding. The tutorials are an important first-hand resource for new users.</p>
 </section>
 <section id="time-zones" class="level3">
 <h3 class="anchored" data-anchor-id="time-zones">Time zones</h3>
@@ -223,7 +223,7 @@ ul.task-list li input[type="checkbox"] {
 <li><p>Other systems often use the default setting for time zone, this harms interoperability of DBI in these cases.</p></li>
 <li><p>Conversion of timestamps to dates via the SQL function <code>DATE</code> is only correct when the session time zone is set correctly.</p></li>
 </ul>
-<p>RMariaDB 1.1.0 and RPostgres 1.3.0 gained more robust support for datetime values. As proposed in the <a href="https://www.r-dbi.org/blog/dbi-3-2/">previous blog post</a>, new arguments <code>timezone</code> and <code>timezone_out</code> were added. Both arguments should use Olson names such as <code>Europe/Berlin</code> or <code>America/New_York</code>, not time offsets like <code>+01:00</code>; the latter may change with daylight time savings season. If <code>timezone</code> is set to <code>NULL</code>, an attempt is made to detect the correct time zone on the database. Thanks to Philipp Schauberger for contributing the initial <code>timezone</code> argument for RMariaDB.</p>
+<p>RMariaDB 1.1.0 and RPostgres 1.3.0 gained more robust support for datetime values. As proposed in the <a href="https://www.r-dbi.org/blog/dbi-3-2.html">previous blog post</a>, new arguments <code>timezone</code> and <code>timezone_out</code> were added. Both arguments should use Olson names such as <code>Europe/Berlin</code> or <code>America/New_York</code>, not time offsets like <code>+01:00</code>; the latter may change with daylight time savings season. If <code>timezone</code> is set to <code>NULL</code>, an attempt is made to detect the correct time zone on the database. Thanks to Philipp Schauberger for contributing the initial <code>timezone</code> argument for RMariaDB.</p>
 <p>RSQLite does not natively support dates or times. A promising <a href="https://github.com/r-dbi/RSQLite/pull/333">pull request</a> is underway that implements support for treating numeric values as time offsets if the column type is declared in a specific way.</p>
 </section>
 <section id="notable-changes-to-dbi-backends" class="level3">
@@ -324,18 +324,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }
     return false;
   }
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    text: function(trigger) {
-      const codeEl = trigger.previousElementSibling.cloneNode(true);
-      for (const childEl of codeEl.children) {
-        if (isCodeAnnotation(childEl)) {
-          childEl.remove();
-        }
-      }
-      return codeEl.innerText;
-    }
-  });
-  clipboard.on('success', function(e) {
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -367,7 +356,29 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    // For code content inside modals, clipBoardJS needs to be initialized with a container option
+    // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
       var filterRegex = new RegExp("https:\/\/maelle\.github\.io\/rdbidotorg\/");
@@ -375,7 +386,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
     // Inspect non-navigation links and adorn them if external
- 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
     for (var i=0; i<links.length; i++) {
       const link = links[i];
       if (!isInternal(link.href)) {
