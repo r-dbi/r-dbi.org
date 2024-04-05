@@ -43,7 +43,7 @@ presentation in Berlin made me realize that a progress report isn't that
 helpful for a general audience. The Zurich version of the presentation
 featured a DBI intro also suitable for new users, merely highlighting
 recent developments. [These slides](https://bit.ly/2wFJix3), and the
-[intro at db.rstudio.com](https://db.rstudio.com/dbi/) seem to be the
+[intro at db.rstudio.com](https://solutions.posit.co/connections/db/r-packages/dbi/) seem to be the
 most recent general-purpose introduction materials available. I think an
 entry-level tutorial would be a good fit for a DBI vignette.
 
@@ -206,7 +206,7 @@ repeated below, with comments based on experience from the past year.
     -   Together with the new [Databases CRAN Task
         View](https://github.com/terrytangyuan/ctv-databases) maintained
         by Yuan (Terry) Tang and
-        <a href="https://db.rstudio.com/" class="uri">https://db.rstudio.com/</a>,
+        <a href="https://solutions.posit.co/connections/db/" class="uri">https://solutions.posit.co/connections/db/</a>,
         the
         <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a>
         should become a viable resource for new and experienced users
@@ -235,10 +235,7 @@ Outlook: next blog post
 -----------------------
 
 The "Maintaining DBI" project is driven by blog posts. I promised four
-blog posts, describing the ongoing maintenance and development. Each
-blog post will get a corresponding GitHub project, like the project for
-[this](https://github.com/orgs/r-dbi/projects/2) and for the
-[next](https://github.com/orgs/r-dbi/projects/3) blog post.
+blog posts, describing the ongoing maintenance and development.
 
 For the next iteration, I plan to improve documentation, do a release
 round for all packages, furnish more packages with a CII badge, review

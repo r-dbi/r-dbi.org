@@ -15,7 +15,7 @@ provide a common interface for database access,
 regardless of the
 specific underlying DBMS.
 DBI works with a variety of DBMS, such as Postgres, MariaDB, and SQLite, through dedicated [backend packages](https://github.com/r-dbi/backends#readme).
-For first-time users I recommend starting with the new [introductory tutorial](https://dbi.r-dbi.org/articles/dbi).
+For first-time users I recommend starting with the new [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html).
 
 The current version of DBI is 1.1.1.
 This blog post attempts to define the scope of the DBI project, summarizes recent developments in DBI and related packages, and showcases future work.
@@ -30,7 +30,7 @@ DBI gives a direct access to the database driver,
 leaving more sophisticated data query and manipulation tasks to packages like [dbplyr](https://dbplyr.tidyverse.org/), [dbx](https://github.com/ankane/dbx) and [rquery](https://winvector.github.io/rquery/).
 
 The core DBI project in R provides an interface for databases, specified in textual form and via automated tests.
-The [DBI specification](https://dbi.r-dbi.org/articles/spec) contains a detailed description of the methods provided by DBI.
+The [DBI specification](https://dbi.r-dbi.org/articles/spec.html) contains a detailed description of the methods provided by DBI.
 In summary, the interface covers:
 
 - Discovery of tables, also in schemas
@@ -84,8 +84,8 @@ The first three items directly affect DBI users, the last item much less so. It 
 
 James Wondrasek substantially expanded the  "Introduction to DBI" article and added a second article.
 DBI now features two tutorials.
-The [introduction](https://dbi.r-dbi.org/articles/dbi) includes a walkthrough that describes connecting and querying a real database.
-The ["Advanced DBI usage"](https://dbi.r-dbi.org/articles/dbi-advanced) tutorial shows more advanced examples of quoting and parameter binding.
+The [introduction](https://dbi.r-dbi.org/articles/DBI.html) includes a walkthrough that describes connecting and querying a real database.
+The ["Advanced DBI usage"](https://dbi.r-dbi.org/articles/DBI-advanced.html) tutorial shows more advanced examples of quoting and parameter binding.
 The tutorials are an important first-hand resource for new users.
 
 
@@ -101,7 +101,7 @@ This poses a few problems in practice:
 - Conversion of timestamps to dates via the SQL function `DATE` is only correct when the session time zone is set correctly.
 
 RMariaDB 1.1.0 and RPostgres 1.3.0 gained more robust support for datetime values.
-As proposed in the [previous blog post](https://www.r-dbi.org/blog/dbi-3-2/), new arguments `timezone` and `timezone_out` were added.
+As proposed in the [previous blog post](https://www.r-dbi.org/blog/dbi-3-2.html), new arguments `timezone` and `timezone_out` were added.
 Both arguments should use Olson names such as `Europe/Berlin` or `America/New_York`, not time offsets like `+01:00`; the latter may change with daylight time savings season.
 If `timezone` is set to `NULL`, an attempt is made to detect the correct time zone on the database.
 Thanks to Philipp Schauberger for contributing the initial `timezone` argument for RMariaDB.

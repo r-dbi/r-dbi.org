@@ -56,7 +56,7 @@ RSQLite 1.1 brings a number of improvements:
 -   Improved mapping between SQLite’s cell-types and R’s column-types.
 
 See the [release
-notes](https://github.com/rstats-db/RSQLite/releases/tag/v1.1) for
+notes](https://github.com/r-dbi/RSQLite/releases/tag/v1.1) for
 further changes.
 
 The rewrite was implemented by Hadley Wickham before the “Improving DBI”
@@ -81,7 +81,7 @@ new generics such as `dbBind()` (for parametrized/prepared queries) or
 `dbSendStatement()` and `dbExecute()` (for statements which don’t return
 data). The definition of a formal DBI specification is part of the
 project, a [formatted
-version](http://rstats-db.github.io/DBI/DBIspec.html) is updated
+version](https://dbi.r-dbi.org/articles/spec.html) is updated
 continuously.
 
 DBItest
@@ -103,14 +103,14 @@ Next steps
 
 The rest of the project will focus on finalizing the specification in
 both code and text (mostly discussed on GitHub in the issue trackers for
-the [DBI](https://github.com/rstats-db/DBI/issues) and
-[DBItest](https://github.com/rstats-db/DBItest/issues) projects). At
+the [DBI](https://github.com/r-dbi/DBI/issues) and
+[DBItest](https://github.com/r-dbi/DBItest/issues) projects). At
 least one new helper package (to handle 64-bit integer types) will be
 created, and DBI, DBItest, and RSQLite will see yet another release: The
 first two will finalize the DBI specification, and RSQLite will fully
 conform to it.
 
 The development happens entirely on GitHub in repositories of the
-[rstats-db](https://github.com/rstats-db) organization. Feel free to try
+[r-dbi](https://github.com/r-dbi) organization. Feel free to try
 out development versions of the packages found there, and to report any
 problems or ideas at the issue trackers.

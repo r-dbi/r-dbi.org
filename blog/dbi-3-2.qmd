@@ -185,7 +185,7 @@ part of a package's test suite. With some effort it is possible to test
 a database backend against a custom database. This can help verify that
 your database installation gives expected results when accessed with DBI
 with specific connection arguments. The [DBItest
-article](https://dbitest.r-dbi.org/articles/dbitest#external-testing)
+article](https://dbitest.r-dbi.org/articles/DBItest.html#external-testing)
 contains a new section that describes how to achieve this, including a
 primer on using {dblog} to understand the cause of test failures.
 
