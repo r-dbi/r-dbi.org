@@ -235,10 +235,7 @@ Outlook: next blog post
 -----------------------
 
 The "Maintaining DBI" project is driven by blog posts. I promised four
-blog posts, describing the ongoing maintenance and development. Each
-blog post will get a corresponding GitHub project, like the project for
-[this](https://github.com/orgs/r-dbi/projects/2) and for the
-[next](https://github.com/orgs/r-dbi/projects/3) blog post.
+blog posts, describing the ongoing maintenance and development.
 
 For the next iteration, I plan to improve documentation, do a release
 round for all packages, furnish more packages with a CII badge, review
