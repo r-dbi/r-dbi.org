@@ -134,7 +134,7 @@ Thanks to Nicolas Bennett for implementation and the wonderful collaboration, an
 ## DBI
 
 This package has seen a minor update to 1.2.2.
-See the [change log](https://rpostgres.r-dbi.org/news/index.html) for the full details.
+See the [change log](https://dbi.r-dbi.org/news/index.html) for the full details.
 
 ### Integration with Arrow
 
