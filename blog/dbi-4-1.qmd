@@ -3,15 +3,13 @@ author: "Kirill Müller"
 date: "2024-04-02"
 title: "The future of DBI, 1/*"
 description: "Summarizing the progress of 2022 and 2023"
-aliases:
-  - /blog/posts/dbi-4-1.html
 ---
 
 
 
 ## What is DBI?
 
-The {DBI} package (**d**ata**b**ase **i**nterface) is a layer between R and database management systems (DBMSes).
+The [DBI package](https://dbi.r-dbi.org/) (**d**ata**b**ase **i**nterface) is a layer between R and database management systems (DBMSes).
 Users who interact with DBMSes via the DBI package are able to use the same API for all DBMSes.
 Implementations of this API are provided by DBMS-specific [backend packages](https://github.com/r-dbi/backends#readme), such as [RPostgres](https://rpostgres.r-dbi.org/), [RMariaDB](https://rmariadb.r-dbi.org/), and [RSQLite](https://rsqlite.r-dbi.org/).
 If you are new to DBI, you can find a good entry point in the [introductory tutorial](https://dbi.r-dbi.org/articles/DBI.html).
@@ -24,11 +22,11 @@ The [RKazam](https://rkazam.r-dbi.org/) template makes it easy to get started.
 Read on!)
 
 This blog post is split into multiple parts.
-In this first part, we will summarize recent developments in {DBI} and related packages.
+In this first part, we summarize recent developments in DBI and related packages, including a glimpse on the new [adbi](https://adbi.r-dbi.org/) package.
 The second part reviews the time it takes to respond to issues and pull requests.
 In the third part, we will do a deeper dive into the new adbi and adbcdrivermanager packages, which use the Arrow data exchange format and offer a more sustainable approach to database connectivity.
 
-Similar articles are available from previous years, reporting on earlier states of the {DBI} ecosystem:
+Similar articles are available from previous years, reporting on earlier states of the DBI ecosystem:
 
 - [4/4: December 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
 - [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
@@ -110,7 +108,33 @@ The RSQLite, RPostgres, and RMariaDB packages no longer change duplicate column 
 The behavior in the presence of duplicate column names was not specified in the DBI specification, but imposing a tidying step seems out of scope for a database interface.
 It is now up to the user to handle duplicate column names, for example by using `janitor::clean_names()`.
 
-## DBI: minor update to 1.2.2
+## adbi: new release in collaboration with Voltron Data
+
+The new adbi package bridges ADBC drivers and DBI.
+Examples include:
+
+- adbcsqlite, on CRAN
+- adbcpostgresql, on CRAN
+- [adbcsnowflake](https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake) for [Snowflake](https://www.snowflake.com/)
+- [adbcflightsql](https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql) for [FlightSQL](https://arrow.apache.org/docs/format/FlightSql.html)
+
+[ADBC](https://arrow.apache.org/adbc/) (Arrow database connectivity) is 
+
+> an API standard for database access libraries that uses Arrow for result sets and query parameters.
+
+The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance.
+To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI.
+For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.
+
+![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
+
+Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
+Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
+
+## DBI
+
+This package has seen a minor update to 1.2.2.
+See the [change log](https://rpostgres.r-dbi.org/news/index.html) for the full details.
 
 ### Integration with Arrow
 
@@ -129,7 +153,10 @@ The `Id()` class has been changed to unnamed components, as the explicit naming 
 This also affects the `dbQuoteIdentifier()`, `dbUnquoteIdentifier()`, and `dbListObjects()` generics, which now accept and return unnamed `Id()` objects.
 
 
-## DBItest: minor update to 1.8.1
+## DBItest
+
+The DBItest package has seen a minor update to 1.8.1.
+See the [change log](https://dbitest.r-dbi.org/news/index.html) for details.
 
 ### Code generation
 
@@ -166,7 +193,10 @@ The new Arrow generics are now tested in DBItest, and the tests have been integr
 A new tweak `allow_na_rows_affected` has been added to support `NA` values returned from `dbGetRowsAffected()` and passed as the `n` argument to `dbFetch()`.
 
 
-## RSQLite: minor update to 2.3.6, continuous updates following upstream SQLite releases
+## Backend packages: RSQLite, RMariaDB, RPostgres
+
+RSQLite has seen a minor update, the current version is 2.3.6.
+See the [change log](https://rsqlite.r-dbi.org/news/index.html) for details.
 
 The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN.
 The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it.
@@ -175,48 +205,33 @@ This process allows quicker updates of SQLite than if installing from [OS packag
 
 Other minor changes include support for the icpc compiler, and a new `sqliteIsTransacting()` function that returns if a transaction is active on the current connection.
 
+RMariaDB has also seen a minor update.
+The current version is 1.3.1.
+See the [change log](https://rmariadb.r-dbi.org/news/index.html) for details.
 
-## RPostgres: minor update to 1.4.6
+MariaDB is a fork of MySQL, and both packages continue to evolve.
+There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences.
+Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 and server description does not contain `"MariaDB"`).
+The new `mysql` argument to `dbConnect()` allows overriding the autodetection.
+This means that code can behave differently depending on the underlying database server.
 
-Maintenance updates.
+Similarly to RPostgres and odbc, RMariaDB now supports `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`.
+This sends the query to the server without preparing it, which is mandatory for some queries.
+For this to work, the connection needs to be opened with the `CLIENT_MULTI_STATEMENTS` flag.
 
-## RMariaDB: minor update to 1.3.1
+Other changes include:
 
-Align with updates to the MySQL C API, e.g., avoiding the deprecated `mysql_ssl_set()` function.
+- Support for `TIME` columns with subsecond precision.
 
-Support `TIME` columns with subsecond precision.
+- The use of strings as default for JSON and all unknown column types.
 
-Use string as default for JSON (#296) and all unknown column types.
-
-Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 and server description does not contain `"MariaDB"`). The new `mysql` argument to `dbConnect()` allows overriding the autodetection.
-
-Support `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`, needs `CLIENT_MULTI_STATEMENTS`.
-
-# adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)
-
-The new adbi package bridges ADBC drivers and DBI.
-Examples include:
-
-- adbcsqlite, on CRAN
-- adbcpostgresql, on CRAN
-- [adbcsnowflake](https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake) for [Snowflake](https://www.snowflake.com/)
-- [adbcflightsql](https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql) for [FlightSQL](https://arrow.apache.org/docs/format/FlightSql.html)
-
-[ADBC](https://arrow.apache.org/adbc/) is 
-
-> an API standard for database access libraries that uses Arrow for result sets and query parameters.
-
-The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance.
-To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI.
-For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.
-The subsequent section contains a more detailed example.
-
-Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
-Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
+RPostgres has seen a minor update, mostly focusing on maintenance.
+The current version is 1.4.6.
+See the [change log](https://rpostgres.r-dbi.org/news/index.html) for details.
 
 ## Acknowledgments
 
-Thanks to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
+Thanks to Maëlle Salmon for her help with the blog post, and to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
 
 - DBI: [&#x0040;apalacio9502](https://github.com/apalacio9502), [&#x0040;asadow](https://github.com/asadow), [&#x0040;bcorwin](https://github.com/bcorwin), [&#x0040;capitantyler](https://github.com/capitantyler), [&#x0040;chrisdane](https://github.com/chrisdane), [&#x0040;eauleaf](https://github.com/eauleaf), [&#x0040;eitsupi](https://github.com/eitsupi), [&#x0040;eriksquires](https://github.com/eriksquires), [&#x0040;fnavarro94](https://github.com/fnavarro94), [&#x0040;GitHunter0](https://github.com/GitHunter0), [&#x0040;hadley](https://github.com/hadley), [&#x0040;hannes101](https://github.com/hannes101), [&#x0040;Jay123ub](https://github.com/Jay123ub), [&#x0040;jd4ds](https://github.com/jd4ds), [&#x0040;kelseyroberts](https://github.com/kelseyroberts), [&#x0040;latot](https://github.com/latot), [&#x0040;maelle](https://github.com/maelle), [&#x0040;matthiasgomolka](https://github.com/matthiasgomolka), [&#x0040;mgirlich](https://github.com/mgirlich), [&#x0040;mmuurr](https://github.com/mmuurr), [&#x0040;nbenn](https://github.com/nbenn), [&#x0040;philibe](https://github.com/philibe), [&#x0040;pnacht](https://github.com/pnacht), [&#x0040;r2evans](https://github.com/r2evans), [&#x0040;renkun-ken](https://github.com/renkun-ken), [&#x0040;salim-b](https://github.com/salim-b), [&#x0040;scottfrechette](https://github.com/scottfrechette), and [&#x0040;tzakharko](https://github.com/tzakharko).
 
