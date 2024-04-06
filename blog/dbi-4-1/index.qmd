@@ -28,10 +28,10 @@ In the third part, we will do a deeper dive into the new adbi and adbcdrivermana
 
 Similar articles are available from previous years, reporting on earlier states of the DBI ecosystem:
 
-- [4/4: December 2021](https://www.r-dbi.org/blog/dbi-3-3/)
-- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3/)
-- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2/)
-- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1/)
+- [4/4: December 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
+- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
+- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2.html)
+- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1.html)
 
 ## Overall
 
