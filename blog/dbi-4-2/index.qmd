@@ -20,11 +20,13 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+library(here)
 ```
 
 This analysis is based on the GitHub issues opened in the r-dbi organization since development has moved to GitHub, for the following packages: DBI, DBItest, RMariaDB, RPostgres, RSQLite, dblog, RKazam.
 
-In total, `r nrow(issues_tbl)` issues and pull requests were opened in the package repositories.
+In total, `r readLines(here("all-issues.txt"))` issues and pull requests were opened in the package repositories, of which `r readLines(here("new-issues.txt"))` were opened in 2022 or later.
 
 ![Issues opened per year](issues_per_year.png)
 
