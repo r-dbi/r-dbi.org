@@ -1,7 +1,7 @@
 ---
 author: "Kirill Müller"
 date: "2024-04-02"
-title: "The future of DBI, 3/*"
+title: "The future of DBI, 2/*"
 description: "Summarizing the progress of 2022 and 2023"
 draft: true
 ---
@@ -174,7 +174,7 @@ The R user has the choice to access the data via data frames or via Arrow.
 Only when using adbi and the new `dbGetQueryArrow()`, the implementation will never convert the data to R data frames.
 In all other cases, a conversion to R data frames will occur.
 
-![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
+FIXME: Add figure from Excalidraw.
 
 While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying.
 The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format.

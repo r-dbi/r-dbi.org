@@ -28,10 +28,10 @@ In the third part, we will do a deeper dive into the new adbi and adbcdrivermana
 
 Similar articles are available from previous years, reporting on earlier states of the DBI ecosystem:
 
-- [4/4: December 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
-- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3.html)
-- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2.html)
-- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1.html)
+- [4/4: December 2021](https://www.r-dbi.org/blog/dbi-3-3/)
+- [3/4: January 2021](https://www.r-dbi.org/blog/dbi-3-3/)
+- [2/4: December 2019](https://www.r-dbi.org/blog/dbi-3-2/)
+- [1/4: December 2018](https://www.r-dbi.org/blog/dbi-3-1/)
 
 ## Overall
 
@@ -125,7 +125,8 @@ Examples include:
 The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance.
 To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI.
 For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames.
-More on that below.
+
+![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
 
 Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
 Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
@@ -133,7 +134,7 @@ Thanks to Nicolas Bennett for implementation and the wonderful collaboration, an
 ## DBI
 
 This package has seen a minor update to 1.2.2.
-See the [change log](https://dbi.r-dbi.org/news/index.html) for the full details.
+See the [change log](https://rpostgres.r-dbi.org/news/index.html) for the full details.
 
 ### Integration with Arrow
 
@@ -143,8 +144,7 @@ See the new [vignette on Arrow support in DBI](https://dbi.r-dbi.org/articles/DB
 
 A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package.
 Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does.
-The third blog post in this series will cover the new Arrow interface and the adbi package in more detail.
-Thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
+More on that below, thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
 
 
 ### Object identifiers
