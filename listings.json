@@ -2,8 +2,7 @@
   {
     "listing": "/blog/index.html",
     "items": [
-      "/blog/dbi-4-1.html",
-      "/blog/posts/dbi-4-1/index.html",
+      "/blog/dbi-4-1/index.html",
       "/blog/dbi-3-4.html",
       "/blog/dbi-3-3.html",
       "/blog/dbi-3-2.html",
@@ -18,8 +17,7 @@
     "listing": "/index.html",
     "items": [
       "/blog/index.html",
-      "/blog/dbi-4-1.html",
-      "/blog/posts/dbi-4-1/index.html",
+      "/blog/dbi-4-1/index.html",
       "/blog/dbi-3-4.html",
       "/blog/dbi-3-3.html",
       "/blog/dbi-3-2.html",
