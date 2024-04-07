@@ -24,6 +24,7 @@ library(here)
 ```
 
 This analysis is based on the GitHub issues opened in the r-dbi organization since development has moved to GitHub, for the following packages: DBI, DBItest, RMariaDB, RPostgres, RSQLite, dblog, RKazam.
+See <https://github.com/r-dbi/issues/> for the source of the analysis.
 
 In total, `r readLines(here("all-issues.txt"))` issues and pull requests were opened in the package repositories, of which `r readLines(here("new-issues.txt"))` were opened in 2022 or later.
 
