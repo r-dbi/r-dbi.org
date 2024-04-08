@@ -15,7 +15,8 @@ about:
       href: https://github.com/r-dbi
 listing:
   - id: blog
-    contents: blog
+    contents: 
+      - "blog/*/*.qmd"
     type: default
     fields: [title, subtitle, author, description, date]
     sort: 
