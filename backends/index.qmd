@@ -11,26 +11,18 @@ open-graph:
 twitter-card:
   description: "Backends for R-DBI."
 ---
----
-output: github_document
----
-
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 
 Do you maintain a backend and think that yours should be on this list?
 Please open an issue in the [backends repository](https://github.com/r-dbi/backends).
 
 ```{r all-from-file, include = FALSE}
-all_df <- jsonlite::fromJSON("https://r-dbi.github.io/backends/all.json", flatten = TRUE)
+all_json <- withr::local_tempfile()
+curl::curl_download(
+  "https://r-dbi.github.io/backends/all.json", 
+  destfile = all_json,
+  quiet = FALSE
+)
+all_df <- jsonlite::fromJSON(all_json, flatten = TRUE)
 ```
 
 ```{r all-url, echo = FALSE, results='asis'}
