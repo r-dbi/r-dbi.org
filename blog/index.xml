@@ -24,7 +24,7 @@
 <section id="measuring-responsiveness" class="level2">
 <h2 class="anchored" data-anchor-id="measuring-responsiveness">Measuring responsiveness</h2>
 <p>For 2022 and 2023, no concrete new features were planned. Instead, the focus has been on establishing a steady pace of maintenance and responsiveness to user feedback. This blog post shows how we have been doing in this regard.</p>
-<p>This analysis is based on the GitHub issues opened in the r-dbi organization since development has moved to GitHub, for the following packages: DBI, DBItest, RMariaDB, RPostgres, RSQLite, dblog, RKazam.</p>
+<p>This analysis is based on the GitHub issues opened in the r-dbi organization since development has moved to GitHub, for the following packages: DBI, DBItest, RMariaDB, RPostgres, RSQLite, dblog, RKazam. See <a href="https://github.com/r-dbi/issues/" class="uri">https://github.com/r-dbi/issues/</a> for the source of the analysis.</p>
 <p>In total, 2086 issues and pull requests were opened in the package repositories, of which 462 were opened in 2022 or later.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
@@ -208,7 +208,7 @@
 <item>
   <title>Maintaining DBI, 4/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-3-4.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-4/</link>
   <description><![CDATA[ 
 
 
@@ -387,13 +387,13 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-3-4.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-4/</guid>
   <pubDate>Tue, 21 Dec 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 3/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-3-3.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-3/</link>
   <description><![CDATA[ 
 
 
@@ -516,13 +516,13 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-3-3.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-3/</guid>
   <pubDate>Wed, 20 Jan 2021 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 2/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-3-2.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-2/</link>
   <description><![CDATA[ 
 
 
@@ -721,13 +721,13 @@ tbl %&gt;%
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-3-2.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-2/</guid>
   <pubDate>Thu, 19 Dec 2019 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Maintaining DBI, 1/4</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-3-1.html</link>
+  <link>https://r-dbi.org/blog/dbi-3-1/</link>
   <description><![CDATA[ 
 
 
@@ -864,13 +864,13 @@ tbl %&gt;%
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-3-1.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-3-1/</guid>
   <pubDate>Mon, 31 Dec 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Done “Establishing DBI”!?</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-2-final.html</link>
+  <link>https://r-dbi.org/blog/dbi-2-final/</link>
   <description><![CDATA[ 
 
 
@@ -1169,13 +1169,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-2-final.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-2-final/</guid>
   <pubDate>Tue, 01 May 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Connecting to open source databases</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/rstudio-conf.html</link>
+  <link>https://r-dbi.org/blog/rstudio-conf/</link>
   <description><![CDATA[ 
 
 
@@ -1201,13 +1201,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/rstudio-conf.html</guid>
+  <guid>https://r-dbi.org/blog/rstudio-conf/</guid>
   <pubDate>Fri, 02 Feb 2018 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title></title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-1-final.html</link>
+  <link>https://r-dbi.org/blog/dbi-1-final/</link>
   <description><![CDATA[ 
 
 
@@ -1272,13 +1272,13 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-1-final.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-1-final/</guid>
   <pubDate>Mon, 15 May 2017 00:00:00 GMT</pubDate>
 </item>
 <item>
   <title>Halfway through “Improving DBI”</title>
   <dc:creator>Kirill Müller</dc:creator>
-  <link>https://r-dbi.org/blog/dbi-1-halfway.html</link>
+  <link>https://r-dbi.org/blog/dbi-1-halfway/</link>
   <description><![CDATA[ 
 
 
@@ -1322,7 +1322,7 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </section>
 
  ]]></description>
-  <guid>https://r-dbi.org/blog/dbi-1-halfway.html</guid>
+  <guid>https://r-dbi.org/blog/dbi-1-halfway/</guid>
   <pubDate>Tue, 06 Dec 2016 00:00:00 GMT</pubDate>
 </item>
 </channel>

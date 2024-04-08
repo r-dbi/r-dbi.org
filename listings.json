@@ -1,33 +1,32 @@
 [
   {
+    "listing": "/index.html",
+    "items": [
+      "/blog/dbi-4-2/index.html",
+      "/blog/dbi-4-1/index.html",
+      "/blog/dbi-3-4/index.html",
+      "/blog/dbi-3-3/index.html",
+      "/blog/dbi-3-2/index.html",
+      "/blog/dbi-3-1/index.html",
+      "/blog/dbi-2-final/index.html",
+      "/blog/rstudio-conf/index.html",
+      "/blog/dbi-1-final/index.html",
+      "/blog/dbi-1-halfway/index.html"
+    ]
+  },
+  {
     "listing": "/blog/index.html",
     "items": [
       "/blog/dbi-4-2/index.html",
       "/blog/dbi-4-1/index.html",
-      "/blog/dbi-3-4.html",
-      "/blog/dbi-3-3.html",
-      "/blog/dbi-3-2.html",
-      "/blog/dbi-3-1.html",
-      "/blog/dbi-2-final.html",
-      "/blog/rstudio-conf.html",
-      "/blog/dbi-1-final.html",
-      "/blog/dbi-1-halfway.html"
-    ]
-  },
-  {
-    "listing": "/index.html",
-    "items": [
-      "/blog/index.html",
-      "/blog/dbi-4-2/index.html",
-      "/blog/dbi-4-1/index.html",
-      "/blog/dbi-3-4.html",
-      "/blog/dbi-3-3.html",
-      "/blog/dbi-3-2.html",
-      "/blog/dbi-3-1.html",
-      "/blog/dbi-2-final.html",
-      "/blog/rstudio-conf.html",
-      "/blog/dbi-1-final.html",
-      "/blog/dbi-1-halfway.html"
+      "/blog/dbi-3-4/index.html",
+      "/blog/dbi-3-3/index.html",
+      "/blog/dbi-3-2/index.html",
+      "/blog/dbi-3-1/index.html",
+      "/blog/dbi-2-final/index.html",
+      "/blog/rstudio-conf/index.html",
+      "/blog/dbi-1-final/index.html",
+      "/blog/dbi-1-halfway/index.html"
     ]
   }
 ]

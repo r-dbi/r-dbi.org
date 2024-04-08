@@ -7,10 +7,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Kirill Müller">
-<meta name="dcterms.date" content="2017-05-15">
-<meta name="description" content="Summary of the “Improving DBI” project">
+<meta name="dcterms.date" content="2018-12-31">
+<meta name="description" content="Summarizing the progress of 2018">
 
-<title>R-DBI – dbi-1-final</title>
+<title>R-DBI – Maintaining DBI, 1/4</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -26,22 +26,22 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="../site_libs/quarto-nav/headroom.min.js"></script>
-<script src="../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../">
-<script src="../site_libs/quarto-html/quarto.js"></script>
-<script src="../site_libs/quarto-html/popper.min.js"></script>
-<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="../site_libs/quarto-html/anchor.min.js"></script>
-<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 }</script>
 
 
-<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../../styles.css">
 </head>
 
 <body class="nav-fixed">
@@ -81,7 +81,7 @@ ul.task-list li input[type="checkbox"] {
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="../index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">R-DBI</span>
     </a>
   </div>
@@ -92,15 +92,15 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="../index.html"> 
+    <a class="nav-link" href="../../index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../blog/index.html"> 
+    <a class="nav-link" href="../../blog/index.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="../backends/index.html"> 
+    <a class="nav-link" href="../../backends/index.html"> 
 <span class="menu-text">Backends</span></a>
   </li>  
 </ul>
@@ -119,11 +119,17 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#dbitest-specification" id="toc-dbitest-specification" class="nav-link active" data-scroll-target="#dbitest-specification"><code>DBItest</code>: Specification</a></li>
-  <li><a href="#dbi-definition" id="toc-dbi-definition" class="nav-link" data-scroll-target="#dbi-definition"><code>DBI</code>: Definition</a></li>
-  <li><a href="#rsqlite-implementation" id="toc-rsqlite-implementation" class="nav-link" data-scroll-target="#rsqlite-implementation"><code>RSQLite</code>: Implementation</a></li>
-  <li><a href="#other-bits-and-pieces" id="toc-other-bits-and-pieces" class="nav-link" data-scroll-target="#other-bits-and-pieces">Other bits and pieces</a></li>
-  <li><a href="#next-steps" id="toc-next-steps" class="nav-link" data-scroll-target="#next-steps">Next steps</a></li>
+  <li><a href="#presentations-at-meetups" id="toc-presentations-at-meetups" class="nav-link active" data-scroll-target="#presentations-at-meetups">Presentations at meetups</a></li>
+  <li><a href="#cii-badge" id="toc-cii-badge" class="nav-link" data-scroll-target="#cii-badge">CII badge</a>
+  <ul class="collapse">
+  <li><a href="#necessary-changes-to-the-dbi-package" id="toc-necessary-changes-to-the-dbi-package" class="nav-link" data-scroll-target="#necessary-changes-to-the-dbi-package">Necessary changes to the DBI package</a></li>
+  </ul></li>
+  <li><a href="#future-development" id="toc-future-development" class="nav-link" data-scroll-target="#future-development">Future development</a>
+  <ul class="collapse">
+  <li><a href="#hard-issues" id="toc-hard-issues" class="nav-link" data-scroll-target="#hard-issues">“Hard” issues</a></li>
+  <li><a href="#soft-issues" id="toc-soft-issues" class="nav-link" data-scroll-target="#soft-issues">“Soft” issues</a></li>
+  </ul></li>
+  <li><a href="#outlook-next-blog-post" id="toc-outlook-next-blog-post" class="nav-link" data-scroll-target="#outlook-next-blog-post">Outlook: next blog post</a></li>
   <li><a href="#acknowledgments" id="toc-acknowledgments" class="nav-link" data-scroll-target="#acknowledgments">Acknowledgments</a></li>
   </ul>
 </nav>
@@ -133,11 +139,12 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
+<h1 class="title">Maintaining DBI, 1/4</h1>
 </div>
 
 <div>
   <div class="description">
-    Summary of the “Improving DBI” project
+    Summarizing the progress of 2018
   </div>
 </div>
 
@@ -154,7 +161,7 @@ ul.task-list li input[type="checkbox"] {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">May 15, 2017</p>
+      <p class="date">December 31, 2018</p>
     </div>
   </div>
   
@@ -166,60 +173,132 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>The “Improving DBI” project, funded by the R consortium, started about a year ago. It includes</p>
+<p>Much earlier this year my proposal for the third R Consortium project for working on DBI has been accepted. DBI is a set of virtual functions declared in the <em>DBI</em> package. Communication with the database is implemented by <em>DBI backends</em>, packages that import <em>DBI</em> and implement its methods. A common interface is helpful for both users and backend implementers. Users, including package developers for DBMS-agnostic packages, need to memoize only one set of functions. Backend developers can focus on functionality instead of design decisions, and can benefit from a large base of potential users right from the start.</p>
+<p>I’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up <a href="http://cynkra.com">cynkra</a>. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.</p>
+<p>This blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the <a href="https://github.com/r-dbi">r-dbi</a> GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development.</p>
+<section id="presentations-at-meetups" class="level2">
+<h2 class="anchored" data-anchor-id="presentations-at-meetups">Presentations at meetups</h2>
+<p>I presented DBI at the <a href="https://www.meetup.com/Berlin-R-Users-Group/">Berlin R user group</a>, at the <a href="https://amsterdam2018.satrdays.org/">amstRdays</a>, and at the <a href="https://zurich-r-user-group.github.io/index.html">Zurich R meetup</a>. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. <a href="https://bit.ly/2wFJix3">These slides</a>, and the <a href="https://solutions.posit.co/connections/db/r-packages/dbi/">intro at db.rstudio.com</a> seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette.</p>
+</section>
+<section id="cii-badge" class="level2">
+<h2 class="anchored" data-anchor-id="cii-badge">CII badge</h2>
+<p>From <a href="https://bestpractices.coreinfrastructure.org/en" class="uri">https://bestpractices.coreinfrastructure.org/en</a>:</p>
+<blockquote class="blockquote">
+<p>The Linux Foundation (LF) Core Infrastructure Initiative (CII) Best Practices badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The CII Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and as a result are more likely to produce higher-quality secure software.</p>
+</blockquote>
+<p>The CII badge can be obtained after a self-certification process that comprises ~70 soft and hard questions about the project around the following topics:</p>
+<ul>
+<li>Basics: Project URLs, license, documentation</li>
+<li>Change Control: Version control and version numbers</li>
+<li>Reporting: Tracking issues and vulnerabilities</li>
+<li>Quality: Build and test system, best practices</li>
+<li>Security (software)</li>
+<li>Analysis (static and dynamic)</li>
+</ul>
+<p>After completing the process, projects are entitled to wear a badge like the one below for the DBI project:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img" alt="OpenSSF Best Practices"></a></p>
+<figcaption>OpenSSF Best Practices</figcaption>
+</figure>
+</div>
+<p>A click on the badge takes you to the detailed assessment. In addition to the badge, completing the self-certification allows the maintainer to rethink if workflows and practices can be improved.</p>
+<p>DBI is currently has the “passing” status, the backend packages and <em>DBItest</em> will follow. I have compiled the changes that were necessary to obtain that status below. It appears to be much more difficult but not impossible to obtain the “silver” status.</p>
+<section id="necessary-changes-to-the-dbi-package" class="level3">
+<h3 class="anchored" data-anchor-id="necessary-changes-to-the-dbi-package">Necessary changes to the DBI package</h3>
+<p>Several files had to be added or updated:</p>
 <ol type="1">
-<li>the definition and implementation of a testable specification for DBI,</li>
-<li>making <code>RSQLite</code> fully compliant to the new specification.</li>
+<li><a href="https://github.com/r-dbi/DBI/blob/master/.github/CONTRIBUTING.md"><code>CONTRIBUTING.md</code></a>: This file describes how to contribute to the project. A link to this file is available when you open a new issue. The function <code>usethis::use_tidy_contributing()</code> created the files which I tweaked a bit.</li>
+<li><a href="https://github.com/r-dbi/DBI/blob/master/LICENSE.md"><code>LICENSE.md</code></a>: The full license terms need to be available as part of the project. To create the file, I <a href="https://github.com/r-lib/usethis/pull/472">contributed</a> <code>usethis::use_lgpl_2.1_license()</code>. Because CRAN discourages redistribution of copies of standard license texts in packages, the file has been added to <code>.Rbuildignore</code>. This makes the file available in the GitHub repository, but not package file on CRAN.</li>
+<li><a href="https://github.com/r-dbi/DBI#readme"><code>README.md</code></a>: Added missing installation instructions.</li>
 </ol>
-<p>Besides the established <code>DBI</code> and <code>RSQLite</code> packages, I have spent a lot of time on the new <code>DBItest</code> package. Final updates to these packages will be pushed to CRAN end of May this year, to give downstream maintainers some time to accommodate.</p>
-<p>The follow-up project “Establishing DBI” will focus on fully DBI-compliant backends for MySQL/MariaDB and PostgreSQL, and on minor updates to the specs where appropriate.</p>
-<section id="dbitest-specification" class="level2">
-<h2 class="anchored" data-anchor-id="dbitest-specification"><code>DBItest</code>: Specification</h2>
-<p>A comprehensive backend-agnostic test suite for DBI backends is provided by the new <code>DBItest</code> package. When the project started, it was merely a collection of test cases. I have considerably expanded the test cases and provided a human-readable description for each, using literate programming techniques powered by <code>roxygen2</code>. The <code>DBI</code> package weaves these chunks of text to a single document that describes all test cases covered by the test suite, the textual <em>DBI specification</em>. This approach ensures that further updates to the specification are reflected in both the automatic tests and the text.</p>
-<p>This package is aimed at backend implementers, who now can programmatically check with very little effort if their DBI backend conforms to the DBI specification. The verification can be integrated in the automated tests which are run as part of R’s package check mechanism in <code>R CMD check</code>. The <code>odbc</code> package, a new DBI-compliant interface to the ODBC interface, has been using <code>DBItest</code> from day one to enable test-driven development. The <code>bigrquery</code> package is another user of <code>DBItest</code>.</p>
-<p>Because not all DBMS support all aspects of DBI, the <code>DBItest</code> package allows to restrict which parts of the specification are tested, or “tweak” certain aspects of the tests, e.g., the format of placeholders in parametrized queries. Adapting to other DBMS may require more work due to subtle differences in the implementation of SQL between various DBMS.</p>
+<p>Though not on the CII badge checklist, I also added:</p>
+<ol type="1">
+<li><p><a href="https://github.com/r-dbi/DBI/blob/master/.github/ISSUE_TEMPLATE.md"><code>ISSUE_TEMPLATE.md</code></a>: pre-populates the issue description when opening a new issue. This is a tweaked version of the file provided by <code>usethis::use_tidy_issue_template()</code>.</p></li>
+<li><p><a href="https://github.com/r-dbi/DBI/blob/master/.github/CODE_OF_CONDUCT.md"><code>CODE_OF_CONDUCT.md</code></a>: The default file as added by <code>usethis::use_code_of_conduct()</code>.</p></li>
+</ol>
+<p>One badge still had an HTTP image source, after changing it to HTTPS the criterion that the website needs to use TLS was satisfied.</p>
+<p>Establishing a process for reporting code vulnerabilities was perhaps the most challenging part. It seems unclear if it applies to R packages at all, in particular to an interface-only package such as DBI. The solution was to add a link with text to the project page <a href="https://dbi.r-dbi.org" class="uri">https://dbi.r-dbi.org</a>, asking to send an e-mail and await further instructions.</p>
 </section>
-<section id="dbi-definition" class="level2">
-<h2 class="anchored" data-anchor-id="dbi-definition"><code>DBI</code>: Definition</h2>
-<p>This package has been around since 2001, it defines the actual <em>DataBase Interface</em> in R. I have taken over maintenance, and released versions 0.4-1, 0.5-1, and 0.6-1, with release of version 0.7 pending.</p>
-<p>The most prominent change in this package is, of course, the textual <a href="https://cran.r-project.org/web/packages/DBI/vignettes/spec.html">DBI specification</a>, which is included as an HTML vignette in the package. The documentation for the various methods defined by <code>DBI</code> is obtained directly from the specification. These help topics are combined in a sensible order to a single, self-contained document. This format is useful for both DBI users and implementers: users can look up the behavior of a method directly from its help page, and implementers can browse a comprehensive document that describes all aspects of the interface. I have also revised the description and the examples for all help topics.</p>
-<p>Other changes include:</p>
+</section>
+<section id="future-development" class="level2">
+<h2 class="anchored" data-anchor-id="future-development">Future development</h2>
+<p>The principal roadmap for future development has been outlined in the project proposal. There are both “hard” and “soft” issues to solve, repeated below, with comments based on experience from the past year.</p>
+<section id="hard-issues" class="level3">
+<h3 class="anchored" data-anchor-id="hard-issues">“Hard” issues</h3>
+<ol type="1">
+<li><p>The test suite for the DBI specificaton in <code>DBItest</code> is currently designed to run as part of the package checks. The next step is to support running the test suite against a particular R + DBMS installation, to ensure that code interoperating with that DBMS in that environment runs as expected.</p>
 <ul>
-<li>the definition of new generics <code>dbSendStatement()</code> and <code>dbExecute()</code>, for backends that distinguish between queries that return a table and statements that manipulate data,</li>
-<li>the new <code>dbWithTransaction()</code> generic and the <code>dbBreak()</code> helper function, thanks Barbara Borges Ribero,</li>
-<li>improved or new default implementations for methods like <code>dbGetQuery()</code>, <code>dbReadTable()</code>, <code>dbQuoteString()</code>, <code>dbQuoteIdentifier()</code>,</li>
-<li>internal changes that allow methods that don’t have a meaningful return value to return silently,</li>
-<li>translation of a helper function from C++ to R, to remove the dependency on <code>Rcpp</code> (thanks Hannes Mühleisen).</li>
-</ul>
-<p>Fortunately, none of the changes seemed to have introduced any major regressions with downstream packages. The <a href="https://github.com/rstats-db/DBI/blob/master/NEWS.md">news</a> contain a comprehensive list of changes.</p>
-</section>
-<section id="rsqlite-implementation" class="level2">
-<h2 class="anchored" data-anchor-id="rsqlite-implementation"><code>RSQLite</code>: Implementation</h2>
-<p><code>RSQLite</code> 1.1-2 is a complete rewrite of the original C implementation. Before focusing on compliance to the new DBI specification, it was important to assert compatibility to more than 100 packages on CRAN and Bioconductor that use <code>RSQLite</code>. These packages revealed many usage patterns that were difficult to foresee. Most of these usage patterns are supported in version 1.1-2, the more esoteric ones (such as supplying an <code>integer</code> where a <code>logical</code> is required) trigger a warning.</p>
-<p>Several rounds of “revdep checking” were necessary before most packages showed no difference in their check output compared to the original implementation. The downstream maintainers and the Bioconductor team were very supportive, and helped spotting functional and performance regressions during the release process. Two point releases were necessary to finally achieve a stable state.</p>
-<p>Supporting 64-bit integers also was trickier than anticipated. There is no built-in way to represent 64-bit integers in R. The <code>bit64</code> package works around this limitation by using a <code>numeric</code> vector as storage, which also happens to use 8 bytes per element, and providing coercion functions. But when an integer column is fetched, it cannot be foreseen if a 64-bit value will occur in the result, and smaller integers must use R’s built-in <code>integer</code> type. For this purpose, an efficient data structure for collecting vectors, which is capable of changing the data type on the fly, has been implemented in C++. This data structure will be useful for many other DBI backends that need support for a 64-bit integer data type, and will be ported to the <code>RKazam</code> package in the follow-up project.</p>
-<p>Once the DBI specification was completed, the process of making <code>RSQLite</code> compliant was easy: enable one of the disabled tests, fix the code, make sure all tests pass, rinse, and repeat. If you haven’t tried it, I seriosly recommend test-driven development, especially when the tests are already implemented.</p>
-<p>The upcoming release of <code>RSQLite</code> 2.0 will require stronger adherence to the DBI specification also from callers. Where possible I tried to maintain backward compatibility, but in some cases breaks were inevitable because otherwise I’d have had to introduce far too many exceptions and corner cases in the DBI spec. For instance, row names are no longer included by default when writing or reading tables. The original behavior can be reenabled by calling <code>pkgconfig::set_config()</code>, so that packages or scripts that rely on row names continue to work as before. (The setting is active for the duration of the session, but only for the caller that has called <code>pkgconfig::set_config()</code>.) I’m happy to include compatibility switches for other breaking changes if necessary and desired, to achieve both adherence to the specs and compatibility with existing behavior.</p>
-<p>A comprehensive list of changes can be found in the <a href="https://github.com/rstats-db/RSQLite/blob/master/NEWS.md">news</a>.</p>
-</section>
-<section id="other-bits-and-pieces" class="level2">
-<h2 class="anchored" data-anchor-id="other-bits-and-pieces">Other bits and pieces</h2>
-<p>The <code>RKazam</code> package is a ready-to-use boilerplate for a DBI backend, named after the hypothetical DBMS used as example in a DBI vignette. It already “passes” all tests of the <code>DBItest</code> package, mostly by calling a function that skips the current test. Starting a DBI backend from scratch requires only copying and renaming the package’s code.</p>
-<p>R has limited support for time-of-day data. The <code>hms</code> package aims at filling this gap. It will be useful especially in the follow-up project, because SQLite doesn’t have an intrinsic type for time-of-day data, unlike many other DBMS.</p>
-</section>
-<section id="next-steps" class="level2">
-<h2 class="anchored" data-anchor-id="next-steps">Next steps</h2>
-<p>The ensemble CRAN release of the three packages <code>DBI</code>, <code>DBItest</code> and <code>RSQLite</code> will occur in parallel to the startup phase for the “Establishing DBI” follow-up project. This project consists of:</p>
+<li>Shouldn’t be too hard, but need to keep the second “soft” issue in mind.</li>
+</ul></li>
+<li><p>Users expect the hard disk or the DBMS to be the limiting factor for loading data, but DBI still lacks a consistent interface for fast data import.</p>
 <ul>
-<li>Fully DBI compatible backends for MySQL/MariaDB and Postgres</li>
-<li>A backend-agnostic C++ data structure to collect column data in the <code>RKazam</code> package</li>
-<li>Support for spatial data</li>
+<li>The new <a href="https://cran.r-project.org/package=arkdb"><em>arkdb</em> package</a> offers a dedicated interface for importing data, I still think this functionality should better live there (or elsewhere).</li>
+</ul></li>
+<li><p>The syntax for query placeholders currently depends on the DBMS. A consistent interface would be useful, in particular for implementers of packages that compute on the database.</p>
+<ul>
+<li>This has already caused some confusion. Shouldn’t be too hard either, but requires a compatibility mode so that existing code doesn’t break.</li>
+</ul></li>
+<li><p>The <code>RPostgres</code> package now has special handling for geometry data. A generic extension to arbitrary data types via hooks would allow e.g.&nbsp;returning JSON data directly as a <code>"json"</code> class without user-initiated manual conversion.</p>
+<ul>
+<li>This seems to be a bigger problem, requiring some thought and design.</li>
+</ul></li>
+</ol>
+</section>
+<section id="soft-issues" class="level3">
+<h3 class="anchored" data-anchor-id="soft-issues">“Soft” issues</h3>
+<ol type="1">
+<li><p>Some users reported installation problems on specific architectures, or connectivity problems with certain databases, or other specific issues. Making the new backends accessible for various combinations of OS/hardware, software, and configuration, will help the adoption of the new packages.</p>
+<ul>
+<li>I remember seeing many SSL and timezone issues, as well as genuine bugs like the representation of times before 1970 on Windows. Expect some progress for the second blog post.</li>
+</ul></li>
+<li><p>The internal architecture of the DBI specification in <code>DBItest</code> requires a bit of reworking. Currently, it is difficult to understand a test failure without inspecting the source code of <code>DBItest</code>. It is difficult to locate the source of a failure in the specification and in the code. Ideally, each test failure would come with a precise link to the part of the specification that is violated, and with a simple sequence of DBI method calls that allow replicating the failure externally.</p>
+<ul>
+<li>That code I wrote 1-2 years ago requires some attention…</li>
+</ul></li>
+<li><p>The communication related to the projects has been rather terse so far. The new website <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> can host blog posts highlighting different aspects of DBI, and serve as a resource for advice on connecting R with databases and computing on the database. This includes coordination and support for developments around DBI like <em>sqlr</em>, an interface for data definition statements on top of DBI.</p>
+<ul>
+<li>Together with the new <a href="https://github.com/terrytangyuan/ctv-databases">Databases CRAN Task View</a> maintained by Yuan (Terry) Tang and <a href="https://solutions.posit.co/connections/db/" class="uri">https://solutions.posit.co/connections/db/</a>, the <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> should become a viable resource for new and experienced users alike. New users should be directed to tutorials and introductory material, whereas experienced users should expect to find pointers to solve the most common problems. The role of each of these websites remains to be shaped, some overlap may be desired.</li>
+</ul></li>
+<li><p>All operations on DBI currently block until a result is available or the DBMS has indicated completion. Asynchronous operations allow parallel processing of multiple queries or statements, however some research is necessary to understand to what extent this can be supported realistically in DBI and for the existing backends.</p>
+<ul>
+<li>Additional arguments to <code>dbConnect()</code>, like the new <code>check_interrupts</code> argument <a href="https://github.com/r-dbi/RPostgres/pull/193">contributed to <em>RPostgres</em> by Mateusz Żółtak</a>, are an option to experiment with asynchronous processing without disrupting existing code.</li>
+</ul></li>
+</ol>
+<p>These lists are not comprehensive, new issues may surface over time, or the importance of issues mentioned above may fade.</p>
+</section>
+</section>
+<section id="outlook-next-blog-post" class="level2">
+<h2 class="anchored" data-anchor-id="outlook-next-blog-post">Outlook: next blog post</h2>
+<p>The “Maintaining DBI” project is driven by blog posts. I promised four blog posts, describing the ongoing maintenance and development.</p>
+<p>For the next iteration, I plan to improve documentation, do a release round for all packages, furnish more packages with a CII badge, review several new packages that build on top of <em>DBI</em>, and improve my responsiveness.</p>
+<p>A Walkthrough for first-time DBI users seems to be the highest priority, perhaps accompanied by an online course. Other documentation improvements mostly will address <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a>.</p>
+<p>The following is an excerpt of changes in the forthcoming CRAN releases of the DBI packages:</p>
+<ul>
+<li><em>RSQLite</em>: window functions!</li>
+<li><em>RMariaDB</em>: better handling for time zones</li>
+<li><em>DBItest</em>: minor improvements</li>
 </ul>
-<p>In addition, it will contain an update to the DBI specification, mostly concerning support for schemas and for querying the structure of the table returned for a query. Targeting three DBMS instead of one will help properly specify these two particularly tricky parts of DBI. I’m happy to take further feedback from users and backend implementers towards further improvement of the DBI specification.</p>
+<p>New packages worth reviewing include:</p>
+<ul>
+<li><a href="https://cran.r-project.org/package=arkdb"><em>arkdb</em></a>: Consistent (and fast?) import and export</li>
+<li><a href="https://cran.r-project.org/package=flobr"><em>flobr</em></a>: Converting files to blobs and back</li>
+<li><a href="https://github.com/nbenn/sqlr"><em>sqlr</em></a>: SQLAlchemy-like DSL for data definition, work in progress</li>
+<li><a href="https://cran.r-project.org/package=dbplot"><em>dbplot</em></a>: Plotting from the database</li>
+<li>and many others.</li>
+</ul>
+<p>Adding CII badges for the backend packages and <em>DBItest</em> will give a more consistent appearance of the entire project.</p>
+<p>As a New Year’s resolution, I pledge to do a better job as package maintainer for <em>DBI</em> and related packages. I reserved a few hours each Monday to respond to issues raised on GitHub and other channels (<a href="https://stackoverflow.com/">SO</a>, <a href="https://community.rstudio.com/">RStudio Community</a>, Twitter, and the somewhat underappreciated <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db">R-SIG-DB mailing list</a>). CI builds on Travis and AppVeyor also require occasional intervention. The remaining time will be spent on resolving known problems.</p>
 </section>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
-<p>Many thanks to the R Consortium, who has sponsored this project, and to the many contributors who have spotted problems, suggested improvements, submitted pull requests, or otherwise helped make this project a great success. In particular, I’d like to thank Hadley Wickham, who suggested the idea, supported initial development of the <code>DBItest</code> package, and provided helpful feedback; and Christoph Hösler, Hannes Mühleisen, Imanuel Costigan, Jim Hester, Marcel Boldt, and <span class="citation" data-cites="thrasibule">@thrasibule</span> for using it and contributing to it. I enjoyed working on this project, looking forward to “Establishing DBI”!</p>
+<p>Thanks to all contributors to <em>DBI</em> and the other projects in the <a href="https://github.com/r-dbi">r-dbi organization</a>!</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://krlmlr.github.io/dbi-slides/2018-09-zurich-meetup/img/contributors.svg" class="img-fluid figure-img"></p>
+<figcaption>DBI contributors</figcaption>
+</figure>
+</div>
 
 
 </section>
