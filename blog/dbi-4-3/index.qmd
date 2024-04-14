@@ -19,6 +19,14 @@ When considering the bigger picture, providing access to all databases for all e
 
 ![Access to all databases from all ecosystems](pairwise.png){fig-alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. One arrow from each database to each ecosystem."}
 
+Each line represents a software package to develop and maintain, following changes in the database system and the target ecosystem.
+And, of course, the list of databases and ecosystems is not exhaustive.
+With every new system, many more connections need to be established.
+A daunting task!
+
+This is where the ADBC project comes in.
+The [Arrow Database Connectivity](https://arrow.apache.org/adbc/) project aims to provide a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format.
+Now, the big picture is greatly simplified:
 
 
 
