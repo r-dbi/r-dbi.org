@@ -157,7 +157,12 @@ In all other cases, a conversion to R data frames will occur.
 
 ![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
 
-The third blog post in this series will cover the new Arrow interface and the adbi package in more detail.
+
+While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying.
+The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format.
+With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database *server*.
+This is a promising development.
+By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database.
 Thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
 
 
