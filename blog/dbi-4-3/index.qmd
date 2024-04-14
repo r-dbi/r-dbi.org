@@ -6,6 +6,24 @@ description: "Summarizing the progress of 2022 and 2023"
 draft: true
 ---
 
+This is a continuation of the [first](https://r-dbi.org/blog/dbi-4-1/) and [second blog post](https://r-dbi.org/blog/dbi-4-2/) in this series.
+
+## A new database standard?
+
+The DBI package offers consistent database access in R.
+Different database systems, such as PostgreSQL, MySQL, SQLite, and others, can be accessed through a common interface.
+To access a particular database, a driver package is required, such as RMariaDB, RPostgres, or RSQLite.
+These driver packages implement the DBI interface and bind to the database system's native client library, such as Connector/C for MariaDB or libpq for PostgreSQL.
+A common interface is essential for users who want to switch between database systems or who want to use different database systems in the same project.
+Similar efforts exist in other ecosystems, such as Python's DB-API 2.0.
+When considering the bigger picture, providing access to all databases for all ecosystems looks like this:
+
+![Data flow from libpq to consumers](pairwise.svg){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
+
+
+
+
+
 - New development ADBC with adbi
 
 - Advantages: graphic
