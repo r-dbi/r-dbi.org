@@ -119,6 +119,7 @@ Examples include:
 - [adbcpostgresql](https://arrow.apache.org/adbc/current/r/adbcpostgresql/), on CRAN
 - [adbcsnowflake](https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake) for [Snowflake](https://www.snowflake.com/)
 - [adbcflightsql](https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql) for [FlightSQL](https://arrow.apache.org/docs/format/FlightSql.html)
+- [duckdb](https://duckdb.org/docs/api/r), which implements an ADBC driver in addition to the DBI backend
 
 [ADBC](https://arrow.apache.org/adbc/) (Arrow database connectivity) is 
 
