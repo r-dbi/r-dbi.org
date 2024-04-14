@@ -6,6 +6,48 @@ description: "Summarizing the progress of 2022 and 2023"
 draft: true
 ---
 
+- New development ADBC with adbi
+
+- Advantages: graphic
+    - PostgreSQL, SQL Server, MariaDB, Oracle, SQLite, Clickhouse on the left, each connected to R, Python, Julia, Excel, Tableau on the right
+
+- Why better than odbc?
+
+    - New implementation, learning from the past
+    
+    - Portable data format Arrow
+    
+        - covering most of what we need on the database
+        
+        - extensible
+        
+        - interoperable
+        
+        - fast
+        
+        - Arrow on the wire
+        
+    - Direct integration with target systems via vendoring: cover database-specific functionality that is not part of the standard
+
+- DBI use cases and needs. I need to:
+
+    - connect to our database
+
+    - read a table from our database
+    
+    - write my data to our database
+
+    - run this query on our database
+    
+    - access data from a database from a Shiny app
+    
+    - create a new table in our database
+    
+    - write complex queries that involve multiple tables
+    
+    - review and manage the tables in our database
+
+
 TODO: Nicolas + Kirill one-on-one
 
 TODO: Bump DBItest
