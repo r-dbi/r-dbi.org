@@ -246,10 +246,11 @@ ul.task-list li input[type="checkbox"] {
 <h2 class="anchored" data-anchor-id="adbi-new-release-in-collaboration-with-voltron-data">adbi: new release in collaboration with Voltron Data</h2>
 <p>The new adbi package bridges ADBC drivers and DBI. Examples include:</p>
 <ul>
-<li>adbcsqlite, on CRAN</li>
-<li>adbcpostgresql, on CRAN</li>
+<li><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/">adbcsqlite</a>, on CRAN</li>
+<li><a href="https://arrow.apache.org/adbc/current/r/adbcpostgresql/">adbcpostgresql</a>, on CRAN</li>
 <li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/">Snowflake</a></li>
 <li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql">adbcflightsql</a> for <a href="https://arrow.apache.org/docs/format/FlightSql.html">FlightSQL</a></li>
+<li><a href="https://duckdb.org/docs/api/r">duckdb</a>, which implements an ADBC driver in addition to the DBI backend</li>
 </ul>
 <p><a href="https://arrow.apache.org/adbc/">ADBC</a> (Arrow database connectivity) is</p>
 <blockquote class="blockquote">
@@ -272,7 +273,7 @@ ul.task-list li input[type="checkbox"] {
 <figcaption>Data flow from libpq to consumers</figcaption>
 </figure>
 </div>
-<p>The third blog post in this series will cover the new Arrow interface and the adbi package in more detail. Thanks to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort!</p>
+<p>While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying. The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format. With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database <em>server</em>. This is a promising development. By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database. Thanks to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort!</p>
 </section>
 <section id="object-identifiers" class="level3">
 <h3 class="anchored" data-anchor-id="object-identifiers">Object identifiers</h3>
