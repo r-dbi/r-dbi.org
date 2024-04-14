@@ -176,30 +176,24 @@ ul.task-list li input[type="checkbox"] {
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="pairwise.png" class="img-fluid figure-img" alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. One arrow from each database to each ecosystem."></p>
-<figcaption>Access to all databases from all ecosystems</figcaption>
+<figcaption>Direct access to all databases from all ecosystems</figcaption>
 </figure>
 </div>
 <p>Each line represents a software package to develop and maintain, following changes in the database system and the target ecosystem. And, of course, the list of databases and ecosystems is not exhaustive. With every new system, many more connections need to be established. A daunting task!</p>
 <p>This is where the ADBC project comes in. The <a href="https://arrow.apache.org/adbc/">Arrow Database Connectivity</a> project aims to provide a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format. Now, the big picture is greatly simplified:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="pairwise.png" class="img-fluid figure-img" alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. ADBC in the middle, with one arrow from each database to ADBC and from ADBC to each ecosystem."></p>
+<figcaption>Access to all databases from all ecosystems through ADBC</figcaption>
+</figure>
+</div>
+<p>This isn’t an entirely new idea. ODBC (Open Database Connectivity) has been around for a long time, with a very similar goal. The new implementation can avoid some of the legacy issues of ODBC, it can also build on the lessons learned from ODBC. The standardization on the Arrow data format is a significant advantage:</p>
 <ul>
-<li><p>New development ADBC with adbi</p></li>
-<li><p>Advantages: graphic</p>
-<ul>
-<li>PostgreSQL, SQL Server, MariaDB, Oracle, SQLite, Clickhouse on the left, each connected to R, Python, Julia, Excel, Tableau on the right</li>
-</ul></li>
-<li><p>Why better than odbc?</p>
-<ul>
-<li><p>New implementation, learning from the past</p></li>
-<li><p>Portable data format Arrow</p>
-<ul>
-<li><p>covering most of what we need on the database</p></li>
-<li><p>extensible</p></li>
-<li><p>interoperable</p></li>
-<li><p>fast</p></li>
-<li><p>Arrow on the wire</p></li>
-</ul></li>
-<li><p>Direct integration with target systems via vendoring: cover database-specific functionality that is not part of the standard</p></li>
-</ul></li>
+<li><p>Most data types typically supported by databases are supported directly, and the format is extensible.</p></li>
+<li><p>The same data format can be used across ecosystems, avoiding conversions and copies.</p></li>
+<li><p>Arrow is designed for high performance, with zero-copy data sharing between systems.</p></li>
+<li><p>With FlightSQL, the same data format can be used for data exchange between client and server, avoiding serialization and deserialization.</p></li>
+<li><p>Like with ODBC, an ADBC driver is a shared library that can be loaded into any ecosystem. In addition, ADBC drivers can be tightly coupled with the target system, allowing to cover database-specific functionality that is not part of ADBC. An example is adbcpostgresql, which provides access to PostgreSQL-specific features: it exists as a <a href="https://github.com/apache/arrow-adbc/tree/main/c/driver/postgresql">standalone C library</a>, as an <a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcpostgresql">R package</a> (essentially vendoring the C library with some very lightweight boilerplate), as a <a href="https://github.com/apache/arrow-adbc/tree/main/python/adbc_driver_postgresql">Python package</a>, and for many other target ecosystems. This greatly simplifies the installation and configuration of the driver.</p></li>
 <li><p>DBI use cases and needs. I need to:</p>
 <ul>
 <li><p>connect to our database</p></li>
