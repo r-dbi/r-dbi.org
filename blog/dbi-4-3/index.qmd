@@ -18,8 +18,7 @@ A common interface is essential for users who want to switch between database sy
 Similar efforts exist in other ecosystems, such as Python's DB-API 2.0.
 When considering the bigger picture, providing access to all databases for all ecosystems looks like this:
 
-![Data flow from libpq to consumers](pairwise.svg){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
-
+![Data flow from libpq to consumers](pairwise.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
 
 
 
