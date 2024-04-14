@@ -10,7 +10,103 @@
 <atom:link href="https://r-dbi.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
 <generator>quarto-1.5.29</generator>
-<lastBuildDate>Sun, 07 Apr 2024 00:00:00 GMT</lastBuildDate>
+<lastBuildDate>Sun, 14 Apr 2024 00:00:00 GMT</lastBuildDate>
+<item>
+  <title>The future of DBI, 3/*</title>
+  <dc:creator>Kirill Müller</dc:creator>
+  <link>https://r-dbi.org/blog/dbi-4-3/</link>
+  <description><![CDATA[ 
+
+
+
+
+<p>This is a continuation of the <a href="https://r-dbi.org/blog/dbi-4-1/">first</a> and <a href="https://r-dbi.org/blog/dbi-4-2/">second blog post</a> in this series.</p>
+<section id="a-new-database-standard" class="level2">
+<h2 class="anchored" data-anchor-id="a-new-database-standard">A new database standard?</h2>
+<p>The DBI package offers consistent database access in R. Different database systems, such as PostgreSQL, MySQL, SQLite, and others, can be accessed through a common interface. To access a particular database, a driver package is required, such as RMariaDB, RPostgres, or RSQLite. These driver packages implement the DBI interface and bind to the database system’s native client library, such as Connector/C for MariaDB or libpq for PostgreSQL. A common interface is essential for users who want to switch between database systems or who want to use different database systems in the same project. Similar efforts exist in other ecosystems, such as Python’s DB-API 2.0. When considering the bigger picture, providing access to all databases for all ecosystems looks like this:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="https://r-dbi.org/blog/dbi-4-3/pairwise.png" class="img-fluid figure-img" alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. One arrow from each database to each ecosystem."></p>
+<figcaption>Access to all databases from all ecosystems</figcaption>
+</figure>
+</div>
+<p>Each line represents a software package to develop and maintain, following changes in the database system and the target ecosystem. And, of course, the list of databases and ecosystems is not exhaustive. With every new system, many more connections need to be established. A daunting task!</p>
+<p>This is where the ADBC project comes in. The <a href="https://arrow.apache.org/adbc/">Arrow Database Connectivity</a> project aims to provide a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format. Now, the big picture is greatly simplified:</p>
+<ul>
+<li><p>New development ADBC with adbi</p></li>
+<li><p>Advantages: graphic</p>
+<ul>
+<li>PostgreSQL, SQL Server, MariaDB, Oracle, SQLite, Clickhouse on the left, each connected to R, Python, Julia, Excel, Tableau on the right</li>
+</ul></li>
+<li><p>Why better than odbc?</p>
+<ul>
+<li><p>New implementation, learning from the past</p></li>
+<li><p>Portable data format Arrow</p>
+<ul>
+<li><p>covering most of what we need on the database</p></li>
+<li><p>extensible</p></li>
+<li><p>interoperable</p></li>
+<li><p>fast</p></li>
+<li><p>Arrow on the wire</p></li>
+</ul></li>
+<li><p>Direct integration with target systems via vendoring: cover database-specific functionality that is not part of the standard</p></li>
+</ul></li>
+<li><p>DBI use cases and needs. I need to:</p>
+<ul>
+<li><p>connect to our database</p></li>
+<li><p>read a table from our database</p></li>
+<li><p>write my data to our database</p></li>
+<li><p>run this query on our database</p></li>
+<li><p>access data from a database from a Shiny app</p></li>
+<li><p>create a new table in our database</p></li>
+<li><p>write complex queries that involve multiple tables</p></li>
+<li><p>review and manage the tables in our database</p></li>
+</ul></li>
+</ul>
+<p>TODO: Nicolas + Kirill one-on-one</p>
+<p>TODO: Bump DBItest</p>
+<p>TODO: CRAN release</p>
+<p>TODO: Issue and PR stats</p>
+<p>FIXME: dm</p>
+<p>FIXME: adbi</p>
+<p>TODO: Async</p>
+<p>FIXME: Intro, summary</p>
+</section>
+<section id="adbi-new-release-in-collaboration-with-voltron-data-bridging-dbi-and-adbc-arrow-database-connectivity" class="level1">
+<h1>adbi: new release in collaboration with Voltron Data, bridging DBI and adbc (Arrow Database Connectivity)</h1>
+<p>The new adbi package bridges ADBC drivers and DBI. Examples include:</p>
+<ul>
+<li>adbcsqlite, on CRAN</li>
+<li>adbcpostgresql, on CRAN</li>
+<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/">Snowflake</a></li>
+<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql">adbcflightsql</a> for <a href="https://arrow.apache.org/docs/format/FlightSql.html">FlightSQL</a></li>
+</ul>
+<p><a href="https://arrow.apache.org/adbc/">ADBC</a> is</p>
+<blockquote class="blockquote">
+<p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
+</blockquote>
+<p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. The subsequent section contains a more detailed example.</p>
+<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
+<section id="dbi3" class="level2">
+<h2 class="anchored" data-anchor-id="dbi3">dbi3?</h2>
+<p>The following example illustrates the various connectivity options with a PostgreSQL database. In all scenarios, the libpq library is used to communicate with the database server. The RPostgres package links to libpq and uses this API directly to retrieve and ingest data from R via the DBI interface. The adbcpostgresql package also links to libpq but exposes ADBC, which is brought to R with the adbcdrivermanager package. On top of that, the adbi package interacts with arbitrary ADBC drivers (including adbcpostgresql) and exposes the functionality through DBI. The R user has the choice to access the data via data frames or via Arrow. Only when using adbi and the new <code>dbGetQueryArrow()</code>, the implementation will never convert the data to R data frames. In all other cases, a conversion to R data frames will occur.</p>
+<p>While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying. The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format. With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database <em>server</em>. This is a promising development. By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database.</p>
+<ul>
+<li><p>n host systems x m databases</p></li>
+<li><p>What boxes are ticked by using adbcdrivermanager?</p></li>
+</ul>
+<section id="review-async" class="level3">
+<h3 class="anchored" data-anchor-id="review-async">Review async</h3>
+
+
+</section>
+</section>
+</section>
+
+ ]]></description>
+  <guid>https://r-dbi.org/blog/dbi-4-3/</guid>
+  <pubDate>Sun, 14 Apr 2024 00:00:00 GMT</pubDate>
+</item>
 <item>
   <title>The future of DBI, 2/*</title>
   <dc:creator>Kirill Müller</dc:creator>
