@@ -115,8 +115,8 @@ It is now up to the user to handle duplicate column names, for example by using 
 The new adbi package bridges ADBC drivers and DBI.
 Examples include:
 
-- adbcsqlite, on CRAN
-- adbcpostgresql, on CRAN
+- [adbcsqlite](https://arrow.apache.org/adbc/current/r/adbcsqlite/), on CRAN
+- [adbcpostgresql](https://arrow.apache.org/adbc/current/r/adbcpostgresql/), on CRAN
 - [adbcsnowflake](https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake) for [Snowflake](https://www.snowflake.com/)
 - [adbcflightsql](https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql) for [FlightSQL](https://arrow.apache.org/docs/format/FlightSql.html)
 
