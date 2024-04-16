@@ -1,17 +1,15 @@
 ---
 author: "Kirill Müller"
 date: "2024-04-07"
-title: "The future of DBI, 2/*"
-description: "Summarizing the progress of 2022 and 2023"
+title: "Towards sustainable DBI maintenance"
+description: "Measuring our responsiveness to bug reports and feature requests, calling for contributions"
 ---
 
-This is a continuation of the [first blog post](https://r-dbi.org/blog/dbi-4-1/) in this series.
-
-## Measuring responsiveness
-
 For 2022 and 2023, no concrete new features were planned.
-Instead, the focus has been on establishing a steady pace of maintenance and responsiveness to user feedback.
+Instead, the focus has been on establishing a sustainable and steady pace of maintenance and responsiveness to user feedback.
 This blog post shows how we have been doing in this regard.
+
+_This is a continuation of the [first blog post](https://r-dbi.org/blog/dbi-4-1/) in this series._
 
 ```{r include = FALSE}
 knitr::opts_chunk$set(
