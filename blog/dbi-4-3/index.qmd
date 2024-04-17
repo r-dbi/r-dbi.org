@@ -2,7 +2,7 @@
 author: "Kirill Müller"
 date: "2024-04-14"
 title: "Using Arrow for data transport"
-description: "Summarizing the progress of 2022 and 2023"
+description: "What would DBI look like if implemented today?"
 ---
 
 The third and final blog post dives deeply into the new Arrow Database Connectivity (ADBC) project and the adbcdrivermanager package, which provides a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format.
