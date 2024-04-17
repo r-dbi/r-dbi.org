@@ -32,7 +32,8 @@ Now, the big picture is greatly simplified:
 
 This isn't an entirely new idea.
 ODBC (Open Database Connectivity) has been around for a long time, with a very similar goal.
-The new implementation can avoid some of the legacy issues of ODBC, it can also build on the lessons learned from ODBC. The standardization on the Arrow data format is a significant advantage:
+The new implementation can build on the lessons learned from ODBC.
+The standardization on the Arrow data format is a significant advantage:
 
 - Most data types typically supported by databases are supported directly, and the format is extensible.
 
@@ -84,13 +85,14 @@ To clear this path, DBI will keep and improve compatibility with ADBC and adbi.
 
 To bring adbcdrivermanager on par with DBI, a few issues need to be addressed:
 
-- Test suite: should a test package similarly to DBItest be created?
-
-- Interoperability with existing DBI backends: can a generic ADBC driver be created so that any existing DBI backend can be used with ADBC? A prime candidate would be the odbc package, this would add support for all ODBC drivers to ADBC via R, until a native ADBC driver is available.
-
 - SQL generation: can dbplyr be connected to ADBC, either directly or via adbi?
 
 - Usability: the adbcdrivermanager package looks more like an "implementer's interface", a convenience "user's interface" wrapper or extension might make it easier to use.
+    More on that below.
+
+- Test suite: should a test package similarly to DBItest be created?
+
+- Interoperability with existing DBI backends: can a generic ADBC driver be created so that any existing DBI backend can be used with ADBC? A prime candidate would be the odbc package, this would add support for all ODBC drivers to ADBC via R, until a native ADBC driver is available.
 
 - Documentation: the ADBC standard is well-documented, but the documentation specific to the R ecosystem could be expanded.
 
@@ -117,6 +119,54 @@ I might also need to:
 - write complex queries that involve multiple tables
 
 - review and manage the tables in our database
+
+Different components:
+
+- bindings to the native database driver
+
+- database meta-information
+
+    - what kind of database?
+    
+    - what SQL dialect?
+    
+    - what is stored on the database?
+
+- SQL generation
+
+- utilities for common tasks
+
+- utilities for tasks specific to the particular database
+
+Responsibility of DBI as an implementer's interface:
+
+- simple connect and disconnect based on credentials
+
+- data type mapping between R and the native database driver
+
+- data transfer in both directions
+
+- emission of queries, with support for placeholders
+
+- reporting success or failure of queries and other operations
+
+- declare 
+
+Non-responsibility of DBI:
+
+- advanced connection management
+
+- transactions?
+
+## Call to action
+
+- Subscribe to the blog for yearly updates
+
+- Try out the adbi package and provide feedback
+
+- Watch the dbi3 repository for progress, and contribute to the discussion
+
+    - Link to doc: how to watch GitHub repo, https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository
 
 
 <!--
