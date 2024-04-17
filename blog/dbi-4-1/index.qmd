@@ -21,7 +21,7 @@ The [RKazam](https://rkazam.r-dbi.org/) template makes it easy to get started.
 (Spoiler alert: We know because a new backend has been added recently.
 Read on!)
 
-This blog post is split into multiple parts.
+This blog post series consists of three parts.
 In this first part, we summarize recent developments in DBI and related packages, including a glimpse on the new [adbi](https://adbi.r-dbi.org/) package.
 The [second part](https://r-dbi.org/blog/dbi-4-2/) reviews the time it takes to respond to issues and pull requests.
 In the [third part](https://r-dbi.org/blog/dbi-4-3/), we will do a deeper dive into the new adbi and adbcdrivermanager packages, which use the Arrow data exchange format and offer a more sustainable approach to database connectivity.
@@ -248,6 +248,12 @@ Other changes include:
 RPostgres has seen a minor update, mostly focusing on maintenance.
 The current version is 1.4.6.
 See the [change log](https://rpostgres.r-dbi.org/news/index.html) for details.
+
+## Conclusion
+
+Quite a few things have happened in the DBI ecosystem since the last blog post.
+Try out the new package versions, let us know if they work for you, and report any problems you encounter in the respective issue trackers on GitHub.
+Happy querying!
 
 ## Acknowledgments
 
