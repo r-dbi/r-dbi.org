@@ -5,7 +5,7 @@ title: "The future of DBI, 3/*"
 description: "Summarizing the progress of 2022 and 2023"
 ---
 
-This is a continuation of the [first](https://r-dbi.org/blog/dbi-4-1/) and [second blog post](https://r-dbi.org/blog/dbi-4-2/) in this series.
+_This is a continuation of the [first](https://r-dbi.org/blog/dbi-4-1/) and [second blog post](https://r-dbi.org/blog/dbi-4-2/) in this series._
 
 ## A new database standard?
 
