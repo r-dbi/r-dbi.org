@@ -179,7 +179,7 @@ Does the adbi package work for you?
 What would a good "user interface" package look like for ADBC?
 Use the [adbi issue tracker](https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) to get in touch!
 
-Thanks to Maëlle Salmon for her help with the blog post.
+Thanks to Maëlle Salmon for her help with the blog post, and to Voltron Data for supporting this effort.
 
 <!--
 TODO: Bump DBItest
