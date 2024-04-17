@@ -1,9 +1,12 @@
 ---
 author: "Kirill Müller"
 date: "2024-04-14"
-title: "The future of DBI, 3/*"
+title: "Using Arrow for data transport"
 description: "Summarizing the progress of 2022 and 2023"
 ---
+
+The third and final blog post dives deeply into the new Arrow Database Connectivity (ADBC) project and the adbcdrivermanager package, which provides a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format.
+It also showcases the adbi package, which bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.
 
 _This is a continuation of the [first](https://r-dbi.org/blog/dbi-4-1/) and [second blog post](https://r-dbi.org/blog/dbi-4-2/) in this series._
 
@@ -30,16 +33,16 @@ Now, the big picture is greatly simplified:
 
 ![Access to all databases from all ecosystems through ADBC](star.png){fig-alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. ADBC in the middle, with one arrow from each database to ADBC and from ADBC to each ecosystem."}
 
-This isn't an entirely new idea.
-ODBC (Open Database Connectivity) has been around for a long time, with a very similar goal.
-The new implementation can build on the lessons learned from ODBC.
+This isn't an [entirely new idea](https://xkcd.com/927/).
+ODBC (Open Database Connectivity) and JDBC (Java Database Connectivity) have been around for a long time, with very similar goals.
+The new implementation can build on the lessons learned from these projects.
 The standardization on the Arrow data format is a significant advantage:
 
 - Most data types typically supported by databases are supported directly, and the format is extensible.
 
 - The same data format can be used across ecosystems, avoiding conversions and copies.
 
-- Arrow is designed for high performance, with zero-copy data sharing between systems.
+- Arrow is designed for high performance, with zero-copy data sharing between systems, with good support for both columnar and row-oriented data processing.
 
 - With FlightSQL, the same data format can be used for data exchange between client and server, avoiding serialization and deserialization.
 
@@ -96,8 +99,9 @@ To bring adbcdrivermanager on par with DBI, a few issues need to be addressed:
 
 - Documentation: the ADBC standard is well-documented, but the documentation specific to the R ecosystem could be expanded.
 
-## Draft: use cases
+## Bindings, database, user interface
 
+Let's step back a little to better understand the responsibilities of DBI and the various other components.
 What is core functionality, what can be provided by addon packages, and what use cases should be left for the end user to implement?
 
 As an R user, I need to:
@@ -108,41 +112,24 @@ As an R user, I need to:
 
 - run this query on our database
 
-- access a database from a Shiny app
-
 - write my data to our database
 
-I might also need to:
-
 - create a new table in our database
+
+I might also need to:
 
 - write complex queries that involve multiple tables
 
 - review and manage the tables in our database
 
-Different components:
+- access a database from a Shiny app
 
-- bindings to the native database driver
-
-- database meta-information
-
-    - what kind of database?
-    
-    - what SQL dialect?
-    
-    - what is stored on the database?
-
-- SQL generation
-
-- utilities for common tasks
-
-- utilities for tasks specific to the particular database
-
-Responsibility of DBI as an implementer's interface:
+The adbcdrivermanager package with the ADBC drivers tick almost all boxes from the "I need to" list, but none of the boxes from the "I might also need to" list.
+It does so by focusing on the following functionality:
 
 - simple connect and disconnect based on credentials
 
-- data type mapping between R and the native database driver
+- data type mapping between Arrow and the native database driver
 
 - data transfer in both directions
 
@@ -150,37 +137,54 @@ Responsibility of DBI as an implementer's interface:
 
 - reporting success or failure of queries and other operations
 
-- declare 
+This shows a good separation of concerns: the adbcdrivermanager package provides the core functionality ("bindings"), and other code can build on top of that to provide more advanced features ("user interface").
 
-Non-responsibility of DBI:
+The bindings alone are not enough to provide a good user experience.
+As an example, there are now several ways to access a PostgreSQL database from R:
 
-- advanced connection management
+- Use the RPostgres or RPostgreSQL packages, which provide a DBI backend for PostgreSQL.
 
-- transactions?
+- Use the adbcpostgresql package, which provides an ADBC driver for PostgreSQL.
 
-## Call to action
+- Use the adbi package, which provides a DBI backend for ADBC that allows accessing PostgreSQL through its ADBC driver.
 
-- Subscribe to the blog for yearly updates
+- Use the odbc package, which provides a DBI backend for ODBC that allows accessing PostgreSQL through an ODBC driver.
 
-- Try out the adbi package and provide feedback
+In the past, "database driver" and "database" were often used interchangeably.
+Some of the operations required to effectively work with a database (such as listing the available tables) are currently tightly coupled with the database driver, but would be best handled by a separate component that dispatches by database.
+As long as the database driver [reports on the kind of database](https://github.com/paleolimbot/demoadbcplyr/pull/2#issuecomment-2059209643), from which the SQL dialect could be inferred, other components can handle the remaining tasks.
+Specifically:
 
-- Watch the dbi3 repository for progress, and contribute to the discussion
+- To write complex queries that involve multiple tables, dbplyr can dispatch on the SQL dialect and generate the appropriate SQL code.
 
-    - Link to doc: how to watch GitHub repo, https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository
+- To review and manage the tables in our database, the dm package has a concept of a standardized "meta-database", similarly to `INFORMATION_SCHEMA` in SQL.
+    (It is currently only used [internally](https://github.com/cynkra/dm/blob/e52ba91e26b04a0332039f8754054cb246542f7e/R/meta.R), but could be exposed.)
 
+- To efficiently access a database from a Shiny app, without blocking the user interface or other sessions handled by the same R process on the server, a helper that wraps ADBC's low-level asynchronous support promises [promises](https://rstudio.github.io/promises/) would be most helpful.
+
+- The combination of bindings and database meta-information should be sufficient to satisfy virtually all other use cases across all databases.
+    In cases where the bindings must provide a functionality that cannot be achieved through the query mechanism, ADBC makes it easy to extend the driver packages (such as the adbcpostgresql R package).
+
+In contrast, in DBI, the three concepts "bindings", "database", and "user interface" are conflated.
+Disentangling them now will be hard.
+
+## Conclusion
+
+With the implementation of adbi and the new DBI generics, the foundation for adopting ADBC has been laid.
+To future-proof ADBC and adbcdrivermanager, a good exercise might be to attempt implementing dbplyr for ADBC connection building directly on adbcdrivermanager, bypassing DBI.
+This will uncover missing pieces and clarify what kind of utilities is needed to make it a pleasant exercise to work with databases through ADBC in R.
+DBI will remain supported, but new development will be restricted to supporting the "I need to" list above.
+
+Does the adbi package work for you?
+What would a good "user interface" package look like for ADBC?
+Use the [adbi issue tracker](https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) to get in touch!
+
+Thanks to Maëlle Salmon for her help with the blog post.
 
 <!--
-TODO: Nicolas + Kirill one-on-one
-
 TODO: Bump DBItest
 
 TODO: CRAN release
 
-FIXME: dm
-
-FIXME: adbi
-
-TODO: Async
-
-FIXME: Intro, summary
+TODO: Post in rOpenSci slack
 -->
