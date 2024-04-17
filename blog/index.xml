@@ -12,7 +12,7 @@
 <generator>quarto-1.5.29</generator>
 <lastBuildDate>Sun, 14 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
-  <title>The future of DBI, 3/*</title>
+  <title>Using Arrow for data transport</title>
   <dc:creator>Kirill Müller</dc:creator>
   <link>https://r-dbi.org/blog/dbi-4-3/</link>
   <description><![CDATA[ 
@@ -20,7 +20,8 @@
 
 
 
-<p>This is a continuation of the <a href="https://r-dbi.org/blog/dbi-4-1/">first</a> and <a href="https://r-dbi.org/blog/dbi-4-2/">second blog post</a> in this series.</p>
+<p>The third and final blog post dives deeply into the new Arrow Database Connectivity (ADBC) project and the adbcdrivermanager package, which provides a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format. It also showcases the adbi package, which bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.</p>
+<p><em>This is a continuation of the <a href="https://r-dbi.org/blog/dbi-4-1/">first</a> and <a href="https://r-dbi.org/blog/dbi-4-2/">second blog post</a> in this series.</em></p>
 <section id="a-new-database-standard" class="level2">
 <h2 class="anchored" data-anchor-id="a-new-database-standard">A new database standard?</h2>
 <p>The DBI package offers consistent database access in R. Different database systems, such as PostgreSQL, MySQL, SQLite, and others, can be accessed through a common interface. To access a particular database, a driver package is required, such as RMariaDB, RPostgres, or RSQLite. These driver packages implement the DBI interface and bind to the database system’s native client library, such as Connector/C for MariaDB or libpq for PostgreSQL. A common interface is essential for users who want to switch between database systems or who want to use different database systems in the same project. Similar efforts exist in other ecosystems, such as Python’s DB-API 2.0. When considering the bigger picture, providing access to all databases for all ecosystems looks like this:</p>
@@ -38,11 +39,11 @@
 <figcaption>Access to all databases from all ecosystems through ADBC</figcaption>
 </figure>
 </div>
-<p>This isn’t an entirely new idea. ODBC (Open Database Connectivity) has been around for a long time, with a very similar goal. The new implementation can build on the lessons learned from ODBC. The standardization on the Arrow data format is a significant advantage:</p>
+<p>This isn’t an <a href="https://xkcd.com/927/">entirely new idea</a>. ODBC (Open Database Connectivity) and JDBC (Java Database Connectivity) have been around for a long time, with very similar goals. The new implementation can build on the lessons learned from these projects. The standardization on the Arrow data format is a significant advantage:</p>
 <ul>
 <li><p>Most data types typically supported by databases are supported directly, and the format is extensible.</p></li>
 <li><p>The same data format can be used across ecosystems, avoiding conversions and copies.</p></li>
-<li><p>Arrow is designed for high performance, with zero-copy data sharing between systems.</p></li>
+<li><p>Arrow is designed for high performance, with zero-copy data sharing between systems, with good support for both columnar and row-oriented data processing.</p></li>
 <li><p>With FlightSQL, the same data format can be used for data exchange between client and server, avoiding serialization and deserialization.</p></li>
 <li><p>Like with ODBC, an ADBC driver is a shared library that can be loaded into any ecosystem. In addition, ADBC drivers can be tightly coupled with the target system, allowing to cover database-specific functionality that is not part of ADBC. An example is adbcpostgresql, which provides access to PostgreSQL-specific features: it exists as a <a href="https://github.com/apache/arrow-adbc/tree/main/c/driver/postgresql">standalone C library</a>, as an <a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcpostgresql">R package</a> (essentially vendoring the C library with some very lightweight boilerplate), as a <a href="https://github.com/apache/arrow-adbc/tree/main/python/adbc_driver_postgresql">Python package</a>, and for many other target ecosystems. This greatly simplifies the installation and configuration of the driver.</p></li>
 </ul>
@@ -71,75 +72,59 @@
 <li><p>Documentation: the ADBC standard is well-documented, but the documentation specific to the R ecosystem could be expanded.</p></li>
 </ul>
 </section>
-<section id="draft-use-cases" class="level2">
-<h2 class="anchored" data-anchor-id="draft-use-cases">Draft: use cases</h2>
-<p>What is core functionality, what can be provided by addon packages, and what use cases should be left for the end user to implement?</p>
+<section id="bindings-database-user-interface" class="level2">
+<h2 class="anchored" data-anchor-id="bindings-database-user-interface">Bindings, database, user interface</h2>
+<p>Let’s step back a little to better understand the responsibilities of DBI and the various other components. What is core functionality, what can be provided by addon packages, and what use cases should be left for the end user to implement?</p>
 <p>As an R user, I need to:</p>
 <ul>
 <li><p>connect to our database</p></li>
 <li><p>read a table from our database</p></li>
 <li><p>run this query on our database</p></li>
-<li><p>access a database from a Shiny app</p></li>
 <li><p>write my data to our database</p></li>
+<li><p>create a new table in our database</p></li>
 </ul>
 <p>I might also need to:</p>
 <ul>
-<li><p>create a new table in our database</p></li>
 <li><p>write complex queries that involve multiple tables</p></li>
 <li><p>review and manage the tables in our database</p></li>
+<li><p>access a database from a Shiny app</p></li>
 </ul>
-<p>Different components:</p>
-<ul>
-<li><p>bindings to the native database driver</p></li>
-<li><p>database meta-information</p>
-<ul>
-<li><p>what kind of database?</p></li>
-<li><p>what SQL dialect?</p></li>
-<li><p>what is stored on the database?</p></li>
-</ul></li>
-<li><p>SQL generation</p></li>
-<li><p>utilities for common tasks</p></li>
-<li><p>utilities for tasks specific to the particular database</p></li>
-</ul>
-<p>Responsibility of DBI as an implementer’s interface:</p>
+<p>The adbcdrivermanager package with the ADBC drivers tick almost all boxes from the “I need to” list, but none of the boxes from the “I might also need to” list. It does so by focusing on the following functionality:</p>
 <ul>
 <li><p>simple connect and disconnect based on credentials</p></li>
-<li><p>data type mapping between R and the native database driver</p></li>
+<li><p>data type mapping between Arrow and the native database driver</p></li>
 <li><p>data transfer in both directions</p></li>
 <li><p>emission of queries, with support for placeholders</p></li>
 <li><p>reporting success or failure of queries and other operations</p></li>
-<li><p>declare</p></li>
 </ul>
-<p>Non-responsibility of DBI:</p>
+<p>This shows a good separation of concerns: the adbcdrivermanager package provides the core functionality (“bindings”), and other code can build on top of that to provide more advanced features (“user interface”).</p>
+<p>The bindings alone are not enough to provide a good user experience. As an example, there are now several ways to access a PostgreSQL database from R:</p>
 <ul>
-<li><p>advanced connection management</p></li>
-<li><p>transactions?</p></li>
+<li><p>Use the RPostgres or RPostgreSQL packages, which provide a DBI backend for PostgreSQL.</p></li>
+<li><p>Use the adbcpostgresql package, which provides an ADBC driver for PostgreSQL.</p></li>
+<li><p>Use the adbi package, which provides a DBI backend for ADBC that allows accessing PostgreSQL through its ADBC driver.</p></li>
+<li><p>Use the odbc package, which provides a DBI backend for ODBC that allows accessing PostgreSQL through an ODBC driver.</p></li>
 </ul>
+<p>In the past, “database driver” and “database” were often used interchangeably. Some of the operations required to effectively work with a database (such as listing the available tables) are currently tightly coupled with the database driver, but would be best handled by a separate component that dispatches by database. As long as the database driver <a href="https://github.com/paleolimbot/demoadbcplyr/pull/2#issuecomment-2059209643">reports on the kind of database</a>, from which the SQL dialect could be inferred, other components can handle the remaining tasks. Specifically:</p>
+<ul>
+<li><p>To write complex queries that involve multiple tables, dbplyr can dispatch on the SQL dialect and generate the appropriate SQL code.</p></li>
+<li><p>To review and manage the tables in our database, the dm package has a concept of a standardized “meta-database”, similarly to <code>INFORMATION_SCHEMA</code> in SQL. (It is currently only used <a href="https://github.com/cynkra/dm/blob/e52ba91e26b04a0332039f8754054cb246542f7e/R/meta.R">internally</a>, but could be exposed.)</p></li>
+<li><p>To efficiently access a database from a Shiny app, without blocking the user interface or other sessions handled by the same R process on the server, a helper that wraps ADBC’s low-level asynchronous support promises <a href="https://rstudio.github.io/promises/">promises</a> would be most helpful.</p></li>
+<li><p>The combination of bindings and database meta-information should be sufficient to satisfy virtually all other use cases across all databases. In cases where the bindings must provide a functionality that cannot be achieved through the query mechanism, ADBC makes it easy to extend the driver packages (such as the adbcpostgresql R package).</p></li>
+</ul>
+<p>In contrast, in DBI, the three concepts “bindings”, “database”, and “user interface” are conflated. Disentangling them now will be hard.</p>
 </section>
-<section id="call-to-action" class="level2">
-<h2 class="anchored" data-anchor-id="call-to-action">Call to action</h2>
-<ul>
-<li><p>Subscribe to the blog for yearly updates</p></li>
-<li><p>Try out the adbi package and provide feedback</p></li>
-<li><p>Watch the dbi3 repository for progress, and contribute to the discussion</p>
-<ul>
-<li>Link to doc: how to watch GitHub repo, https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository</li>
-</ul></li>
-</ul>
+<section id="conclusion" class="level2">
+<h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
+<p>With the implementation of adbi and the new DBI generics, the foundation for adopting ADBC has been laid. To future-proof ADBC and adbcdrivermanager, a good exercise might be to attempt implementing dbplyr for ADBC connection building directly on adbcdrivermanager, bypassing DBI. This will uncover missing pieces and clarify what kind of utilities is needed to make it a pleasant exercise to work with databases through ADBC in R. DBI will remain supported, but new development will be restricted to supporting the “I need to” list above.</p>
+<p>Does the adbi package work for you? What would a good “user interface” package look like for ADBC? Use the <a href="https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">adbi issue tracker</a> to get in touch!</p>
+<p>Thanks to Maëlle Salmon for her help with the blog post.</p>
 <!--
-TODO: Nicolas + Kirill one-on-one
-
 TODO: Bump DBItest
 
 TODO: CRAN release
 
-FIXME: dm
-
-FIXME: adbi
-
-TODO: Async
-
-FIXME: Intro, summary
+TODO: Post in rOpenSci slack
 -->
 
 
