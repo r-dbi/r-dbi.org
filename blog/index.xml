@@ -9,7 +9,7 @@
 <link>https://r-dbi.org/blog/</link>
 <atom:link href="https://r-dbi.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
-<generator>quarto-1.5.29</generator>
+<generator>quarto-1.5.30</generator>
 <lastBuildDate>Sun, 14 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Arrow for data transport</title>
@@ -212,7 +212,7 @@ TODO: Post in rOpenSci slack
 <p>Several components simplify the day-to-day work:</p>
 <ul>
 <li><p><a href="https://www.aviator.co/">Aviator</a> helps ensuring always “green” builds on the main branch.</p>
-<p>It is a “click-and-forget” solution that automatically merges pull requests when all checks pass. I’m using this for all my packages now, and it has saved me a lot of time. I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which conflicts with 👇</p></li>
+<p>It is a “click-and-forget” solution that allows queueing a pull request so that it is automatically merged when all checks pass. I’m using this for all my packages now, and it has saved me a lot of time. I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which is required for fledge. 👇</p></li>
 <li><p><a href="https://fledge.cynkra.com/">fledge</a> helps automating the release process.</p>
 <p>This package generates a changelog from PR titles. In my setup, it is run daily and automatically updates <code>NEWS.md</code>. Before release to CRAN, the changelog is manually converted to release notes. Once a package is on CRAN, a GitHub release is created with these release notes.</p></li>
 <li><p>All packages use a similar but not identical setup for CI/CD.</p>
@@ -235,7 +235,7 @@ TODO: Post in rOpenSci slack
 <h3 class="anchored" data-anchor-id="documentation-improvements">Documentation improvements</h3>
 <p>Various documentation improvements have been made:</p>
 <ul>
-<li><p>DBI specification is now version-controlled as Markdown files. Previously has been assembled at package build time from various sources.</p></li>
+<li><p>The DBI specification is now version-controlled as Markdown files. This allows for more control and a simpler build process. Previously has been assembled at package build time from various sources.</p></li>
 <li><p>The command execution and data retrieval flow has been clarified in the documentation. This has been a common source of confusion for new users.</p></li>
 <li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon!</p></li>
 </ul>
@@ -264,7 +264,7 @@ TODO: Post in rOpenSci slack
 <p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
 </blockquote>
 <p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. More on that below.</p>
-<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
+<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
 </section>
 <section id="dbi" class="level2">
 <h2 class="anchored" data-anchor-id="dbi">DBI</h2>
@@ -273,14 +273,16 @@ TODO: Post in rOpenSci slack
 <h3 class="anchored" data-anchor-id="integration-with-arrow">Integration with Arrow</h3>
 <p>DBI backens can now optionally support Arrow arrays and streams as the primary data exchange format. This is accessed through the new generics <code>dbSendQueryArrow()</code>, <code>dbFetchArrow()</code>, <code>dbFetchArrowChunk()</code>, <code>dbGetQueryArrow()</code>, <code>dbReadTableArrow()</code>, <code>dbWriteTableArrow()</code>, <code>dbCreateTableArrow()</code>, <code>dbAppendTableArrow()</code>, and <code>dbBindArrow()</code>. See the new <a href="https://dbi.r-dbi.org/articles/DBI-arrow.html">vignette on Arrow support in DBI</a> for details.</p>
 <p>A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package. Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does.</p>
-<p>The following example illustrates the various connectivity options with a PostgreSQL database. In all scenarios, the libpq library is used to communicate with the database server. The RPostgres package links to libpq and uses this API directly to retrieve and ingest data from R via the DBI interface. The adbcpostgresql package also links to libpq but exposes ADBC, which is brought to R with the adbcdrivermanager package. On top of that, the adbi package interacts with arbitrary ADBC drivers (including adbcpostgresql) and exposes the functionality through DBI. The R user has the choice to access the data via data frames or via Arrow. Only when using adbi and the new <code>dbGetQueryArrow()</code>, the implementation will never convert the data to R data frames. In all other cases, a conversion to R data frames will occur.</p>
+<p>The following example illustrates two options to connect with a PostgreSQL database. In both scenarios, the libpq library is used to communicate with the database server. The RPostgres package links to libpq, the PostgreSQL client library, and uses this API directly to retrieve and ingest data from R via the DBI interface. The adbcpostgresql package also links to libpq but exposes ADBC, which is brought to R with the adbcdrivermanager package. On top of that, the adbi package interacts with arbitrary ADBC drivers (including adbcpostgresql) and exposes the functionality through DBI. The R user has the choice to access the data via data frames or via Arrow. When using adbi and the new <code>dbGetQueryArrow()</code>, the implementation will never convert the data to R data frames. This allows, e.g., directly saving the result to a Parquet file, or further processing it with Arrow. In all other cases, a conversion to R data frames will occur.</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://r-dbi.org/blog/dbi-4-1/adbi.png" class="img-fluid figure-img" alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."></p>
 <figcaption>Data flow from libpq to consumers</figcaption>
 </figure>
 </div>
-<p>While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying. The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format. With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database <em>server</em>. This is a promising development. By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database. Thanks to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort!</p>
+<p>While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying. The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format.</p>
+<p>With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database <em>server</em>. This is a promising development. By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database.</p>
+<p>Thanks to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort!</p>
 </section>
 <section id="object-identifiers" class="level3">
 <h3 class="anchored" data-anchor-id="object-identifiers">Object identifiers</h3>
@@ -293,7 +295,7 @@ TODO: Post in rOpenSci slack
 <section id="code-generation" class="level3">
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
 <p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement. In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
-<p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
+<p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
 <p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
 </section>
