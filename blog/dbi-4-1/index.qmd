@@ -45,9 +45,9 @@ Several components simplify the day-to-day work:
 
 - [Aviator](https://www.aviator.co/) helps ensuring always "green" builds on the main branch.
 
-    It is a "click-and-forget" solution that automatically merges pull requests when all checks pass.
+    It is a "click-and-forget" solution that allows queueing a pull request so that it is automatically merged when all checks pass.
     I'm using this for all my packages now, and it has saved me a lot of time.
-    I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which conflicts with 👇
+    I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which is required for fledge. 👇
 
 - [fledge](https://fledge.cynkra.com/) helps automating the release process.
 
@@ -89,7 +89,8 @@ Feedback and contributions are welcome.
 
 Various documentation improvements have been made:
 
-- DBI specification is now version-controlled as Markdown files.
+- The DBI specification is now version-controlled as Markdown files.
+  This allows for more control and a simpler build process.
   Previously has been assembled at package build time from various sources.
 
 - The command execution and data retrieval flow has been clarified in the documentation.
@@ -131,7 +132,7 @@ For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow
 More on that below.
 
 Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
-Thanks to Nicolas Bennett for implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
+Thanks to Nicolas Bennett for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
 
 ## DBI
 
@@ -147,13 +148,14 @@ See the new [vignette on Arrow support in DBI](https://dbi.r-dbi.org/articles/DB
 A default implementation is provided in the DBI package, this means that the new interface can be used with any DBI backend without changes to the backend package.
 Performance and interoperability gains can be achieved by directly implementing the Arrow interface in the backend package, as the new adbi package does.
 
-The following example illustrates the various connectivity options with a PostgreSQL database.
-In all scenarios, the libpq library is used to communicate with the database server.
-The RPostgres package links to libpq and uses this API directly to retrieve and ingest data from R via the DBI interface.
+The following example illustrates two options to connect with a PostgreSQL database.
+In both scenarios, the libpq library is used to communicate with the database server.
+The RPostgres package links to libpq, the PostgreSQL client library, and uses this API directly to retrieve and ingest data from R via the DBI interface.
 The adbcpostgresql package also links to libpq but exposes ADBC, which is brought to R with the adbcdrivermanager package.
 On top of that, the adbi package interacts with arbitrary ADBC drivers (including adbcpostgresql) and exposes the functionality through DBI.
 The R user has the choice to access the data via data frames or via Arrow.
-Only when using adbi and the new `dbGetQueryArrow()`, the implementation will never convert the data to R data frames.
+When using adbi and the new `dbGetQueryArrow()`, the implementation will never convert the data to R data frames.
+This allows, e.g., directly saving the result to a Parquet file, or further processing it with Arrow.
 In all other cases, a conversion to R data frames will occur.
 
 ![Data flow from libpq to consumers](adbi.png){fig-alt="Space divided into two areas, R data frames at the left, Arrow at the right. Two concurrent data flows from libpq to DBI are shown: one via RPostgres through R data frames, one via adbcpostgresql and adbi through Arrow. The two flows merge at the DBI layer. From DBI, consumers can use dbGetQuery() to get data frames, or dbGetQueryArrow() to get Arrow streams."}
@@ -161,9 +163,11 @@ In all other cases, a conversion to R data frames will occur.
 
 While the Arrow path seems to involve more components, it is the most efficient way to interact with the database because the data is threaded through from adbcpostgresql to R without any conversion or even copying.
 The only conversion occurs in adbcpostgresql, when the data returned by libpq is converted to Arrow format.
+
 With FlightSQL, the data will be passed in the Arrow format end to end, this requires support in the database *server*.
 This is a promising development.
 By using adbi or adbcdrivermanager, R users can seamlessly transition to FlightSQL when it becomes available in their database.
+
 Thanks to [Voltron Data](https://voltrondata.com/) for supporting this effort!
 
 
@@ -185,7 +189,7 @@ I consider myself a good developer, and the DBItest package is a prime example o
 In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.
 
 The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends.
-As such, good software engineering practices are actually helpful here and have helped cover many corner cases in the DBI backends.
+As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends.
 Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful.
 Backend developers typically have to read the test code to understand what went wrong.
 And if the actual test code hides between layers of abstraction, this can be a daunting task.
