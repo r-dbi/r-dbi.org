@@ -54,7 +54,7 @@ The standardization on the Arrow data format is a significant advantage:
 For R, the main entry point is the [adbcdrivermanager package](https://arrow.apache.org/adbc/current/r/adbcdrivermanager/).
 It provides the glue between R and the ADBC drivers.
 Because all ADBC drivers use the same Arrow data format, the adbcdrivermanager package can focus on the common functionality, such as connection management, query execution, and data retrieval.
-The [adbcpostgresql package](https://arrow.apache.org/adbc/current/r/adbcpostgresql/) imports the adbcdrivermanager package and provides the PostgreSQL-specific functionality.
+For example, the [adbcpostgresql package](https://arrow.apache.org/adbc/current/r/adbcpostgresql/) imports the adbcdrivermanager package and provides the PostgreSQL-specific functionality, with currently very few additional features.
 
 ## The adbi package
 
@@ -160,7 +160,7 @@ Specifically:
 - To review and manage the tables in our database, the dm package has a concept of a standardized "meta-database", similarly to `INFORMATION_SCHEMA` in SQL.
     (It is currently only used [internally](https://github.com/cynkra/dm/blob/e52ba91e26b04a0332039f8754054cb246542f7e/R/meta.R), but could be exposed.)
 
-- To efficiently access a database from a Shiny app, without blocking the user interface or other sessions handled by the same R process on the server, a helper that wraps ADBC's low-level asynchronous support promises [promises](https://rstudio.github.io/promises/) would be most helpful.
+- To efficiently access a database from a Shiny app, without blocking the user interface or other sessions handled by the same R process on the server, a helper that wraps ADBC's low-level asynchronous support as [promises](https://rstudio.github.io/promises/) would be most helpful.
 
 - The combination of bindings and database meta-information should be sufficient to satisfy virtually all other use cases across all databases.
     In cases where the bindings must provide a functionality that cannot be achieved through the query mechanism, ADBC makes it easy to extend the driver packages (such as the adbcpostgresql R package).
