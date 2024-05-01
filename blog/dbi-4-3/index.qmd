@@ -5,8 +5,8 @@ title: "Using Arrow for data transport"
 description: "What would DBI look like if implemented today?"
 ---
 
-The third and final blog post dives deeply into the new Arrow Database Connectivity (ADBC) project and the adbcdrivermanager package, which provides a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format.
-It also showcases the adbi package, which bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.
+The third and final blog post explores the new Arrow Database Connectivity (ADBC) project, which provides a common interface for database access across ecosystems and database systems, using the Arrow data format as data exchange format.
+The associated R bindings available from the adbcdrivermanager package provide the foundation for the adbi package, bridging the gap between ADBC and DBI, and thereby enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.
 
 _This is a continuation of the [first](https://r-dbi.org/blog/dbi-4-1/) and [second blog post](https://r-dbi.org/blog/dbi-4-2/) in this series._
 
@@ -28,15 +28,15 @@ With every new system, many more connections need to be established.
 A daunting task!
 
 This is where the ADBC project comes in.
-The [Arrow Database Connectivity](https://arrow.apache.org/adbc/) project aims to provide a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format.
-Now, the big picture is greatly simplified:
+The [Arrow Database Connectivity](https://arrow.apache.org/adbc/) project aims to provide a common interface for database access across ecosystems, using the Arrow data format as data exchange format.
+This way, the above graphic can be simplified:
 
 ![Access to all databases from all ecosystems through ADBC](star.png){fig-alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. ADBC in the middle, with one arrow from each database to ADBC and from ADBC to each ecosystem."}
 
 This isn't an [entirely new idea](https://xkcd.com/927/).
 ODBC (Open Database Connectivity) and JDBC (Java Database Connectivity) have been around for a long time, with very similar goals.
 The new implementation can build on the lessons learned from these projects.
-The standardization on the Arrow data format is a significant advantage:
+The standardization around the Arrow data format is a significant advantage:
 
 - Most data types typically supported by databases are supported directly, and the format is extensible.
 
@@ -60,7 +60,7 @@ For example, the [adbcpostgresql package](https://arrow.apache.org/adbc/current/
 
 Because ADBC is a new project, it doesn't yet cover all databases and ecosystems.
 To simplify the transition, the adbi package bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.
-Thanks to Voltron Data for the collaboration on this project and for the support in developing the adbi package and the DBI extension.
+Thanks to [Voltron Data](https://voltrondata.com/) for the collaboration on this project and for the support in developing the adbi package and the DBI extension.
 
 The adbi package is available on CRAN and provides the following features:
 
@@ -68,27 +68,26 @@ The adbi package is available on CRAN and provides the following features:
 
 - Data retrieval as data frames or Arrow, side by side, on the same connection object, using the new generics defined by DBI.
 
-Using ADBC through adbi will not improve performance, but it will facilitate the switch to using Arrow as a data interchange format.
-Similarly, the DBI package provides a default implementation for the new Arrow generics, which is not optimized for performance but can be used to directly convert data provided by DBI backends to Arrow.
+The DBI package provides a default implementation for the new Arrow generics, which is not optimized for performance but can be used to directly convert data provided by DBI backends to Arrow.
 However, by using adbi with the new DBI generics such as `dbGetQueryArrow()` or `dbFetchArrow()`, the data is never converted to a data frame, and the Arrow data format is used directly.
 See [the relevant section in the first blog post](https://r-dbi.org/blog/dbi-4-1/#integration-with-arrow) for an example using PostgreSQL.
 
 ## Reimagining DBI
 
-The [dbi3 repository](https://github.com/r-dbi/dbi3/) contains little but an issue tracker and a few scripts.
-The issues were moved from the various repositories in the [r-dbi organization](https://github.com/r-dbi) to be picked up for a reimagining of the database interface.
+The [dbi3 repository](https://github.com/r-dbi/dbi3/) currently only hosts an issue tracker and a couple of scripts.
+Several issues were moved from other repositories in the [r-dbi organization](https://github.com/r-dbi), with the intention of shaping the reimagining of a more modern database interface.
 With the new ADBC standard and the adbi package, it seemed worthwhile to revisit the responsibilities of a database interface in R.
 
 The [README](https://github.com/r-dbi/dbi3?tab=readme-ov-file#issues-and-solutions) now contains a categorization of the issues.
-It turns out that a good third of the issues can now be easily solved with ADBC and the adbcdrivermanager package, or a solution on top of ADBC/adbcdrivermanager is the best way to go.
-A few issues seem to belong in other packages such as dbplyr or dm.
-The remaining issues, again about a third, are not actionable at this time.
-The resolution depends on whether the ADBC project will be successful and whether the R community will adopt it.
-To clear this path, DBI will keep and improve compatibility with ADBC and adbi.
+It turns out that roughly a third of the issues can be addressed with ADBC and the adbcdrivermanager package, or a solution building on ADBC/adbcdrivermanager.
+Another thrid of the issues seem to belong in other packages such as dbplyr or dm.
+The the final third are issues that are not actionable at this time.
+The way forward therefore depends to a large extent on whether the ADBC project will be successful and whether the R community will adopt it.
+To help with this, DBI will keep and improve compatibility with ADBC and adbi.
 
 To bring adbcdrivermanager on par with DBI, a few issues need to be addressed:
 
-- SQL generation: can dbplyr be connected to ADBC, either directly or via adbi?
+- SQL generation: how can dbplyr be connected to ADBC, either directly or via adbi?
 
 - Usability: the adbcdrivermanager package looks more like an "implementer's interface", a convenience "user's interface" wrapper or extension might make it easier to use.
     More on that below.
@@ -106,36 +105,36 @@ What is core functionality, what can be provided by addon packages, and what use
 
 As an R user, I need to:
 
-- connect to our database
+- connect to a database,
 
-- read a table from our database
+- run a query,
 
-- run this query on our database
+- read the resulting table,
 
-- write my data to our database
+- create a new table,
 
-- create a new table in our database
+- write data to a table.
 
 I might also need to:
 
-- write complex queries that involve multiple tables
+- create complex queries that involve multiple tables,
 
-- review and manage the tables in our database
+- access metadata such as table and column names, column types, etc.,
 
-- access a database from a Shiny app
+- read data asynchronously.
 
 The adbcdrivermanager package with the ADBC drivers tick almost all boxes from the "I need to" list, but none of the boxes from the "I might also need to" list.
 It does so by focusing on the following functionality:
 
-- simple connect and disconnect based on credentials
+- simple connect and disconnect based on credentials,
 
-- data type mapping between Arrow and the native database driver
+- data type mapping between Arrow and the native database driver,
 
-- data transfer in both directions
+- data transfer in both directions,
 
-- emission of queries, with support for placeholders
+- execution of queries, with support for placeholders,
 
-- reporting success or failure of queries and other operations
+- reporting success or failure of queries and other operations.
 
 This shows a good separation of concerns: the adbcdrivermanager package provides the core functionality ("bindings"), and other code can build on top of that to provide more advanced features ("user interface").
 
@@ -179,7 +178,7 @@ Does the adbi package work for you?
 What would a good "user interface" package look like for ADBC?
 Use the [adbi issue tracker](https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) to get in touch!
 
-Thanks to Maëlle Salmon for her help with the blog post, and to Voltron Data for supporting this effort.
+Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle)) and Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for their help with the blog post, and to [Voltron Data](https://voltrondata.com/) for supporting this effort.
 
 <!--
 TODO: Bump DBItest

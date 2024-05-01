@@ -97,7 +97,7 @@ Various documentation improvements have been made:
   This has been a common source of confusion for new users.
 
 - All packages now use the new pkgdown documentation template at <https://github.com/r-dbi/dbitemplate>, and the website at <https://r-dbi.org> is now built using Quarto.
-  Thanks to Maëlle Salmon!
+  Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle))!
 
 ### Move to cpp11
 
@@ -132,7 +132,7 @@ For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow
 More on that below.
 
 Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
-Thanks to Nicolas Bennett for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
+Thanks to Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for the implementation and the wonderful collaboration, and to [Voltron Data](https://voltrondata.com/) for supporting this effort.
 
 ## DBI
 
@@ -185,7 +185,6 @@ See the [change log](https://dbitest.r-dbi.org/news/index.html) for details.
 ### Code generation
 
 [Why good developers write bad unit tests](https://mtlynch.io/good-developers-bad-tests/)?
-I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement.
 In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.
 
 The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends.
@@ -219,39 +218,39 @@ A new tweak `allow_na_rows_affected` has been added to support `NA` values retur
 
 ## Backend packages: RSQLite, RMariaDB, RPostgres
 
-RSQLite has seen a minor update, the current version is 2.3.6.
-See the [change log](https://rsqlite.r-dbi.org/news/index.html) for details.
+- RSQLite has seen a minor update, the current version is 2.3.6.
+    See the [change log](https://rsqlite.r-dbi.org/news/index.html) for details.
 
-The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN.
-The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it.
-For this reason, the known authors of SQLite have been added to the `DESCRIPTION` file.
-This process allows quicker updates of SQLite than if installing from [OS package repositories](https://repology.org/project/sqlite/versions), and precise control of the underlying SQLite version used in a project.
+    The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN.
+    The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it.
+    For this reason, the known authors of SQLite have been added to the `DESCRIPTION` file.
+    This process allows quicker updates of SQLite than if installing from [OS package repositories](https://repology.org/project/sqlite/versions), and precise control of the underlying SQLite version used in a project.
 
-Other minor changes include support for the icpc compiler, and a new `sqliteIsTransacting()` function that returns if a transaction is active on the current connection.
+    Other minor changes include support for the icpc compiler, and a new `sqliteIsTransacting()` function that returns if a transaction is active on the current connection.
 
-RMariaDB has also seen a minor update.
-The current version is 1.3.1.
-See the [change log](https://rmariadb.r-dbi.org/news/index.html) for details.
+- RMariaDB has also seen a minor update.
+    The current version is 1.3.1.
+    See the [change log](https://rmariadb.r-dbi.org/news/index.html) for details.
 
-MariaDB is a fork of MySQL, and both packages continue to evolve.
-There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences.
-Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 and server description does not contain `"MariaDB"`).
-The new `mysql` argument to `dbConnect()` allows overriding the autodetection.
-This means that code can behave differently depending on the underlying database server.
+    MariaDB is a fork of MySQL, and both packages continue to evolve.
+    There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences.
+    Connections now inherit from `"MySQLConnection"` if a MySQL server is detected (server version \< 10.0 and server description does not contain `"MariaDB"`).
+    The new `mysql` argument to `dbConnect()` allows overriding the autodetection.
+    This means that code can behave differently depending on the underlying database server.
 
-Similarly to RPostgres and odbc, RMariaDB now supports `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`.
-This sends the query to the server without preparing it, which is mandatory for some queries.
-For this to work, the connection needs to be opened with the `CLIENT_MULTI_STATEMENTS` flag.
+    Similarly to RPostgres and odbc, RMariaDB now supports `dbSendStatement(immediate = TRUE)` and `dbExecute(immediate = TRUE)`.
+    This sends the query to the server without preparing it, which is mandatory for some queries.
+    For this to work, the connection needs to be opened with the `CLIENT_MULTI_STATEMENTS` flag.
 
-Other changes include:
+    Other changes include:
 
-- Support for `TIME` columns with subsecond precision.
+    - Support for `TIME` columns with subsecond precision.
 
-- The use of strings as default for JSON and all unknown column types.
+    - The use of strings as default for JSON and all unknown column types.
 
-RPostgres has seen a minor update, mostly focusing on maintenance.
-The current version is 1.4.6.
-See the [change log](https://rpostgres.r-dbi.org/news/index.html) for details.
+- RPostgres has seen a minor update, mostly focusing on maintenance.
+    The current version is 1.4.6.
+    See the [change log](https://rpostgres.r-dbi.org/news/index.html) for details.
 
 ## Conclusion
 
@@ -261,7 +260,7 @@ Happy querying!
 
 ## Acknowledgments
 
-Thanks to Maëlle Salmon for her help with the blog post, and to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
+Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle)) and Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for their help with the blog post, and to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
 
 - DBI: [&#x0040;apalacio9502](https://github.com/apalacio9502), [&#x0040;asadow](https://github.com/asadow), [&#x0040;bcorwin](https://github.com/bcorwin), [&#x0040;capitantyler](https://github.com/capitantyler), [&#x0040;chrisdane](https://github.com/chrisdane), [&#x0040;eauleaf](https://github.com/eauleaf), [&#x0040;eitsupi](https://github.com/eitsupi), [&#x0040;eriksquires](https://github.com/eriksquires), [&#x0040;fnavarro94](https://github.com/fnavarro94), [&#x0040;GitHunter0](https://github.com/GitHunter0), [&#x0040;hadley](https://github.com/hadley), [&#x0040;hannes101](https://github.com/hannes101), [&#x0040;Jay123ub](https://github.com/Jay123ub), [&#x0040;jd4ds](https://github.com/jd4ds), [&#x0040;kelseyroberts](https://github.com/kelseyroberts), [&#x0040;latot](https://github.com/latot), [&#x0040;maelle](https://github.com/maelle), [&#x0040;matthiasgomolka](https://github.com/matthiasgomolka), [&#x0040;mgirlich](https://github.com/mgirlich), [&#x0040;mmuurr](https://github.com/mmuurr), [&#x0040;nbenn](https://github.com/nbenn), [&#x0040;philibe](https://github.com/philibe), [&#x0040;pnacht](https://github.com/pnacht), [&#x0040;r2evans](https://github.com/r2evans), [&#x0040;renkun-ken](https://github.com/renkun-ken), [&#x0040;salim-b](https://github.com/salim-b), [&#x0040;scottfrechette](https://github.com/scottfrechette), and [&#x0040;tzakharko](https://github.com/tzakharko).
 
