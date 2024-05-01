@@ -231,7 +231,7 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li><p>The DBI specification is now version-controlled as Markdown files. This allows for more control and a simpler build process. Previously has been assembled at package build time from various sources.</p></li>
 <li><p>The command execution and data retrieval flow has been clarified in the documentation. This has been a common source of confusion for new users.</p></li>
-<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon!</p></li>
+<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>)!</p></li>
 </ul>
 </section>
 <section id="move-to-cpp11" class="level3">
@@ -258,7 +258,7 @@ ul.task-list li input[type="checkbox"] {
 <p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
 </blockquote>
 <p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. More on that below.</p>
-<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
+<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for the implementation and the wonderful collaboration, and to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort.</p>
 </section>
 <section id="dbi" class="level2">
 <h2 class="anchored" data-anchor-id="dbi">DBI</h2>
@@ -288,7 +288,7 @@ ul.task-list li input[type="checkbox"] {
 <p>The DBItest package has seen a minor update to 1.8.1. See the <a href="https://dbitest.r-dbi.org/news/index.html">change log</a> for details.</p>
 <section id="code-generation" class="level3">
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
-<p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement. In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
+<p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
 <p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
 <p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
@@ -305,18 +305,20 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="backend-packages-rsqlite-rmariadb-rpostgres" class="level2">
 <h2 class="anchored" data-anchor-id="backend-packages-rsqlite-rmariadb-rpostgres">Backend packages: RSQLite, RMariaDB, RPostgres</h2>
-<p>RSQLite has seen a minor update, the current version is 2.3.6. See the <a href="https://rsqlite.r-dbi.org/news/index.html">change log</a> for details.</p>
+<ul>
+<li><p>RSQLite has seen a minor update, the current version is 2.3.6. See the <a href="https://rsqlite.r-dbi.org/news/index.html">change log</a> for details.</p>
 <p>The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN. The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it. For this reason, the known authors of SQLite have been added to the <code>DESCRIPTION</code> file. This process allows quicker updates of SQLite than if installing from <a href="https://repology.org/project/sqlite/versions">OS package repositories</a>, and precise control of the underlying SQLite version used in a project.</p>
-<p>Other minor changes include support for the icpc compiler, and a new <code>sqliteIsTransacting()</code> function that returns if a transaction is active on the current connection.</p>
-<p>RMariaDB has also seen a minor update. The current version is 1.3.1. See the <a href="https://rmariadb.r-dbi.org/news/index.html">change log</a> for details.</p>
+<p>Other minor changes include support for the icpc compiler, and a new <code>sqliteIsTransacting()</code> function that returns if a transaction is active on the current connection.</p></li>
+<li><p>RMariaDB has also seen a minor update. The current version is 1.3.1. See the <a href="https://rmariadb.r-dbi.org/news/index.html">change log</a> for details.</p>
 <p>MariaDB is a fork of MySQL, and both packages continue to evolve. There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences. Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 and server description does not contain <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code>dbConnect()</code> allows overriding the autodetection. This means that code can behave differently depending on the underlying database server.</p>
 <p>Similarly to RPostgres and odbc, RMariaDB now supports <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>. This sends the query to the server without preparing it, which is mandatory for some queries. For this to work, the connection needs to be opened with the <code>CLIENT_MULTI_STATEMENTS</code> flag.</p>
 <p>Other changes include:</p>
 <ul>
 <li><p>Support for <code>TIME</code> columns with subsecond precision.</p></li>
 <li><p>The use of strings as default for JSON and all unknown column types.</p></li>
+</ul></li>
+<li><p>RPostgres has seen a minor update, mostly focusing on maintenance. The current version is 1.4.6. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for details.</p></li>
 </ul>
-<p>RPostgres has seen a minor update, mostly focusing on maintenance. The current version is 1.4.6. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for details.</p>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -324,7 +326,7 @@ ul.task-list li input[type="checkbox"] {
 </section>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
-<p>Thanks to Maëlle Salmon for her help with the blog post, and to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
+<p>Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>) and Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for their help with the blog post, and to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
 <ul>
 <li><p>DBI: <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/bcorwin">@bcorwin</a>, <a href="https://github.com/capitantyler">@capitantyler</a>, <a href="https://github.com/chrisdane">@chrisdane</a>, <a href="https://github.com/eauleaf">@eauleaf</a>, <a href="https://github.com/eitsupi">@eitsupi</a>, <a href="https://github.com/eriksquires">@eriksquires</a>, <a href="https://github.com/fnavarro94">@fnavarro94</a>, <a href="https://github.com/GitHunter0">@GitHunter0</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/hannes101">@hannes101</a>, <a href="https://github.com/Jay123ub">@Jay123ub</a>, <a href="https://github.com/jd4ds">@jd4ds</a>, <a href="https://github.com/kelseyroberts">@kelseyroberts</a>, <a href="https://github.com/latot">@latot</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/matthiasgomolka">@matthiasgomolka</a>, <a href="https://github.com/mgirlich">@mgirlich</a>, <a href="https://github.com/mmuurr">@mmuurr</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/philibe">@philibe</a>, <a href="https://github.com/pnacht">@pnacht</a>, <a href="https://github.com/r2evans">@r2evans</a>, <a href="https://github.com/renkun-ken">@renkun-ken</a>, <a href="https://github.com/salim-b">@salim-b</a>, <a href="https://github.com/scottfrechette">@scottfrechette</a>, and <a href="https://github.com/tzakharko">@tzakharko</a>.</p></li>
 <li><p>DBItest: <a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/detule">@detule</a>, <a href="https://github.com/dpprdan">@dpprdan</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/MichaelChirico">@MichaelChirico</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/psychelzh">@psychelzh</a>, and <a href="https://github.com/TSchiefer">@TSchiefer</a>.</p></li>

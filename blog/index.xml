@@ -20,7 +20,7 @@
 
 
 
-<p>The third and final blog post dives deeply into the new Arrow Database Connectivity (ADBC) project and the adbcdrivermanager package, which provides a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format. It also showcases the adbi package, which bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.</p>
+<p>The third and final blog post explores the new Arrow Database Connectivity (ADBC) project, which provides a common interface for database access across ecosystems and database systems, using the Arrow data format as data exchange format. The associated R bindings available from the adbcdrivermanager package provide the foundation for the adbi package, bridging the gap between ADBC and DBI, and thereby enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.</p>
 <p><em>This is a continuation of the <a href="https://r-dbi.org/blog/dbi-4-1/">first</a> and <a href="https://r-dbi.org/blog/dbi-4-2/">second blog post</a> in this series.</em></p>
 <section id="a-new-database-standard" class="level2">
 <h2 class="anchored" data-anchor-id="a-new-database-standard">A new database standard?</h2>
@@ -32,14 +32,14 @@
 </figure>
 </div>
 <p>Each line represents a software package to develop and maintain, following changes in the database system and the target ecosystem. And, of course, the list of databases and ecosystems is not exhaustive. With every new system, many more connections need to be established. A daunting task!</p>
-<p>This is where the ADBC project comes in. The <a href="https://arrow.apache.org/adbc/">Arrow Database Connectivity</a> project aims to provide a common interface for database access across ecosystems, using the Arrow data format as the common data exchange format. Now, the big picture is greatly simplified:</p>
+<p>This is where the ADBC project comes in. The <a href="https://arrow.apache.org/adbc/">Arrow Database Connectivity</a> project aims to provide a common interface for database access across ecosystems, using the Arrow data format as data exchange format. This way, the above graphic can be simplified:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
 <p><img src="https://r-dbi.org/blog/dbi-4-3/star.png" class="img-fluid figure-img" alt="Two boxes, Databases at the top, ecosystems at the bottom. PostgreSQL, SQL Server, MariaDB, Oracle, Clickhouse in the top box, R, Python, Julia, Excel, Tableau, and others in the bottom box. ADBC in the middle, with one arrow from each database to ADBC and from ADBC to each ecosystem."></p>
 <figcaption>Access to all databases from all ecosystems through ADBC</figcaption>
 </figure>
 </div>
-<p>This isn’t an <a href="https://xkcd.com/927/">entirely new idea</a>. ODBC (Open Database Connectivity) and JDBC (Java Database Connectivity) have been around for a long time, with very similar goals. The new implementation can build on the lessons learned from these projects. The standardization on the Arrow data format is a significant advantage:</p>
+<p>This isn’t an <a href="https://xkcd.com/927/">entirely new idea</a>. ODBC (Open Database Connectivity) and JDBC (Java Database Connectivity) have been around for a long time, with very similar goals. The new implementation can build on the lessons learned from these projects. The standardization around the Arrow data format is a significant advantage:</p>
 <ul>
 <li><p>Most data types typically supported by databases are supported directly, and the format is extensible.</p></li>
 <li><p>The same data format can be used across ecosystems, avoiding conversions and copies.</p></li>
@@ -51,21 +51,21 @@
 </section>
 <section id="the-adbi-package" class="level2">
 <h2 class="anchored" data-anchor-id="the-adbi-package">The adbi package</h2>
-<p>Because ADBC is a new project, it doesn’t yet cover all databases and ecosystems. To simplify the transition, the adbi package bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers. Thanks to Voltron Data for the collaboration on this project and for the support in developing the adbi package and the DBI extension.</p>
+<p>Because ADBC is a new project, it doesn’t yet cover all databases and ecosystems. To simplify the transition, the adbi package bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers. Thanks to <a href="https://voltrondata.com/">Voltron Data</a> for the collaboration on this project and for the support in developing the adbi package and the DBI extension.</p>
 <p>The adbi package is available on CRAN and provides the following features:</p>
 <ul>
 <li><p>Access to ADBC drivers through the DBI interface.</p></li>
 <li><p>Data retrieval as data frames or Arrow, side by side, on the same connection object, using the new generics defined by DBI.</p></li>
 </ul>
-<p>Using ADBC through adbi will not improve performance, but it will facilitate the switch to using Arrow as a data interchange format. Similarly, the DBI package provides a default implementation for the new Arrow generics, which is not optimized for performance but can be used to directly convert data provided by DBI backends to Arrow. However, by using adbi with the new DBI generics such as <code>dbGetQueryArrow()</code> or <code>dbFetchArrow()</code>, the data is never converted to a data frame, and the Arrow data format is used directly. See <a href="https://r-dbi.org/blog/dbi-4-1/#integration-with-arrow">the relevant section in the first blog post</a> for an example using PostgreSQL.</p>
+<p>The DBI package provides a default implementation for the new Arrow generics, which is not optimized for performance but can be used to directly convert data provided by DBI backends to Arrow. However, by using adbi with the new DBI generics such as <code>dbGetQueryArrow()</code> or <code>dbFetchArrow()</code>, the data is never converted to a data frame, and the Arrow data format is used directly. See <a href="https://r-dbi.org/blog/dbi-4-1/#integration-with-arrow">the relevant section in the first blog post</a> for an example using PostgreSQL.</p>
 </section>
 <section id="reimagining-dbi" class="level2">
 <h2 class="anchored" data-anchor-id="reimagining-dbi">Reimagining DBI</h2>
-<p>The <a href="https://github.com/r-dbi/dbi3/">dbi3 repository</a> contains little but an issue tracker and a few scripts. The issues were moved from the various repositories in the <a href="https://github.com/r-dbi">r-dbi organization</a> to be picked up for a reimagining of the database interface. With the new ADBC standard and the adbi package, it seemed worthwhile to revisit the responsibilities of a database interface in R.</p>
-<p>The <a href="https://github.com/r-dbi/dbi3?tab=readme-ov-file#issues-and-solutions">README</a> now contains a categorization of the issues. It turns out that a good third of the issues can now be easily solved with ADBC and the adbcdrivermanager package, or a solution on top of ADBC/adbcdrivermanager is the best way to go. A few issues seem to belong in other packages such as dbplyr or dm. The remaining issues, again about a third, are not actionable at this time. The resolution depends on whether the ADBC project will be successful and whether the R community will adopt it. To clear this path, DBI will keep and improve compatibility with ADBC and adbi.</p>
+<p>The <a href="https://github.com/r-dbi/dbi3/">dbi3 repository</a> currently only hosts an issue tracker and a couple of scripts. Several issues were moved from other repositories in the <a href="https://github.com/r-dbi">r-dbi organization</a>, with the intention of shaping the reimagining of a more modern database interface. With the new ADBC standard and the adbi package, it seemed worthwhile to revisit the responsibilities of a database interface in R.</p>
+<p>The <a href="https://github.com/r-dbi/dbi3?tab=readme-ov-file#issues-and-solutions">README</a> now contains a categorization of the issues. It turns out that roughly a third of the issues can be addressed with ADBC and the adbcdrivermanager package, or a solution building on ADBC/adbcdrivermanager. Another thrid of the issues seem to belong in other packages such as dbplyr or dm. The the final third are issues that are not actionable at this time. The way forward therefore depends to a large extent on whether the ADBC project will be successful and whether the R community will adopt it. To help with this, DBI will keep and improve compatibility with ADBC and adbi.</p>
 <p>To bring adbcdrivermanager on par with DBI, a few issues need to be addressed:</p>
 <ul>
-<li><p>SQL generation: can dbplyr be connected to ADBC, either directly or via adbi?</p></li>
+<li><p>SQL generation: how can dbplyr be connected to ADBC, either directly or via adbi?</p></li>
 <li><p>Usability: the adbcdrivermanager package looks more like an “implementer’s interface”, a convenience “user’s interface” wrapper or extension might make it easier to use. More on that below.</p></li>
 <li><p>Test suite: should a test package similarly to DBItest be created?</p></li>
 <li><p>Interoperability with existing DBI backends: can a generic ADBC driver be created so that any existing DBI backend can be used with ADBC? A prime candidate would be the odbc package, this would add support for all ODBC drivers to ADBC via R, until a native ADBC driver is available.</p></li>
@@ -77,25 +77,25 @@
 <p>Let’s step back a little to better understand the responsibilities of DBI and the various other components. What is core functionality, what can be provided by addon packages, and what use cases should be left for the end user to implement?</p>
 <p>As an R user, I need to:</p>
 <ul>
-<li><p>connect to our database</p></li>
-<li><p>read a table from our database</p></li>
-<li><p>run this query on our database</p></li>
-<li><p>write my data to our database</p></li>
-<li><p>create a new table in our database</p></li>
+<li><p>connect to a database,</p></li>
+<li><p>run a query,</p></li>
+<li><p>read the resulting table,</p></li>
+<li><p>create a new table,</p></li>
+<li><p>write data to a table.</p></li>
 </ul>
 <p>I might also need to:</p>
 <ul>
-<li><p>write complex queries that involve multiple tables</p></li>
-<li><p>review and manage the tables in our database</p></li>
-<li><p>access a database from a Shiny app</p></li>
+<li><p>create complex queries that involve multiple tables,</p></li>
+<li><p>access metadata such as table and column names, column types, etc.,</p></li>
+<li><p>read data asynchronously.</p></li>
 </ul>
 <p>The adbcdrivermanager package with the ADBC drivers tick almost all boxes from the “I need to” list, but none of the boxes from the “I might also need to” list. It does so by focusing on the following functionality:</p>
 <ul>
-<li><p>simple connect and disconnect based on credentials</p></li>
-<li><p>data type mapping between Arrow and the native database driver</p></li>
-<li><p>data transfer in both directions</p></li>
-<li><p>emission of queries, with support for placeholders</p></li>
-<li><p>reporting success or failure of queries and other operations</p></li>
+<li><p>simple connect and disconnect based on credentials,</p></li>
+<li><p>data type mapping between Arrow and the native database driver,</p></li>
+<li><p>data transfer in both directions,</p></li>
+<li><p>execution of queries, with support for placeholders,</p></li>
+<li><p>reporting success or failure of queries and other operations.</p></li>
 </ul>
 <p>This shows a good separation of concerns: the adbcdrivermanager package provides the core functionality (“bindings”), and other code can build on top of that to provide more advanced features (“user interface”).</p>
 <p>The bindings alone are not enough to provide a good user experience. As an example, there are now several ways to access a PostgreSQL database from R:</p>
@@ -118,7 +118,7 @@
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
 <p>With the implementation of adbi and the new DBI generics, the foundation for adopting ADBC has been laid. To future-proof ADBC and adbcdrivermanager, a good exercise might be to attempt implementing dbplyr for ADBC connection building directly on adbcdrivermanager, bypassing DBI. This will uncover missing pieces and clarify what kind of utilities is needed to make it a pleasant exercise to work with databases through ADBC in R. DBI will remain supported, but new development will be restricted to supporting the “I need to” list above.</p>
 <p>Does the adbi package work for you? What would a good “user interface” package look like for ADBC? Use the <a href="https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">adbi issue tracker</a> to get in touch!</p>
-<p>Thanks to Maëlle Salmon for her help with the blog post, and to Voltron Data for supporting this effort.</p>
+<p>Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>) and Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for their help with the blog post, and to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort.</p>
 <!--
 TODO: Bump DBItest
 
@@ -173,7 +173,7 @@ TODO: Post in rOpenSci slack
 <h2 class="anchored" data-anchor-id="moving-forward">Moving forward</h2>
 <p>Unfortunately, I’m using RPostgres, RMariaDB and RSQLite only in a lab setting, not in production. The new <a href="https://github.com/r-dbi/docker">docker</a> repository is a step towards making it easier to test various combinations of database servers and client libraries. I hope that this will make it easier to experience what using these tools in production is like, perhaps in combination with <a href="https://medium.com/@kazushi/simulate-high-latency-network-using-docker-containerand-tc-commands-a3e503ea4307">increasing network latency</a> and <a href="https://www.sitespeed.io/documentation/throttle/">throttling bandwidth</a>.</p>
 <p>No lab setup can replace the experience of using these tools in production. To effectively maintain DBI and the backend packages, I rely on contributed issues and pull requests. I’m grateful for every issue opened, even if some may be not actionable for me. Luckily, for a substantial number of the issues, the first response actally comes from a contributor! If you are interested in helping out, consider <a href="https://docs.github.com/en/account-and-profile/managing-subscriptions-and-notifications-on-github/setting-up-notifications/configuring-notifications#configuring-your-watch-settings-for-an-individual-repository">watching</a> one or several repositories in the <a href="https://github.com/r-dbi/">r-dbi organization</a>.</p>
-<p>Thanks to Maëlle Salmon for her help with the blog post.</p>
+<p>Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>) and Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for their help with the blog post.</p>
 
 
 </section>
@@ -237,7 +237,7 @@ TODO: Post in rOpenSci slack
 <ul>
 <li><p>The DBI specification is now version-controlled as Markdown files. This allows for more control and a simpler build process. Previously has been assembled at package build time from various sources.</p></li>
 <li><p>The command execution and data retrieval flow has been clarified in the documentation. This has been a common source of confusion for new users.</p></li>
-<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon!</p></li>
+<li><p>All packages now use the new pkgdown documentation template at <a href="https://github.com/r-dbi/dbitemplate" class="uri">https://github.com/r-dbi/dbitemplate</a>, and the website at <a href="https://r-dbi.org" class="uri">https://r-dbi.org</a> is now built using Quarto. Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>)!</p></li>
 </ul>
 </section>
 <section id="move-to-cpp11" class="level3">
@@ -264,7 +264,7 @@ TODO: Post in rOpenSci slack
 <p>an API standard for database access libraries that uses Arrow for result sets and query parameters.</p>
 </blockquote>
 <p>The adbi package allows existing code that uses DBI to seamlessly interact with the new ADBC drivers, but this will not improve performance. To facilitate the switch to using Arrow as a data interchange format, adbi supports access via data frames and Arrow side by side, on the same connection object, using the new generics defined by DBI. For example, with <code>dbGetQueryArrow()</code>, the result set is passed to R as an Arrow stream, bypassing the expensive conversion to data frames. More on that below.</p>
-<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.</p>
+<p>Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all “pass” with the package generated from the template and help guide the development process. Thanks to Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for the implementation and the wonderful collaboration, and to <a href="https://voltrondata.com/">Voltron Data</a> for supporting this effort.</p>
 </section>
 <section id="dbi" class="level2">
 <h2 class="anchored" data-anchor-id="dbi">DBI</h2>
@@ -294,7 +294,7 @@ TODO: Post in rOpenSci slack
 <p>The DBItest package has seen a minor update to 1.8.1. See the <a href="https://dbitest.r-dbi.org/news/index.html">change log</a> for details.</p>
 <section id="code-generation" class="level3">
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
-<p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? I consider myself a good developer, and the DBItest package is a prime example of tests with room for improvement. In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
+<p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
 <p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
 <p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
@@ -311,18 +311,20 @@ TODO: Post in rOpenSci slack
 </section>
 <section id="backend-packages-rsqlite-rmariadb-rpostgres" class="level2">
 <h2 class="anchored" data-anchor-id="backend-packages-rsqlite-rmariadb-rpostgres">Backend packages: RSQLite, RMariaDB, RPostgres</h2>
-<p>RSQLite has seen a minor update, the current version is 2.3.6. See the <a href="https://rsqlite.r-dbi.org/news/index.html">change log</a> for details.</p>
+<ul>
+<li><p>RSQLite has seen a minor update, the current version is 2.3.6. See the <a href="https://rsqlite.r-dbi.org/news/index.html">change log</a> for details.</p>
 <p>The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN. The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it. For this reason, the known authors of SQLite have been added to the <code>DESCRIPTION</code> file. This process allows quicker updates of SQLite than if installing from <a href="https://repology.org/project/sqlite/versions">OS package repositories</a>, and precise control of the underlying SQLite version used in a project.</p>
-<p>Other minor changes include support for the icpc compiler, and a new <code>sqliteIsTransacting()</code> function that returns if a transaction is active on the current connection.</p>
-<p>RMariaDB has also seen a minor update. The current version is 1.3.1. See the <a href="https://rmariadb.r-dbi.org/news/index.html">change log</a> for details.</p>
+<p>Other minor changes include support for the icpc compiler, and a new <code>sqliteIsTransacting()</code> function that returns if a transaction is active on the current connection.</p></li>
+<li><p>RMariaDB has also seen a minor update. The current version is 1.3.1. See the <a href="https://rmariadb.r-dbi.org/news/index.html">change log</a> for details.</p>
 <p>MariaDB is a fork of MySQL, and both packages continue to evolve. There are small but important differences between the two DBMSs, and the RMariaDB package is now more explicit about the differences. Connections now inherit from <code>"MySQLConnection"</code> if a MySQL server is detected (server version &lt; 10.0 and server description does not contain <code>"MariaDB"</code>). The new <code>mysql</code> argument to <code>dbConnect()</code> allows overriding the autodetection. This means that code can behave differently depending on the underlying database server.</p>
 <p>Similarly to RPostgres and odbc, RMariaDB now supports <code>dbSendStatement(immediate = TRUE)</code> and <code>dbExecute(immediate = TRUE)</code>. This sends the query to the server without preparing it, which is mandatory for some queries. For this to work, the connection needs to be opened with the <code>CLIENT_MULTI_STATEMENTS</code> flag.</p>
 <p>Other changes include:</p>
 <ul>
 <li><p>Support for <code>TIME</code> columns with subsecond precision.</p></li>
 <li><p>The use of strings as default for JSON and all unknown column types.</p></li>
+</ul></li>
+<li><p>RPostgres has seen a minor update, mostly focusing on maintenance. The current version is 1.4.6. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for details.</p></li>
 </ul>
-<p>RPostgres has seen a minor update, mostly focusing on maintenance. The current version is 1.4.6. See the <a href="https://rpostgres.r-dbi.org/news/index.html">change log</a> for details.</p>
 </section>
 <section id="conclusion" class="level2">
 <h2 class="anchored" data-anchor-id="conclusion">Conclusion</h2>
@@ -330,7 +332,7 @@ TODO: Post in rOpenSci slack
 </section>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
-<p>Thanks to Maëlle Salmon for her help with the blog post, and to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
+<p>Thanks to Maëlle Salmon (<a href="https://github.com/maelle">@maelle</a>) and Nicolas Bennett (<a href="https://github.com/nbenn">@nbenn</a>) for their help with the blog post, and to the numerous contributors to the packages in the “Maintaining DBI” project in 2022 and 2023:</p>
 <ul>
 <li><p>DBI: <a href="https://github.com/apalacio9502">@apalacio9502</a>, <a href="https://github.com/asadow">@asadow</a>, <a href="https://github.com/bcorwin">@bcorwin</a>, <a href="https://github.com/capitantyler">@capitantyler</a>, <a href="https://github.com/chrisdane">@chrisdane</a>, <a href="https://github.com/eauleaf">@eauleaf</a>, <a href="https://github.com/eitsupi">@eitsupi</a>, <a href="https://github.com/eriksquires">@eriksquires</a>, <a href="https://github.com/fnavarro94">@fnavarro94</a>, <a href="https://github.com/GitHunter0">@GitHunter0</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/hannes101">@hannes101</a>, <a href="https://github.com/Jay123ub">@Jay123ub</a>, <a href="https://github.com/jd4ds">@jd4ds</a>, <a href="https://github.com/kelseyroberts">@kelseyroberts</a>, <a href="https://github.com/latot">@latot</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/matthiasgomolka">@matthiasgomolka</a>, <a href="https://github.com/mgirlich">@mgirlich</a>, <a href="https://github.com/mmuurr">@mmuurr</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/philibe">@philibe</a>, <a href="https://github.com/pnacht">@pnacht</a>, <a href="https://github.com/r2evans">@r2evans</a>, <a href="https://github.com/renkun-ken">@renkun-ken</a>, <a href="https://github.com/salim-b">@salim-b</a>, <a href="https://github.com/scottfrechette">@scottfrechette</a>, and <a href="https://github.com/tzakharko">@tzakharko</a>.</p></li>
 <li><p>DBItest: <a href="https://github.com/barracuda156">@barracuda156</a>, <a href="https://github.com/detule">@detule</a>, <a href="https://github.com/dpprdan">@dpprdan</a>, <a href="https://github.com/hadley">@hadley</a>, <a href="https://github.com/maelle">@maelle</a>, <a href="https://github.com/MichaelChirico">@MichaelChirico</a>, <a href="https://github.com/nbenn">@nbenn</a>, <a href="https://github.com/psychelzh">@psychelzh</a>, and <a href="https://github.com/TSchiefer">@TSchiefer</a>.</p></li>
