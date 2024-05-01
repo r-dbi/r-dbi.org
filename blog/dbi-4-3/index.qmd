@@ -60,7 +60,7 @@ For example, the [adbcpostgresql package](https://arrow.apache.org/adbc/current/
 
 Because ADBC is a new project, it doesn't yet cover all databases and ecosystems.
 To simplify the transition, the adbi package bridges ADBC drivers and DBI, enabling existing code that uses DBI to seamlessly interact with the new ADBC drivers.
-Thanks to Voltron Data for the collaboration on this project and for the support in developing the adbi package and the DBI extension.
+Thanks to [Voltron Data](https://voltrondata.com/) for the collaboration on this project and for the support in developing the adbi package and the DBI extension.
 
 The adbi package is available on CRAN and provides the following features:
 
@@ -178,7 +178,7 @@ Does the adbi package work for you?
 What would a good "user interface" package look like for ADBC?
 Use the [adbi issue tracker](https://github.com/r-dbi/adbi/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc) to get in touch!
 
-Thanks to Maëlle Salmon for her help with the blog post, and to Voltron Data for supporting this effort.
+Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle)) and Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for their help with the blog post, and to [Voltron Data](https://voltrondata.com/) for supporting this effort.
 
 <!--
 TODO: Bump DBItest

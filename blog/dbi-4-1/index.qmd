@@ -132,7 +132,7 @@ For example, with `dbGetQueryArrow()`, the result set is passed to R as an Arrow
 More on that below.
 
 Development of the adbi package has been made easy with the RKazam package, which is a template for creating DBI backends, and the DBItest package, which provides a battery of tests that all "pass" with the package generated from the template and help guide the development process.
-Thanks to Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for the implementation and the wonderful collaboration, and to Voltron Data for supporting this effort.
+Thanks to Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for the implementation and the wonderful collaboration, and to [Voltron Data](https://voltrondata.com/) for supporting this effort.
 
 ## DBI
 
@@ -260,7 +260,7 @@ Happy querying!
 
 ## Acknowledgments
 
-Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle)) for her help with the blog post, and to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
+Thanks to Maëlle Salmon ([&#x0040;maelle](https://github.com/maelle)) and Nicolas Bennett ([&#x0040;nbenn](https://github.com/nbenn)) for their help with the blog post, and to the numerous contributors to the packages in the "Maintaining DBI" project in 2022 and 2023:
 
 - DBI: [&#x0040;apalacio9502](https://github.com/apalacio9502), [&#x0040;asadow](https://github.com/asadow), [&#x0040;bcorwin](https://github.com/bcorwin), [&#x0040;capitantyler](https://github.com/capitantyler), [&#x0040;chrisdane](https://github.com/chrisdane), [&#x0040;eauleaf](https://github.com/eauleaf), [&#x0040;eitsupi](https://github.com/eitsupi), [&#x0040;eriksquires](https://github.com/eriksquires), [&#x0040;fnavarro94](https://github.com/fnavarro94), [&#x0040;GitHunter0](https://github.com/GitHunter0), [&#x0040;hadley](https://github.com/hadley), [&#x0040;hannes101](https://github.com/hannes101), [&#x0040;Jay123ub](https://github.com/Jay123ub), [&#x0040;jd4ds](https://github.com/jd4ds), [&#x0040;kelseyroberts](https://github.com/kelseyroberts), [&#x0040;latot](https://github.com/latot), [&#x0040;maelle](https://github.com/maelle), [&#x0040;matthiasgomolka](https://github.com/matthiasgomolka), [&#x0040;mgirlich](https://github.com/mgirlich), [&#x0040;mmuurr](https://github.com/mmuurr), [&#x0040;nbenn](https://github.com/nbenn), [&#x0040;philibe](https://github.com/philibe), [&#x0040;pnacht](https://github.com/pnacht), [&#x0040;r2evans](https://github.com/r2evans), [&#x0040;renkun-ken](https://github.com/renkun-ken), [&#x0040;salim-b](https://github.com/salim-b), [&#x0040;scottfrechette](https://github.com/scottfrechette), and [&#x0040;tzakharko](https://github.com/tzakharko).
 
