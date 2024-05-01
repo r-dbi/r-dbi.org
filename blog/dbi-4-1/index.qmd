@@ -47,7 +47,7 @@ Several components simplify the day-to-day work:
 
     It is a "click-and-forget" solution that allows queueing a pull request so that it is automatically merged when all checks pass.
     I'm using this for all my packages now, and it has saved me a lot of time.
-    I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which is required for fledge (see next item).
+    I also tried the native GitHub merge queue, but it seems to require protecting the main branch, which is required for fledge. 👇
 
 - [fledge](https://fledge.cynkra.com/) helps automating the release process.
 
@@ -219,7 +219,7 @@ A new tweak `allow_na_rows_affected` has been added to support `NA` values retur
 ## Backend packages: RSQLite, RMariaDB, RPostgres
 
 - RSQLite has seen a minor update, the current version is 2.3.6.
-See the [change log](https://rsqlite.r-dbi.org/news/index.html) for details.
+    See the [change log](https://rsqlite.r-dbi.org/news/index.html) for details.
 
     The automatic update of the bundled SQLite library has enabled continuous and timely updates of the RSQLite package on CRAN.
     The latest version of SQLite is 3.45.2, and the RSQLite package is now bundling it.
