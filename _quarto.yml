@@ -27,5 +27,7 @@ format:
     css: styles.css
     toc: true
 
-
+comments:
+  giscus:
+    repo: r-dbi/r-dbi.org
 
