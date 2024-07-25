@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://r-dbi.org/index.html</loc>
+    <loc>https://r-dbi.org/blog/dbi-2-final/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
@@ -13,11 +13,7 @@
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
-    <loc>https://r-dbi.org/blog/dbi-3-2/index.html</loc>
-    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-dbi.org/blog/rstudio-conf/index.html</loc>
+    <loc>https://r-dbi.org/blog/dbi-4-2/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
@@ -25,7 +21,11 @@
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
-    <loc>https://r-dbi.org/blog/dbi-4-3/index.html</loc>
+    <loc>https://r-dbi.org/blog/dbi-3-3/index.html</loc>
+    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-dbi.org/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
@@ -33,27 +33,27 @@
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
+    <loc>https://r-dbi.org/blog/dbi-4-3/index.html</loc>
+    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
+  </url>
+  <url>
     <loc>https://r-dbi.org/blog/dbi-4-1/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
-    <loc>https://r-dbi.org/blog/dbi-2-final/index.html</loc>
+    <loc>https://r-dbi.org/blog/rstudio-conf/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
-    <loc>https://r-dbi.org/blog/dbi-4-2/index.html</loc>
-    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-dbi.org/blog/dbi-3-3/index.html</loc>
-    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
-  </url>
-  <url>
-    <loc>https://r-dbi.org/blog/dbi-1-halfway/index.html</loc>
+    <loc>https://r-dbi.org/blog/dbi-3-2/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
   <url>
     <loc>https://r-dbi.org/blog/dbi-3-1/index.html</loc>
+    <lastmod>2024-05-06T11:41:09.000Z</lastmod>
+  </url>
+  <url>
+    <loc>https://r-dbi.org/blog/dbi-1-halfway/index.html</loc>
     <lastmod>2024-05-06T11:41:09.000Z</lastmod>
   </url>
 </urlset>

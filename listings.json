@@ -1,6 +1,6 @@
 [
   {
-    "listing": "/index.html",
+    "listing": "/blog/index.html",
     "items": [
       "/blog/dbi-4-3/index.html",
       "/blog/dbi-4-2/index.html",
@@ -16,7 +16,7 @@
     ]
   },
   {
-    "listing": "/blog/index.html",
+    "listing": "/index.html",
     "items": [
       "/blog/dbi-4-3/index.html",
       "/blog/dbi-4-2/index.html",
