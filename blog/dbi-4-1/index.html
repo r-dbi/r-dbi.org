@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.6.4">
+<meta name="generator" content="quarto-1.6.15">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-018089954d508eae8a473f0b7f0491f0.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-4bc7ed19c1537b81b8b62ff01e504cfa.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -290,7 +290,7 @@ ul.task-list li input[type="checkbox"] {
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
 <p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
 <p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
-<p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
+<p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckplyr.tidyverse.org/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
 </section>
 <section id="decoupling-from-backends" class="level3">

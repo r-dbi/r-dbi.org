@@ -9,7 +9,7 @@
 <link>https://r-dbi.org/blog/</link>
 <atom:link href="https://r-dbi.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
-<generator>quarto-1.6.4</generator>
+<generator>quarto-1.6.15</generator>
 <lastBuildDate>Sun, 14 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Arrow for data transport</title>
@@ -296,7 +296,7 @@ TODO: Post in rOpenSci slack
 <h3 class="anchored" data-anchor-id="code-generation">Code generation</h3>
 <p><a href="https://mtlynch.io/good-developers-bad-tests/">Why good developers write bad unit tests</a>? In a nutshell, production code should avoid repetition and hard-coded constant, while testing code should be as explicit and as easy to understand and execute as possible.</p>
 <p>The DBItest package is home to both the specification of the DBI package and a test suite for DBI backends. As such, good software engineering practices are actually useful here and have helped cover many corner cases in the DBI backends. Running the tests in DBItest is easy, but in the case of a failure, the error messages are not always helpful. Backend developers typically have to read the test code to understand what went wrong. And if the actual test code hides between layers of abstraction, this can be a daunting task.</p>
-<p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckdblabs.github.io/duckplyr/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
+<p>Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the <a href="https://duckplyr.tidyverse.org/">duckplyr</a> project. In R, code is data, and the language and the associated packages are very well suited for this task. The long-term goal is to turn DBItest into a <em>code generator</em> rather than a <em>test executor</em>: the test code will be generated from a specification directly into the backend package and executed there. In the case of a failure, the error message will point to the generated code and to the relevant part of the specification. Failing tests can be executed trivially, very much like failures in regular tests. The expected behavior becomes apparent from the generated code, leading to a better understanding of the failure and a more efficient debugging process.</p>
 <p>A first step has been taken in this direction, the tests for the command execution and data retrieval flows via <code>dbBind()</code> have been refactored to generate inline code in the DBItest package. The process towards full code generation requires similar steps in a few other places to avoid hard-to-understand generated code, which would be even worse than the current situation.</p>
 </section>
 <section id="decoupling-from-backends" class="level3">
