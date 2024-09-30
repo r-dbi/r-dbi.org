@@ -193,7 +193,7 @@ Running the tests in DBItest is easy, but in the case of a failure, the error me
 Backend developers typically have to read the test code to understand what went wrong.
 And if the actual test code hides between layers of abstraction, this can be a daunting task.
 
-Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the [duckplyr](https://duckdblabs.github.io/duckplyr/) project.
+Code generation has proved to be a powerful tool to peel off abstraction layers, for instance in the [duckplyr](https://duckplyr.tidyverse.org/) project.
 In R, code is data, and the language and the associated packages are very well suited for this task.
 The long-term goal is to turn DBItest into a *code generator* rather than a *test executor*: the test code will be generated from a specification directly into the backend package and executed there.
 In the case of a failure, the error message will point to the generated code and to the relevant part of the specification.
