@@ -196,11 +196,11 @@
     "text": "RPostgres 1.4.7 (2024-05-27) 🔗 🐛\nC++ Interface to PostgreSQL\nFully DBI-compliant C++-backed interface to PostgreSQL https://www.postgresql.org/, an open-source relational database.\nMaintainer: Kirill Müller kirill@cynkra.com. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#rpostgresql-0.7-6-2024-01-11",
-    "href": "backends/index.html#rpostgresql-0.7-6-2024-01-11",
+    "objectID": "backends/index.html#rpostgresql-0.7-7-2024-09-30",
+    "href": "backends/index.html#rpostgresql-0.7-7-2024-09-30",
     "title": "Backends for R-DBI",
-    "section": "RPostgreSQL 0.7-6 (2024-01-11) 🔗 🔗",
-    "text": "RPostgreSQL 0.7-6 (2024-01-11) 🔗 🔗\nR Interface to the ‘PostgreSQL’ Database System\nDatabase interface and ‘PostgreSQL’ driver for ‘R’. This package provides a Database Interface ‘DBI’ compliant driver for ‘R’ to access ‘PostgreSQL’ database systems. In order to build and install this package from source, ‘PostgreSQL’ itself must be present your system to provide ‘PostgreSQL’ functionality via its libraries and header files. These files are provided as ‘postgresql-devel’ package under some Linux distributions. On ‘macOS’ and ‘Microsoft Windows’ system the attached ‘libpq’ library source will be used.\nMaintainer: Tomoaki Nishiyama tomoakin@staff.kanazawa-u.ac.jp. License: GPL-3 | file LICENSE"
+    "section": "RPostgreSQL 0.7-7 (2024-09-30) 🔗 🔗",
+    "text": "RPostgreSQL 0.7-7 (2024-09-30) 🔗 🔗\nR Interface to the ‘PostgreSQL’ Database System\nDatabase interface and ‘PostgreSQL’ driver for ‘R’. This package provides a Database Interface ‘DBI’ compliant driver for ‘R’ to access ‘PostgreSQL’ database systems. In order to build and install this package from source, ‘PostgreSQL’ itself must be present your system to provide ‘PostgreSQL’ functionality via its libraries and header files. These files are provided as ‘postgresql-devel’ package under some Linux distributions. On ‘macOS’ and ‘Microsoft Windows’ system the attached ‘libpq’ library source will be used.\nMaintainer: Tomoaki Nishiyama tomoaki@sci.u-toyama.ac.jp. License: GPL-3 | file LICENSE"
   },
   {
     "objectID": "backends/index.html#rpresto-1.4.6-2023-11-01",
