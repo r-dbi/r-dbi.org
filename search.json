@@ -168,11 +168,11 @@
     "text": "RMariaDB 1.3.2 (2024-05-27) 🔗 🔗 🐛\nDatabase Interface and MariaDB Driver\nImplements a DBI-compliant interface to MariaDB (https://mariadb.org/) and MySQL (https://www.mysql.com/) databases.\nMaintainer: Kirill Müller kirill@cynkra.com. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#rmysql-0.10.28-2024-08-22",
-    "href": "backends/index.html#rmysql-0.10.28-2024-08-22",
+    "objectID": "backends/index.html#rmysql-0.10.29-2024-10-04",
+    "href": "backends/index.html#rmysql-0.10.29-2024-10-04",
     "title": "Backends for R-DBI",
-    "section": "RMySQL 0.10.28 (2024-08-22) 🔗 🐛",
-    "text": "RMySQL 0.10.28 (2024-08-22) 🔗 🐛\nDatabase Interface and ‘MySQL’ Driver for R\nLegacy ‘DBI’ interface to ‘MySQL’ / ‘MariaDB’ based on old code ported from S-PLUS. A modern ‘MySQL’ client written in ‘C++’ is available from the ‘RMariaDB’ package.\nMaintainer: Jeroen Ooms jeroen@berkeley.edu. License: GPL-2"
+    "section": "RMySQL 0.10.29 (2024-10-04) 🔗 🐛",
+    "text": "RMySQL 0.10.29 (2024-10-04) 🔗 🐛\nDatabase Interface and ‘MySQL’ Driver for R\nLegacy ‘DBI’ interface to ‘MySQL’ / ‘MariaDB’ based on old code ported from S-PLUS. A modern ‘MySQL’ client written in ‘C++’ is available from the ‘RMariaDB’ package.\nMaintainer: Jeroen Ooms jeroenooms@gmail.com. License: GPL-2"
   },
   {
     "objectID": "backends/index.html#rodbcdbi-0.1.1-2016-03-14",
