@@ -37,7 +37,7 @@ Presentations at meetups
 
 I presented DBI at the [Berlin R user
 group](https://www.meetup.com/Berlin-R-Users-Group/), at the
-[amstRdays](https://amsterdam2018.satrdays.org/), and at the [Zurich R
+amstRdays, and at the [Zurich R
 meetup](https://zurich-r-user-group.github.io/index.html). The
 presentation in Berlin made me realize that a progress report isn't that
 helpful for a general audience. The Zurich version of the presentation
