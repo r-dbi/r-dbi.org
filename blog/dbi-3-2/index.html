@@ -296,7 +296,7 @@ data
 #&gt; 1          5.1         3.5          1.4         0.2  setosa
 #&gt; 2          4.9         3.0          1.4         0.2  setosa
 #&gt; 3          4.7         3.2          1.3         0.2  setosa</code></pre>
-<p>This also works in scenarios where DBI is used under the hood by other packages like <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://tidymodels.github.io/tidypredict/">tidypredict</a>. The log will represent the DBI operations issued, which allows for a better understanding of the internals.</p>
+<p>This also works in scenarios where DBI is used under the hood by other packages like <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://tidypredict.tidymodels.org/">tidypredict</a>. The log will represent the DBI operations issued, which allows for a better understanding of the internals.</p>
 </section>
 </section>
 <section id="testing-your-infrastructure-for-dbi-compatibility" class="level2">
@@ -368,7 +368,7 @@ tbl %&gt;%
 </section>
 <section id="terraforming-databases" class="level3">
 <h3 class="anchored" data-anchor-id="terraforming-databases">Terraforming databases</h3>
-<p>Now that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. <a href="https://www.terraform.io/">Terraform</a> helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.</p>
+<p>Now that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. <a href="https://developer.hashicorp.com/terraform">Terraform</a> helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.</p>
 <p>It would be helpful to have a selection of open-source and commercial databases in different configuration settings ready for testing.</p>
 </section>
 <section id="query-cancellation" class="level3">

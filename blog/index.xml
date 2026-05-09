@@ -255,7 +255,7 @@ TODO: Post in rOpenSci slack
 <ul>
 <li><a href="https://arrow.apache.org/adbc/current/r/adbcsqlite/">adbcsqlite</a>, on CRAN</li>
 <li><a href="https://arrow.apache.org/adbc/current/r/adbcpostgresql/">adbcpostgresql</a>, on CRAN</li>
-<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/">Snowflake</a></li>
+<li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcsnowflake">adbcsnowflake</a> for <a href="https://www.snowflake.com/en/">Snowflake</a></li>
 <li><a href="https://github.com/apache/arrow-adbc/tree/main/r/adbcflightsql">adbcflightsql</a> for <a href="https://arrow.apache.org/docs/format/FlightSql.html">FlightSQL</a></li>
 <li><a href="https://duckdb.org/docs/api/r">duckdb</a>, which implements an ADBC driver in addition to the DBI backend</li>
 </ul>
@@ -461,7 +461,7 @@ font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code
 </section>
 <section id="future-work" class="level2">
 <h2 class="anchored" data-anchor-id="future-work">Future work</h2>
-<p>The {DBI} package provides a low-level interface for database connectivity with a <a href="https://www.r-dbi.org/blog/dbi-3-3.html">narrow scope</a>. Data query and manipulation tasks that are not in-scope for {DBI} are currently left to auxiliary packages, including <a href="https://dbplyr.tidyverse.org/">dbplyr</a>, <a href="https://cynkra.github.io/dm/">dm</a>, <a href="https://github.com/ankane/dbx">dbx</a> and <a href="https://winvector.github.io/rquery/">rquery</a>. {DBI} uses S4, one of several systems for object-oriented programming in R. While S4 offers several advantages over its predecessor S3, including increased strictness and multiple dispatch, it also is more rigid compared to S3. <!-- I don't see how this is specific to S4, but then again, I haven't really used S4 myself, so I'm no expert; it might still be worthwhile to elaborate a bit here --> <!-- also, what is the intention of discussing S4 here? is it to justify a move away from S4? if so I feel a need for fleshing out this argument more --> Consequently, once the definition of a generic is published, it is difficult to make changes without breaking downstream dependencies.</p>
+<p>The {DBI} package provides a low-level interface for database connectivity with a <a href="https://www.r-dbi.org/blog/dbi-3-3.html">narrow scope</a>. Data query and manipulation tasks that are not in-scope for {DBI} are currently left to auxiliary packages, including <a href="https://dbplyr.tidyverse.org/">dbplyr</a>, <a href="https://dm.cynkra.com/">dm</a>, <a href="https://github.com/ankane/dbx">dbx</a> and <a href="https://winvector.github.io/rquery/">rquery</a>. {DBI} uses S4, one of several systems for object-oriented programming in R. While S4 offers several advantages over its predecessor S3, including increased strictness and multiple dispatch, it also is more rigid compared to S3. <!-- I don't see how this is specific to S4, but then again, I haven't really used S4 myself, so I'm no expert; it might still be worthwhile to elaborate a bit here --> <!-- also, what is the intention of discussing S4 here? is it to justify a move away from S4? if so I feel a need for fleshing out this argument more --> Consequently, once the definition of a generic is published, it is difficult to make changes without breaking downstream dependencies.</p>
 <p>The first release of {DBI} dates back roughly 20 years and since, the package has been widely adopted by others, both for accessing databases or providing <a href="https://github.com/r-dbi/backends#readme">backends</a> to DBMSes. Its success, combined with the rigidity imposed by S4, has made it difficult to extend the interface beyond what is currently offered. When considering new additions, there is pressure to get it right in the first attempt, thereby holding back less essential improvements.</p>
 <p>The DBI specification in the {DBItest} package aims to standardize the feature set of {DBI}-compliant backends, and to provide a test suite against which conformity of an implementation can be verified. Due to differences in design of individual DBMSes, not all features of the DBI specification and therefore not all tests provided by {DBItest} are supported by all backend packages. Using a newly introduced mechanism, backends can declare, by means of <em>tweaks</em>, which tests to run in what way. This addresses some of the problems associated with implementing a test suite that can be re-used for several backends. General-purpose clients however, can only make guesses as to the exact feature set supported by a given backend or connection. There currently is no formal way to declare certain capabilities as missing (or available).</p>
 <p>Based on these observations, for extending DBI, it may be worthwhile to address the following two issues:</p>
@@ -775,7 +775,7 @@ data
 #&gt; 1          5.1         3.5          1.4         0.2  setosa
 #&gt; 2          4.9         3.0          1.4         0.2  setosa
 #&gt; 3          4.7         3.2          1.3         0.2  setosa</code></pre>
-<p>This also works in scenarios where DBI is used under the hood by other packages like <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://tidymodels.github.io/tidypredict/">tidypredict</a>. The log will represent the DBI operations issued, which allows for a better understanding of the internals.</p>
+<p>This also works in scenarios where DBI is used under the hood by other packages like <a href="https://dbplyr.tidyverse.org/">dbplyr</a> or <a href="https://tidypredict.tidymodels.org/">tidypredict</a>. The log will represent the DBI operations issued, which allows for a better understanding of the internals.</p>
 </section>
 </section>
 <section id="testing-your-infrastructure-for-dbi-compatibility" class="level2">
@@ -847,7 +847,7 @@ tbl %&gt;%
 </section>
 <section id="terraforming-databases" class="level3">
 <h3 class="anchored" data-anchor-id="terraforming-databases">Terraforming databases</h3>
-<p>Now that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. <a href="https://www.terraform.io/">Terraform</a> helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.</p>
+<p>Now that using DBItest to test backends against custom infrastructure is understood, it becomes easier to enhance tests so that not only pristine setups are tested, but also databases with nonstandard settings for time zone, character encoding or collation. <a href="https://developer.hashicorp.com/terraform">Terraform</a> helps automating the setup of databases of different flavors on cloud providers such as Azure or Google Cloud. The desired state of computing infrastructure is specified in a declarative way. This allows testing a much broader variety of databases and configurations, without maintaining expensive infrastructure: databases can be spun up when needed and torn down when done.</p>
 <p>It would be helpful to have a selection of open-source and commercial databases in different configuration settings ready for testing.</p>
 </section>
 <section id="query-cancellation" class="level3">
@@ -877,15 +877,15 @@ tbl %&gt;%
 
 
 <p>Much earlier this year my proposal for the third R Consortium project for working on DBI has been accepted. DBI is a set of virtual functions declared in the <em>DBI</em> package. Communication with the database is implemented by <em>DBI backends</em>, packages that import <em>DBI</em> and implement its methods. A common interface is helpful for both users and backend implementers. Users, including package developers for DBMS-agnostic packages, need to memoize only one set of functions. Backend developers can focus on functionality instead of design decisions, and can benefit from a large base of potential users right from the start.</p>
-<p>I’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up <a href="http://cynkra.com">cynkra</a>. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.</p>
+<p>I’m grateful for the trust, and will do my best to make the “Maintaining DBI” project a success. For this round, the main goals are: maintain, enhance, disseminate. The project is delayed mostly becase I grossly underestimated how much time and energy it would take to set up <a href="https://cynkra.com">cynkra</a>. The new joint venture with Christoph Sax consults businesses and organizations on matters related to R, statistics, data, and software. We are strongly committed to R and open-source software, and more priority will be given the “Maintaining DBI” project next year.</p>
 <p>This blog post, much later than planned, summarizes the efforts of the past year: presentations at meetups, the “Core Infrastructure Initiative” badge, and activity in the various repositories of the <a href="https://github.com/r-dbi">r-dbi</a> GitHub organization. I’ll repeat the big picture issues from the proposal and present plans for future development.</p>
 <section id="presentations-at-meetups" class="level2">
 <h2 class="anchored" data-anchor-id="presentations-at-meetups">Presentations at meetups</h2>
-<p>I presented DBI at the <a href="https://www.meetup.com/Berlin-R-Users-Group/">Berlin R user group</a>, at the amstRdays, and at the <a href="https://zurich-r-user-group.github.io/index.html">Zurich R meetup</a>. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. <a href="https://bit.ly/2wFJix3">These slides</a>, and the <a href="https://solutions.posit.co/connections/db/r-packages/dbi/">intro at db.rstudio.com</a> seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette.</p>
+<p>I presented DBI at the <a href="https://www.meetup.com/berlin-r-users-group/">Berlin R user group</a>, at the amstRdays, and at the <a href="https://zurich-r-user-group.github.io/index.html">Zurich R meetup</a>. The presentation in Berlin made me realize that a progress report isn’t that helpful for a general audience. The Zurich version of the presentation featured a DBI intro also suitable for new users, merely highlighting recent developments. <a href="https://bit.ly/2wFJix3">These slides</a>, and the <a href="https://solutions.posit.co/connections/db/r-packages/dbi/">intro at db.rstudio.com</a> seem to be the most recent general-purpose introduction materials available. I think an entry-level tutorial would be a good fit for a DBI vignette.</p>
 </section>
 <section id="cii-badge" class="level2">
 <h2 class="anchored" data-anchor-id="cii-badge">CII badge</h2>
-<p>From <a href="https://bestpractices.coreinfrastructure.org/en" class="uri">https://bestpractices.coreinfrastructure.org/en</a>:</p>
+<p>From <a href="https://www.bestpractices.dev/en" class="uri">https://www.bestpractices.dev/en</a>:</p>
 <blockquote class="blockquote">
 <p>The Linux Foundation (LF) Core Infrastructure Initiative (CII) Best Practices badge is a way for Free/Libre and Open Source Software (FLOSS) projects to show that they follow best practices. Projects can voluntarily self-certify, at no cost, by using this web application to explain how they follow each best practice. The CII Best Practices Badge is inspired by the many badges available to projects on GitHub. Consumers of the badge can quickly assess which FLOSS projects are following best practices and as a result are more likely to produce higher-quality secure software.</p>
 </blockquote>
@@ -901,7 +901,7 @@ tbl %&gt;%
 <p>After completing the process, projects are entitled to wear a badge like the one below for the DBI project:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img"></a></p>
+<p><a href="https://www.bestpractices.dev/en/projects/1882/passing"><img src="https://www.bestpractices.dev/projects/1882/badge.svg" class="img-fluid figure-img"></a></p>
 <figcaption>OpenSSF Best Practices</figcaption>
 </figure>
 </div>
@@ -991,7 +991,7 @@ tbl %&gt;%
 <li>and many others.</li>
 </ul>
 <p>Adding CII badges for the backend packages and <em>DBItest</em> will give a more consistent appearance of the entire project.</p>
-<p>As a New Year’s resolution, I pledge to do a better job as package maintainer for <em>DBI</em> and related packages. I reserved a few hours each Monday to respond to issues raised on GitHub and other channels (<a href="https://stackoverflow.com/">SO</a>, <a href="https://community.rstudio.com/">RStudio Community</a>, Twitter, and the somewhat underappreciated <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db">R-SIG-DB mailing list</a>). CI builds on Travis and AppVeyor also require occasional intervention. The remaining time will be spent on resolving known problems.</p>
+<p>As a New Year’s resolution, I pledge to do a better job as package maintainer for <em>DBI</em> and related packages. I reserved a few hours each Monday to respond to issues raised on GitHub and other channels (<a href="https://stackoverflow.com/questions">SO</a>, <a href="https://forum.posit.co/">RStudio Community</a>, Twitter, and the somewhat underappreciated <a href="https://stat.ethz.ch/mailman/listinfo/r-sig-db">R-SIG-DB mailing list</a>). CI builds on Travis and AppVeyor also require occasional intervention. The remaining time will be spent on resolving known problems.</p>
 </section>
 <section id="acknowledgments" class="level2">
 <h2 class="anchored" data-anchor-id="acknowledgments">Acknowledgments</h2>
@@ -1327,18 +1327,18 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 <section id="link-to-video" class="level2">
 <h2 class="anchored" data-anchor-id="link-to-video">Link to video</h2>
 <p>
-<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5"><img src="https://embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases?wvideo=yf1vdwugk5"><img src="https://embed-ssl.wistia.com/deliveries/6cc6be1f7e21a6ecd6640c0068ecd86a94c235d0.jpg?image_play_button_size=2x&amp;image_crop_resized=960x540&amp;image_play_button=1&amp;image_play_button_color=4287c7e0" style="width: 400px; height: 225px;" width="400" height="225"></a>
 </p>
 <p>
-<a href="https://posit.co/resources/videos/connecting-to-open-source-databases/?wvideo=yf1vdwugk5">Connecting to open source databases - Posit</a>
+<a href="https://posit.co/resources/videos/connecting-to-open-source-databases?wvideo=yf1vdwugk5">Connecting to open source databases - Posit</a>
 </p>
 </section>
 <section id="slides" class="level2">
 <h2 class="anchored" data-anchor-id="slides">Slides</h2>
 <div style="position:relative;padding-top:56.25%;">
-<p><iframe src="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf" frameborder="0" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></p>
+<p><iframe src="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf/" frameborder="0" allowfullscreen="" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe></p>
 </div>
-<p><a href="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf" target="_blank">Full screen version</a></p>
+<p><a href="https://krlmlr.github.io/dbi-slides/2018-02-san-diego-rstudio-conf/" target="_blank">Full screen version</a></p>
 
 
 </section>
