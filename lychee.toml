@@ -1,8 +1,0 @@
-# Lychee link checker configuration
-
-[network]
-# Follow redirects and treat them as successful
-accept_redirect = true
-
-[output]
-# Display redirect information in reports
