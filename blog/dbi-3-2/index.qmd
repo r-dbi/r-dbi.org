@@ -173,7 +173,7 @@ logging code for debugging.
 
 This also works in scenarios where DBI is used under the hood by other
 packages like [dbplyr](https://dbplyr.tidyverse.org/) or
-[tidypredict](https://tidymodels.github.io/tidypredict/). The log will
+[tidypredict](https://tidypredict.tidymodels.org/). The log will
 represent the DBI operations issued, which allows for a better
 understanding of the internals.
 
@@ -298,7 +298,7 @@ Now that using DBItest to test backends against custom infrastructure is
 understood, it becomes easier to enhance tests so that not only pristine
 setups are tested, but also databases with nonstandard settings for time
 zone, character encoding or collation.
-[Terraform](https://www.terraform.io/) helps automating the setup of
+[Terraform](https://developer.hashicorp.com/terraform) helps automating the setup of
 databases of different flavors on cloud providers such as Azure or
 Google Cloud. The desired state of computing infrastructure is specified
 in a declarative way. This allows testing a much broader variety of
