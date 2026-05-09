@@ -9,7 +9,7 @@
 <link>https://r-dbi.org/blog/</link>
 <atom:link href="https://r-dbi.org/blog/index.xml" rel="self" type="application/rss+xml"/>
 <description>R + databases</description>
-<generator>quarto-1.7.2</generator>
+<generator>quarto-1.10.3</generator>
 <lastBuildDate>Sun, 14 Apr 2024 00:00:00 GMT</lastBuildDate>
 <item>
   <title>Using Arrow for data transport</title>
@@ -419,7 +419,7 @@ TODO: Post in rOpenSci slack
 <section id="reorganized-structure-of-the-r-code" class="level3">
 <h3 class="anchored" data-anchor-id="reorganized-structure-of-the-r-code">Reorganized structure of the R code</h3>
 <p>{DBI} uses S4 classes and generic functions to specify the interface to be implemented by backends, using database specific subclasses. Class specific generic implementations are consequently declared with <code>setMethod()</code>, using the following convention:</p>
-<div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="fu" style="color: #4758AB;
 background-color: null;
 font-style: inherit;">setMethod</span>(<span class="st" style="color: #20794D;
 background-color: null;
@@ -434,9 +434,9 @@ background-color: null;
 font-weight: bold;
 font-style: inherit;">function</span>(x, char_arg, ...) {</span>
 <span id="cb1-2">  ...</span>
-<span id="cb1-3">})</span></code></pre></div>
+<span id="cb1-3">})</span></code></pre></div></div>
 <p>Instead of passing an anonymous function as <code>definition</code> argument to <code>setMethod()</code>, this has been changed to a semantic equivalent which is more explicit:</p>
-<div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">foo_myclass_character <span class="ot" style="color: #003B4F;
+<div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb2" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1">foo_myclass_character <span class="ot" style="color: #003B4F;
 background-color: null;
 font-style: inherit;">&lt;-</span> <span class="cf" style="color: #003B4F;
 background-color: null;
@@ -455,7 +455,7 @@ font-style: inherit;">c</span>(<span class="st" style="color: #20794D;
 background-color: null;
 font-style: inherit;">"myclass"</span>, <span class="st" style="color: #20794D;
 background-color: null;
-font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code></pre></div>
+font-style: inherit;">"character"</span>), foo_myclass_mycharacter)</span></code></pre></div></div>
 <p>Reasons for this transformation were to make the respective implementations more accessible, as function definitions now can be displayed more easily via <code>mypkg:::foo_myclass_character</code>, and to generally make the code-base easier to read and navigate. In similar spirit, each such generic implementation is now defined in its own file with file names constructed as <code>foo_myclass_mycharacter.R</code>. This makes it immediately clear, exactly which methods are implemented by a package, simply from the list of associated files. Code transformation was carried out in semi-automated fashion, with the help of a <a href="https://github.com/pre-processing-r/rpp/blob/main/script/un-s4.R">script</a> that uses infrastructure from the “Pre-processing R code” project.</p>
 </section>
 </section>
@@ -901,7 +901,7 @@ tbl %&gt;%
 <p>After completing the process, projects are entitled to wear a badge like the one below for the DBI project:</p>
 <div class="quarto-figure quarto-figure-center">
 <figure class="figure">
-<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img" alt="OpenSSF Best Practices"></a></p>
+<p><a href="https://bestpractices.coreinfrastructure.org/projects/1882"><img src="https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg" class="img-fluid figure-img"></a></p>
 <figcaption>OpenSSF Best Practices</figcaption>
 </figure>
 </div>
@@ -1448,8 +1448,9 @@ dbGetQuery(pg_conn, 'SELECT 1 AS a, 2 AS a, 3 AS "a..2"')
 </ul>
 <p>See the <a href="https://github.com/r-dbi/RSQLite/releases/tag/v1.1">release notes</a> for further changes.</p>
 <p>The rewrite was implemented by Hadley Wickham before the “Improving DBI” project started, and has been available for a long time on GitHub. Nevertheless, the CRAN release has proven much more challenging than anticipated, because so many CRAN and Bioconductor packages import it. (Maintainers of reverse dependencies might remember multiple e-mails where I was threatening to release RSQLite “for real”.) My aim was to break as little existing code as possible. After numerous rounds of revdep-checking and improving RSQLite, I’m proud to report that the vast majority of reverse dependencies pass their checks just as well (and as quickly!) as they did with v1.0.0. Most tests from v1.0.0 are still present in the current codebase. This means that non-packaged code also has a good chance to work unchanged. I’m happy to work with package maintainers or users whose code breaks after the update.</p>
-<p>DBI</p>
-<hr>
+</section>
+<section id="dbi" class="level2">
+<h2 class="anchored" data-anchor-id="dbi">DBI</h2>
 <p>I have also released several DBI updates to CRAN, mostly to introduce new generics such as <code>dbBind()</code> (for parametrized/prepared queries) or <code>dbSendStatement()</code> and <code>dbExecute()</code> (for statements which don’t return data). The definition of a formal DBI specification is part of the project, a <a href="https://dbi.r-dbi.org/articles/spec.html">formatted version</a> is updated continuously.</p>
 </section>
 <section id="dbitest" class="level2">
