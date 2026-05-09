@@ -42,7 +42,7 @@ meetup](https://zurich-r-user-group.github.io/index.html). The
 presentation in Berlin made me realize that a progress report isn't that
 helpful for a general audience. The Zurich version of the presentation
 featured a DBI intro also suitable for new users, merely highlighting
-recent developments. [These slides](https://krlmlr.github.io/dbi-slides/2018-09-zurich-meetup/), and the
+recent developments. [These slides](https://bit.ly/2wFJix3), and the
 [intro at db.rstudio.com](https://solutions.posit.co/connections/db/r-packages/dbi/) seem to be the
 most recent general-purpose introduction materials available. I think an
 entry-level tutorial would be a good fit for a DBI vignette.
@@ -151,7 +151,7 @@ repeated below, with comments based on experience from the past year.
     data import.
 
     -   The new [*arkdb*
-        package](https://cran.r-project.org/web/packages/arkdb/index.html) offers a
+        package](https://cran.r-project.org/package=arkdb) offers a
         dedicated interface for importing data, I still think this
         functionality should better live there (or elsewhere).
 
@@ -258,11 +258,11 @@ New packages worth reviewing include:
 
 -   [*arkdb*](https://cran.r-project.org/package=arkdb): Consistent (and
     fast?) import and export
--   [*flobr*](https://cran.r-project.org/web/packages/flobr/index.html): Converting
+-   [*flobr*](https://cran.r-project.org/package=flobr): Converting
     files to blobs and back
 -   [*sqlr*](https://github.com/nbenn/sqlr): SQLAlchemy-like DSL for
     data definition, work in progress
--   [*dbplot*](https://cran.r-project.org/web/packages/dbplot/index.html): Plotting from
+-   [*dbplot*](https://cran.r-project.org/package=dbplot): Plotting from
     the database
 -   and many others.
 
