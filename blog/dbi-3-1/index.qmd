@@ -19,7 +19,7 @@ I'm grateful for the trust, and will do my best to make the "Maintaining
 DBI" project a success. For this round, the main goals are: maintain,
 enhance, disseminate. The project is delayed mostly becase I grossly
 underestimated how much time and energy it would take to set up
-[cynkra](http://cynkra.com). The new joint venture with Christoph Sax
+[cynkra](https://cynkra.com). The new joint venture with Christoph Sax
 consults businesses and organizations on matters related to R,
 statistics, data, and software. We are strongly committed to R and
 open-source software, and more priority will be given the "Maintaining
@@ -36,7 +36,7 @@ Presentations at meetups
 ------------------------
 
 I presented DBI at the [Berlin R user
-group](https://www.meetup.com/Berlin-R-Users-Group/), at the
+group](https://www.meetup.com/berlin-r-users-group/), at the
 amstRdays, and at the [Zurich R
 meetup](https://zurich-r-user-group.github.io/index.html). The
 presentation in Berlin made me realize that a progress report isn't that
@@ -51,7 +51,7 @@ CII badge
 ---------
 
 From
-<a href="https://bestpractices.coreinfrastructure.org/en" class="uri">https://bestpractices.coreinfrastructure.org/en</a>:
+<a href="https://www.bestpractices.dev/en" class="uri">https://www.bestpractices.dev/en</a>:
 
 > The Linux Foundation (LF) Core Infrastructure Initiative (CII) Best
 > Practices badge is a way for Free/Libre and Open Source Software
@@ -77,7 +77,7 @@ following topics:
 After completing the process, projects are entitled to wear a badge like
 the one below for the DBI project:
 
-[![OpenSSF Best Practices](https://bestpractices.coreinfrastructure.org/projects/1882/badge.svg)](https://bestpractices.coreinfrastructure.org/projects/1882)
+[![OpenSSF Best Practices](https://www.bestpractices.dev/projects/1882/badge.svg)](https://www.bestpractices.dev/en/projects/1882/passing)
 
 A click on the badge takes you to the detailed assessment. In addition
 to the badge, completing the self-certification allows the maintainer to
@@ -272,8 +272,8 @@ more consistent appearance of the entire project.
 As a New Year's resolution, I pledge to do a better job as package
 maintainer for *DBI* and related packages. I reserved a few hours each
 Monday to respond to issues raised on GitHub and other channels
-([SO](https://stackoverflow.com/), [RStudio
-Community](https://community.rstudio.com/), Twitter, and the somewhat
+([SO](https://stackoverflow.com/questions), [RStudio
+Community](https://forum.posit.co/), Twitter, and the somewhat
 underappreciated [R-SIG-DB mailing
 list](https://stat.ethz.ch/mailman/listinfo/r-sig-db)). CI builds on
 Travis and AppVeyor also require occasional intervention. The remaining
