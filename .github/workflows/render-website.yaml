@@ -85,7 +85,7 @@ jobs:
         with:
           path: ./lychee/out.md
 
-      - uses: mshick/add-pr-comment@v2
+      - uses: mshick/add-pr-comment@v3
         if: failure()
         with:
           message: ${{ steps.lychee-output.outputs.content }}
