@@ -26,6 +26,20 @@ all_df <- jsonlite::fromJSON(all_json, flatten = TRUE)
 ```
 
 ```{r all-url, echo = FALSE, results='asis'}
+url_replacements <- c(
+  "http://developer.r-project.org/db" = "https://developer.r-project.org/db/",
+  "http://www.monetdb.org/" = "https://www.monetdb.org/",
+  "https://boto3.amazonaws.com/v1/documentation/api/latest/index.html" = "https://docs.aws.amazon.com/boto3/latest/",
+  "https://docs.databricks.com/api" = "https://docs.databricks.com/aws/en/reference/api",
+  "https://downloads.mariadb.org/connector-c/" = "https://mariadb.org/download/"
+)
+
+fix_url <- function(u) {
+  if (length(u) == 0) return(u)
+  replaced <- unname(url_replacements[u])
+  ifelse(is.na(replaced), u, replaced)
+}
+
 format_pkg <- function(name, version, title, description, date, maintainer, license, url, bugs) {
 
   if (is.na(date)) {
@@ -35,17 +49,19 @@ format_pkg <- function(name, version, title, description, date, maintainer, lice
   }
 
   if (length(url) > 0 && !anyNA(url)) {
+    url <- fix_url(url)
     name <- paste0("[", name, "](", url[[1]], ")")
     url <- url[-1]
   }
-  
+
   if (length(url) > 0 && !anyNA(url)) {
     url <- paste0(" [:link:](", url, ")", collapse = "")
   } else {
     url <- ""
   }
-  
+
   if (!is.na(bugs)) {
+    bugs <- fix_url(bugs)
     bugs <- paste0(" [:bug:](", bugs, ")")
   } else {
     bugs <- ""
