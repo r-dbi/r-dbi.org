@@ -364,11 +364,11 @@
     "text": "ckanr 0.7.0 (2023-03-17) 🔗 🐛\nClient for the Comprehensive Knowledge Archive Network (CKAN) API\nClient for CKAN API (https://ckan.org/). Includes interface to CKAN APIs for search, list, show for packages, organizations, and resources. In addition, provides an interface to the datastore API.\nMaintainer: Francisco Alves fjunior.alves.oliveira@gmail.com. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#clickhousehttp-0.3.4-2025-06-05",
-    "href": "backends/index.html#clickhousehttp-0.3.4-2025-06-05",
+    "objectID": "backends/index.html#clickhousehttp-1.0.0-2026-05-18",
+    "href": "backends/index.html#clickhousehttp-1.0.0-2026-05-18",
     "title": "Backends for R-DBI",
-    "section": "ClickHouseHTTP 0.3.4 (2025-06-05) 🐛",
-    "text": "ClickHouseHTTP 0.3.4 (2025-06-05) 🐛\nA Simple HTTP Database Interface to ClickHouse\nClickHouse (https://clickhouse.com/) is an open-source, high performance columnar OLAP (online analytical processing of queries) database management system for real-time analytics using SQL. This DBI backend relies on the ClickHouse HTTP interface and support HTTPS protocol.\nMaintainer: Patrice Godard patrice.godard@gmail.com. License: GPL-3"
+    "section": "ClickHouseHTTP 1.0.0 (2026-05-18) 🐛",
+    "text": "ClickHouseHTTP 1.0.0 (2026-05-18) 🐛\nA Simple HTTP Database Interface to ClickHouse\nClickHouse (https://clickhouse.com/) is an open-source, high performance columnar OLAP (online analytical processing of queries) database management system for real-time analytics using SQL. This DBI backend relies on the ClickHouse HTTP interface and support HTTPS protocol.\nMaintainer: Patrice Godard patrice.godard@gmail.com. License: GPL-3"
   },
   {
     "objectID": "backends/index.html#connections-0.2.1-2025-09-11",
@@ -455,11 +455,11 @@
     "text": "odbc 1.7.0 (2026-05-09) 🔗 🔗 🐛\nConnect to ODBC Compatible Databases (using the DBI Interface)\nA DBI-compatible interface to ODBC databases.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#pool-1.0.4-2024-10-07",
-    "href": "backends/index.html#pool-1.0.4-2024-10-07",
+    "objectID": "backends/index.html#pool-1.0.5-2026-05-19",
+    "href": "backends/index.html#pool-1.0.5-2026-05-19",
     "title": "Backends for R-DBI",
-    "section": "pool 1.0.4 (2024-10-07) 🔗 🐛",
-    "text": "pool 1.0.4 (2024-10-07) 🔗 🐛\nObject Pooling\nEnables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are DBI connections.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
+    "section": "pool 1.0.5 (2026-05-19) 🔗 🐛",
+    "text": "pool 1.0.5 (2026-05-19) 🔗 🐛\nObject Pooling\nEnables the creation of object pools, which make it less computationally expensive to fetch a new object. Currently the only supported pooled objects are DBI connections.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
     "objectID": "backends/index.html#rathena-2.6.3-2025-09-29",
