@@ -350,11 +350,11 @@
     "text": "bigrquery 1.6.2 (2026-05-12) 🔗 🐛\nAn Interface to Google’s BigQuery API\nEasily talk to Google’s BigQuery database from R.\nMaintainer: Hadley Wickham hadley@posit.co. License: MIT + file LICENSE"
   },
   {
-    "objectID": "backends/index.html#brickster-0.2.12-2026-02-04",
-    "href": "backends/index.html#brickster-0.2.12-2026-02-04",
+    "objectID": "backends/index.html#brickster-0.2.13-2026-05-20",
+    "href": "backends/index.html#brickster-0.2.13-2026-05-20",
     "title": "Backends for R-DBI",
-    "section": "brickster 0.2.12 (2026-02-04)",
-    "text": "brickster 0.2.12 (2026-02-04)\nR Toolkit for Databricks\nCollection of utilities that improve using Databricks from R. Primarily functions that wrap specific Databricks APIs (https://docs.databricks.com/api), RStudio connection pane support, quality of life functions to make Databricks simpler to use.\nMaintainer: Zac Davies zac@databricks.com. License: Apache License (&gt;= 2)"
+    "section": "brickster 0.2.13 (2026-05-20)",
+    "text": "brickster 0.2.13 (2026-05-20)\nR Toolkit for Databricks\nCollection of utilities that improve using Databricks from R. Primarily functions that wrap specific Databricks APIs (https://docs.databricks.com/api), RStudio connection pane support, quality of life functions to make Databricks simpler to use.\nMaintainer: Zac Davies zac@databricks.com. License: Apache License (&gt;= 2)"
   },
   {
     "objectID": "backends/index.html#ckanr-0.7.0-2023-03-17",
